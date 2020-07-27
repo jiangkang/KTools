@@ -161,7 +161,6 @@ dependencies {
     implementation(project(":annotations"))
     implementation(project(":hack"))
     implementation(project(":tools"))
-    implementation(project(":kdownloader"))
     implementation(project(":hybrid"))
     implementation(project(":storage"))
     kapt(project (":compiler"))
