@@ -1,0 +1,6 @@
+ext.sign_debug = [
+        storeFilePath : '/path/to/your/keystore-file',
+        storePassword : 'your-store-password',
+        keyAlias : 'your-key-alias',
+        keyPassword : 'your-key-password',
+]

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <TextView
+        android:id="@+id/tv_crash_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_crash_restart"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:singleLine="false"
+        android:ellipsize="none"
+        android:inputType="textMultiLine"
+        />
+
+    <Button
+        android:id="@+id/btn_crash_restart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="重启App"
+        android:layout_centerInParent="true"
+        />
+    
+
+</RelativeLayout>

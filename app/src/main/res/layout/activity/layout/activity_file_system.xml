@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_get_general_file_path"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="获取常用文件路径" />
+
+        <Button
+            android:id="@+id/btn_get_img_from_assets"
+            style="@style/KButton"
+            android:background="#E91E63"
+            android:text="从Assets中获取图片" />
+
+        <Button
+            android:id="@+id/btn_get_audio_from_assets"
+            style="@style/KButton"
+            android:background="#9C27B0"
+            android:text="从Assets中获取音频" />
+
+        <Button
+            android:id="@+id/btn_get_json_from_assets"
+            style="@style/KButton"
+            android:background="#673AB7"
+            android:text="从Assets中获取Json数据" />
+
+
+        <Button
+            android:id="@+id/btn_create_file"
+            style="@style/KButton"
+            android:background="#3F51B5"
+            android:text="在指定文件夹创建文件" />
+
+        <Button
+            android:id="@+id/btn_create_dir"
+            style="@style/KButton"
+            android:background="#2196F3"
+            android:text="在指定路径创建文件夹" />
+
+
+        <Button
+            android:id="@+id/btn_traverse"
+            style="@style/KButton"
+            android:background="#2196F3"
+            android:text="遍历存储器" />
+
+        <Button
+            android:id="@+id/btn_zip_files"
+            style="@style/KButton"
+            android:background="#03A9F4"
+            android:text="压缩文件/文件夹" />
+
+        <Button
+            android:id="@+id/btn_unzip_files"
+            style="@style/KButton"
+            android:background="#00BCD4"
+            android:text="解压文件/文件夹" />
+
+
+        <Button
+            android:id="@+id/btn_read_json_from_file"
+            style="@style/KButton"
+            android:background="#009688"
+            android:text="从文件中读取Json数据" />
+
+
+        <Button
+            android:id="@+id/btn_store_json_to_file"
+            style="@style/KButton"
+            android:background="#4CAF50"
+            android:text="将json数据存储到文件" />
+
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_"-->
+            <!--style="@style/KButton"-->
+            <!--android:background="#8BC34A"-->
+            <!--android:text="从文件中解析json数据" />-->
+
+        <Button
+            android:id="@+id/btn_parse_xml_file"
+            style="@style/KButton"
+            android:background="#CDDC39"
+            android:text="从xml文件中解析数据" />
+
+        <Button
+            android:id="@+id/btn_get_file_size"
+            style="@style/KButton"
+            android:background="#FFC107"
+            android:text="获取文件大小" />
+
+
+        <Button
+            android:id="@+id/btn_get_dir_size"
+            style="@style/KButton"
+            android:background="#FF9800"
+            android:text="获取文件夹大小" />
+
+        <Button
+            android:id="@+id/btn_delete_file"
+            style="@style/KButton"
+            android:background="#FF5722"
+            android:text="删除文件" />
+
+        <Button
+            android:id="@+id/btn_delete_dir"
+            style="@style/KButton"
+            android:background="#795548"
+            android:text="删除文件夹" />
+
+        <Button
+            android:id="@+id/btn_encrypt_file"
+            style="@style/KButton"
+            android:background="#9E9E9E"
+            android:text="加密文件" />
+
+        <Button
+            android:id="@+id/btn_decrypt_file"
+            style="@style/KButton"
+            android:background="#607D8B"
+            android:text="解密文件" />
+
+        <Button
+            android:id="@+id/btn_hide_file"
+            style="@style/KButton"
+            android:background="#607D8B"
+            android:text="隐藏文件" />
+
+
+    </LinearLayout>
+</ScrollView>

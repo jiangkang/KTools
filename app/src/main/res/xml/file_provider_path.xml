@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <!--内部存储空间应用私有目录下的 files/ 目录,等同于Context.getFileDir()-->
+    <files-path
+        name="files"
+        path="files/" />
+
+    <!--内部存储空间应用私有目录下的 cache/ 目录，等同于 Context.getCacheDir() 所获取的目录路径-->
+    <cache-path
+        name="cache"
+        path="cache/"/>
+
+    <!--外部存储空间根目录，等同于 Environment.getExternalStorageDirectory() 所获取的目录路径；-->
+    <external-path
+        name="images"
+        path="/"/>
+
+    <!--外部存储空间应用私有目录下的 files/ 目录，等同于 Context.getExternalFilesDir(null) 所获取的目录路径；-->
+    <external-files-path
+        name="files"
+        path="files/"/>
+
+    <!--外部存储空间应用私有目录下的 cache/ 目录，等同于 Context.getExternalCacheDir()；-->
+    <external-cache-path
+        name="cache"
+        path="cache/"/>
+
+</paths>

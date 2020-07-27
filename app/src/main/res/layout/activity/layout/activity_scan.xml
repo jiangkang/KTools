@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_scan_qr"-->
+        <!--style="@style/KButton"-->
+        <!--android:text="扫描二维码"-->
+        <!--android:background="#f44336"-->
+        <!--/>-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
+
+    <EditText
+        android:id="@+id/et_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="输入网址"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        />
+
+    <Button
+        android:id="@+id/btn_gen_qr_code"
+        style="@style/KButton"
+        android:background="#E91E63"
+        android:text="生成二维码"/>
+
+
+</LinearLayout>

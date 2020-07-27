@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>KTools</title>
+</head>
+<body>
+
+<h3>Base64 图片编码</h3>
+<img id="demo" width="320" height="482"/><br>
+
+
+</body>
+<script async>
+        function getImgSrc(){
+            var content = "data:image/jpg;base64," + jk.getBase64Img();
+            console.log(content)
+            return content;
+        }
+
+        function exe(){
+            var img = document.getElementById("demo");
+            img.src = getImgSrc();
+        }
+
+        exe();
+
+</script>
+</html>

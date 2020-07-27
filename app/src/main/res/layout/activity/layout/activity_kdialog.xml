@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:id="@+id/btn_create_simple_text_dialog"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="简单文字对话框"
+            />
+
+        <Button
+            android:id="@+id/btn_single_choice_dialog"
+            style="@style/KButton"
+            android:background="#E91E63"
+            android:text="单选对话框" />
+
+        <Button
+            android:id="@+id/btn_multi_choices_dialog"
+            style="@style/KButton"
+            android:background="#9C27B0"
+            android:text="多选对话框" />
+
+        <Button
+            android:id="@+id/btn_progress_dialog_simple"
+            style="@style/KButton"
+            android:background="#673AB7"
+            android:text="水平进度条对话框" />
+
+        <Button
+            android:id="@+id/btn_progress_dialog_indeterminate"
+            style="@style/KButton"
+            android:background="#3F51B5"
+            android:text="圆形进度条对话框" />
+
+        <Button
+            android:id="@+id/btn_input_dialog"
+            style="@style/KButton"
+            android:background="#2196F3"
+            android:text="输入信息的对话框" />
+
+        <Button
+            android:id="@+id/btn_choose_date_dialog"
+            style="@style/KButton"
+            android:background="#03A9F4"
+            android:text="日期选择对话框" />
+
+        <Button
+            android:id="@+id/btn_choose_time_dialog"
+            style="@style/KButton"
+            android:background="#00BCD4"
+            android:text="时间选择对话框" />
+
+
+        <Button
+            android:id="@+id/btn_web_view_dialog"
+            style="@style/KButton"
+            android:background="#009688"
+            android:text="WebView对话框" />
+
+        <Button
+            android:id="@+id/btn_bottom_dialog"
+            style="@style/KButton"
+            android:text="底部对话框"
+            android:background="#81C784"
+            />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ConstraintLinearLayout">
+        <attr name="max_height" format="dimension" />
+        <attr name="min_height" format="dimension" />
+    </declare-styleable>
+
+</resources>

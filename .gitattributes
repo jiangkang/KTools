@@ -1,0 +1,3 @@
+*.kt linguist-language=Kotlin
+*.h linguist-language=Kotlin
+

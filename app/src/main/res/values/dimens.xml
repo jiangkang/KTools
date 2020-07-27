@@ -1,0 +1,14 @@
+<resources>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="drag_circle_size">72dp</dimen>
+    <dimen name="first_circle_size">56dp</dimen>
+    <dimen name="second_circle_size">32dp</dimen>
+    <dimen name="circle_distance">48dp</dimen>
+</resources>

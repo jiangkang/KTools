@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <Button
+        android:id="@+id/btnResourceInterceptor"
+        style="@style/KButton"
+        android:text="H5资源拦截"
+        android:background="#f44336"
+        />
+
+    <Button
+        android:id="@+id/btnImgLazyLoading"
+        style="@style/KButton"
+        android:text="H5 图片延迟加载"
+        android:background="#E91E63"
+        />
+
+    <!--<Button-->
+        <!--android:id="@+id/btnCertificateVerify"-->
+        <!--style="@style/KButton"-->
+        <!--android:text="H5 自定义证书校验"-->
+        <!--android:background="#9C27B0"-->
+        <!--/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btnGeoRequest"-->
+        <!--style="@style/KButton"-->
+        <!--android:text="H5 地理位置请求"-->
+        <!--android:background="#673AB7"-->
+        <!--/>-->
+
+
+    <!--<Button-->
+        <!--android:id="@+id/btnPageCache"-->
+        <!--style="@style/KButton"-->
+        <!--android:text="H5 页面缓存"-->
+        <!--android:background="#3F51B5"-->
+        <!--/>-->
+
+
+    <Button
+        android:id="@+id/btnJsInject"
+        style="@style/KButton"
+        android:text="H5 Js注入(改变网页背景色)"
+        android:background="#2196F3"
+        />
+
+</LinearLayout>

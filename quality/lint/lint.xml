@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!--WebView中调用AddJavaScriptInterface，在低版本Android系统中存在安全漏洞-->
+    <issue id="AddJavascriptInterface" severity="warning"/>
+
+    <!--在老版本Android上使用新API-->
+    <issue id="NewApi" severity="error"/>
+
+    <!--ImageView 没有带 contentDescription，不利于自动化测试-->
+    <issue id="ContentDescription" severity="informational"/>
+
+    <!--backup安全隐患，可以复制还原应用数据-->
+    <issue id="AllowBackup" severity="warning"/>
+
+    <!--ConstraintLayout 中缺少相应的constraints-->
+    <issue id="MissingConstraints" severity="fatal"/>
+
+    <!--对于指定文件，忽略指定的问题-->
+    <issue id="ObsoleteLayoutParam">
+        <ignore path="res/layout/activation.xml" />
+        <ignore path="res/layout-xlarge/activation.xml" />
+    </issue>
+
+</lint>

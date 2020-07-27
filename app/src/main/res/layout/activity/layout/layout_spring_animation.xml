@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/drag"
+        style="@style/AppTheme.CircleTextView"
+        android:layout_width="@dimen/drag_circle_size"
+        android:layout_height="@dimen/drag_circle_size"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#2e7d32"
+        android:padding="8dp"
+        android:text="Drag Me"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/first"
+        style="@style/AppTheme.CircleTextView"
+        android:layout_width="@dimen/first_circle_size"
+        android:layout_height="@dimen/first_circle_size"
+        android:layout_marginTop="@dimen/circle_distance"
+        android:backgroundTint="#388e3c"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drag" />
+
+    <TextView
+        android:id="@+id/second"
+        style="@style/AppTheme.CircleTextView"
+        android:layout_width="@dimen/second_circle_size"
+        android:layout_height="@dimen/second_circle_size"
+        android:layout_marginTop="@dimen/circle_distance"
+        android:backgroundTint="#81c784"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/first" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/damping_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="damping value" />
+
+        <TextView
+            android:id="@+id/damping_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/damping_label"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="24dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            tools:text="0.1" />
+
+        <SeekBar
+            android:id="@+id/damping_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/damping_label"
+            android:layout_toRightOf="@id/damping_value" />
+
+        <TextView
+            android:id="@+id/stiffness_label"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_below="@id/damping_bar"
+            android:layout_marginBottom="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="stiffness" />
+
+        <TextView
+            android:id="@+id/stiffness_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/stiffness_label"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            tools:text="0.1" />
+
+        <SeekBar
+            android:id="@+id/stiffness_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/stiffness_label"
+            android:layout_marginBottom="6dp"
+            android:layout_toRightOf="@id/stiffness_value" />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

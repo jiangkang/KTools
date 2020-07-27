@@ -1,0 +1,100 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/effect_shape"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="Shape" />
+
+
+        <Button
+            android:id="@+id/tai_chi"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="太极图" />
+
+        <Button
+            android:id="@+id/animated_shape_view"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="View + Animation" />
+
+
+        <Button
+            android:id="@+id/shape_path_view"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="Shape + Path" />
+
+        <Button
+            android:id="@+id/btnAutoLayoutAnimation"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="Auto Animation Layout Updates" />
+
+        <Button
+            android:id="@+id/btnValueAnimator"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="Value Animator"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnVectorDrawable"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="Vector Drawable"
+            android:textAllCaps="false" />
+
+
+        <Button
+            android:id="@+id/btnCrossFadeAnimator"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="Cross Fade Animator"
+            android:textAllCaps="false" />
+
+
+        <Button
+            android:id="@+id/btnCardFlip"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="Card Flip Animator"
+            android:textAllCaps="false" />
+
+
+        <Button
+            android:id="@+id/btnSpringAnim"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="Spring Animation"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnCircleRevealAnim"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="Circle Reveal Animation"
+            android:textAllCaps="false" />
+
+
+        <Button
+            android:id="@+id/btnCurvedMotionAnim"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="Curved Motion Animation"
+            android:textAllCaps="false" />
+
+
+    </LinearLayout>
+
+</ScrollView>

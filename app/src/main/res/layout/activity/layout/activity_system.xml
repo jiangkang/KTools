@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_open_contacts"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FFCC99"
+            android:text="打开通讯录"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_get_all_contacts"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FFCC66"
+            android:text="获取所有联系人"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_open_contacts" />
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:hint="在此输入内容"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_get_all_contacts" />
+
+
+        <Button
+            android:id="@+id/btn_set_clipboard"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="#FF99CC"
+            android:text="设置剪贴板数据"
+            app:layout_constraintEnd_toStartOf="@+id/btn_get_clipboard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_content" />
+
+        <Button
+            android:id="@+id/btn_get_clipboard"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="#FF99CC"
+            android:onClick="onBtnGetClipboardClicked"
+            android:text="获取剪贴板数据"
+            app:layout_constraintBaseline_toBaselineOf="@+id/btn_set_clipboard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_set_clipboard" />
+
+
+        <Button
+            android:id="@+id/btn_hide_app_icon"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FF9966"
+            android:onClick="onHideAppIconClicked"
+            android:text="隐藏应用图标（谨慎点击）"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_get_clipboard" />
+
+        <Button
+            android:id="@+id/btn_load_dex"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FF9966"
+            android:onClick="onBtnLoadDexClicked"
+            android:text="加载本地jar包中的dex文件"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_hide_app_icon" />
+
+        <Button
+            android:id="@+id/btn_exit_app"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FF9966"
+            android:text="退出App"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.625"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_load_dex" />
+
+        <Button
+            android:id="@+id/btn_hide_status_bar"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FF9966"
+            android:onClick="onBtnHideStatusBarClicked"
+            android:text="隐藏状态栏"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_exit_app" />
+
+        <Button
+            android:id="@+id/btn_hide_virtual_navbar"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FF9966"
+            android:onClick="onBtnHideVirtualNavbarClicked"
+            android:text="隐藏虚拟导航栏（再次点击会消耗事件）"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_hide_status_bar" />
+
+        <Button
+            android:id="@+id/btn_aidl"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FF9966"
+            android:onClick="onAIDLClicked"
+            android:text="AIDL使用"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_hide_virtual_navbar" />
+
+        <Button
+            android:id="@+id/btn_change_icon"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FF9966"
+            android:onClick="onBtnChangeIconClicked"
+            android:text="更换桌面图标"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_aidl" />
+
+        <Button
+            android:id="@+id/btn_change_wallpaper"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FF9966"
+            android:onClick="onBtnChangeWallpaper"
+            android:text="更换桌面壁纸"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_change_icon" />
+
+        <Button
+            android:id="@+id/btnShare"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FF9966"
+            android:onClick="onBtnShare"
+            android:text="分享"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_change_wallpaper" />
+
+        <Button
+            android:id="@+id/btnQuickSettings"
+            style="@style/KButton"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FF9966"
+            android:onClick="onBtnShare"
+            android:text="显示该应用的布局边界（重启应用后生效）"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnShare" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

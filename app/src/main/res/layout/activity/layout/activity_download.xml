@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <!--red:500-->
+    <Button
+        android:id="@+id/btn_download_by_download_manager"
+        style="@style/KButton"
+        android:text="使用DownloadManager下载"
+        android:background="#f44336"
+        />
+
+    <Button
+        android:id="@+id/btn_download_by_retrofit"
+        style="@style/KButton"
+        android:text="使用Retrofit/Okhttp下载"
+        android:background="#E91E63"
+        />
+
+
+</LinearLayout>

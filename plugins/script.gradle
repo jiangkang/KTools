@@ -1,0 +1,35 @@
+class ApkExt {
+
+    String msg
+
+    String greeter
+
+}
+
+
+class GreetingPlugin implements Plugin<Project> {
+
+    void apply(Project project) {
+
+        def extension = project.extensions.create("greet", ApkExt)
+
+        project.task("hello") {
+
+            doLast {
+                println "${extension.msg} from ${extension.greeter}"
+            }
+
+        }
+    }
+
+}
+
+apply plugin: GreetingPlugin
+
+greet {
+
+    msg = 'Hello World !'
+
+    greeter = 'JiangKang'
+
+}

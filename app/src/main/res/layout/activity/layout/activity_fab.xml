@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".widget.FabActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_refresh" />
+
+    <ImageView
+        android:id="@+id/iv_fake_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_refresh"
+        android:layout_gravity="left|bottom|start"
+        android:layout_margin="16dp"
+        android:background="@color/colorAccent"
+        android:padding="12dp"
+        app:layout_behavior="com.jiangkang.ktools.widget.FloatingActionButtonBehavior"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

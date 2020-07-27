@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <Button
+        android:id="@+id/btn_choose_picture_from_album"
+        style="@style/KButton"
+        android:text="从相册中选择照片"
+        android:background="#f44336"
+        />
+
+    <Button
+        android:id="@+id/btn_take_picture"
+        style="@style/KButton"
+        android:text="打开系统相机拍照"
+        android:background="#E91E63"
+        />
+
+    <Button
+        android:id="@+id/btn_take_picture_without_compress"
+        style="@style/KButton"
+        android:text="打开系统相机拍照（原图）"
+        android:background="#9C27B0"
+        />
+
+    <Button
+        android:id="@+id/btn_take_video"
+        style="@style/KButton"
+        android:text="调用系统相机拍摄视频"
+        android:background="#673AB7"
+        />
+
+    <Button
+        android:id="@+id/btn_screen_capture"
+        style="@style/KButton"
+        android:text="截屏"
+        android:background="#3F51B5"
+        />
+
+    <Button
+        android:id="@+id/btn_show_base64_img_in_web"
+        style="@style/KButton"
+        android:text="让H5页面显示Base64图片"
+        android:background="#2196F3"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
+
+    <EditText
+        android:id="@+id/et_max_width"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="输入图片最大宽度（px）"
+        android:inputType="numberDecimal"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        />
+
+    <EditText
+        android:id="@+id/et_max_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="输入图片最大高度（px）"
+        android:inputType="numberDecimal"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        />
+
+    <Button
+        android:id="@+id/btn_scale_image_by_max_width_and_height"
+        style="@style/KButton"
+        android:text="按照最大宽高限制缩放图片"
+        android:background="#009688"
+        />
+
+    <Button
+        android:id="@+id/btnPrintBitmap"
+        style="@style/KButton"
+        android:background="#8BC34A"
+        android:text="打印图片"
+        />
+
+
+</LinearLayout>
+</ScrollView>

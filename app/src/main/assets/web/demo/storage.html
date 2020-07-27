@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Title</title>
+    <style rel="stylesheet" type="text/css">
+        * {
+            width: 100%;
+            height: auto;
+        }
+
+        .choose_file ,#btn_choose_file, #file_chooser ,#img_uploaded,.sessionStorage, .localStorage{
+            width: inherit;
+            height:auto;
+            align-content: center;
+        }
+        #btn_choose_file {
+            background-color: #f44336;
+            height:60px;
+            color: white;
+            font-size: 36px;
+        }
+
+        #content_input_local , #content_input_session{
+            width: inherit;
+            height: 100px;
+            border: solid 2px #009688;
+        }
+
+        #btn_sessionStorage ,#btn_localStorage{
+            background-color: #E91E63;
+            width: inherit;
+            height:60px;
+            color: white;
+            font-size: 36px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="choose_file">
+    <button id="btn_choose_file">选择要上传的图片</button>
+    <input type="file" hidden id="file_chooser">
+    <img id="img_uploaded"/><br/>
+</div>
+<hr>
+<div class="sessionStorage">
+    <textarea id="content_input_session">
+    在这里输入要存储的内容(SessionStorage)
+</textarea>
+    <br/>
+    <button id="btn_sessionStorage">存储SessionStorage</button>
+</div>
+
+<hr>
+<div class="localStorage">
+    <textarea id="content_input_local">
+    在这里输入要存储的内容(LocalStorage)
+</textarea>
+    <br/>
+    <button id="btn_localStorage">存储LocalStorage</button>
+</div>
+
+</body>
+<script>
+    var btnChooseFile = document.getElementById('btn_choose_file');
+    var fileChooser = document.getElementById('file_chooser');
+    var imgUploaded = document.getElementById('img_uploaded');
+    var txtAreaContentLocal = document.getElementById('content_input_local');
+    var btnSessionStorage = document.getElementById('btn_sessionStorage');
+
+    function storeSessionStorage() {
+        sessionStorage.setItem('content', txtAreaContentLocal.textContent)
+        alert('存入成功');
+    }
+
+    addEventListener('click', function (e) {
+        switch (e.target){
+            case btnChooseFile:
+                console.log('点击了文件选择按钮');
+                fileChooser.click();
+                break;
+            case btnSessionStorage:
+                console.log('点击了SessionKey按钮');
+                storeSessionStorage();
+                break;
+            case imgUploaded:
+                imgUploaded.style.display = "none";
+                break;
+            default:
+                break;
+        }
+    });
+    fileChooser.onchange = function () {
+        let files = this.files;
+        console.log(files);
+        for (var file of files) {
+            console.log(file.type);
+
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onprogress = function (e) {
+
+            };
+            reader.onload = function (e) {
+                imgUploaded.src = reader.result;
+            };
+        }
+    }
+
+</script>
+
+</html>

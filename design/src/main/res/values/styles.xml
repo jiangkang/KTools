@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Transition" parent="Transition.Base"/>
+
+    <style name="Transition.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/transition_primary</item>
+        <item name="colorPrimaryDark">@color/transition_primary_dark</item>
+        <item name="colorAccent">@color/transition_accent</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:textColorPrimaryInverse">@color/text_light</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">
+            @color/transition_primary_dark
+        </item>
+        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:windowBackground">@color/light_grey</item>
+        <item name="android:colorBackground">@color/light_grey</item>
+    </style>
+
+</resources>

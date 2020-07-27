@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnCheckNetworkInfo"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="查看网络信息"
+            />
+
+        <Button
+            android:id="@+id/btnScreenBrightness"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="查看并修改系统屏幕亮度"
+            />
+
+
+        <Button
+            android:id="@+id/btnCurrentWindowBrightness"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="修改当前页面屏幕亮度"
+            />
+
+        <Button
+            android:id="@+id/btnCheckCurrentActivity"
+            style="@style/KButton"
+            android:background="#E91E63"
+            android:text="查看当前Activity" />
+
+        <Button
+            android:id="@+id/btnAdbWireless"
+            style="@style/KButton"
+            android:background="#E91E63"
+            android:text="无线adb调试" />
+
+        <Button
+            android:id="@+id/btnGetMaxMemory"
+            style="@style/KButton"
+            android:background="#E91E63"
+            android:text="获取内存信息" />
+
+
+    </LinearLayout>
+
+</ScrollView>

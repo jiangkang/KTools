@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:scrollbars="none"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:id="@+id/btn_set_pref"
+            style="@style/KButton"
+            android:text="将值存入SharedPreference"
+            android:background="#f44336"
+            />
+
+        <Button
+            android:id="@+id/btn_get_pref"
+            style="@style/KButton"
+            android:text="从SharedPreference中取值"
+            android:background="#E91E63"
+            />
+
+        <Button
+            android:id="@+id/btn_sqlite"
+            style="@style/KButton"
+            android:background="#9C27B0"
+            android:text="SQLite Demo" />
+
+    </LinearLayout>
+
+
+</ScrollView>

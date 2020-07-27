@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:id="@+id/btnShareText"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="分享文本" />
+
+        <Button
+            android:id="@+id/btnShareSingleImage"
+            style="@style/KButton"
+            android:background="#E91E63"
+            android:text="分享单张图片" />
+
+        <Button
+            android:id="@+id/btnShareMultiImages"
+            style="@style/KButton"
+            android:background="#9C27B0"
+            android:text="分享多张图片" />
+
+
+        <Button
+            android:id="@+id/btnShareToQQ"
+            style="@style/KButton"
+            android:background="#9C27B0"
+            android:text="指定分享到QQ" />
+
+
+        <Button
+            android:id="@+id/btnShareToWeChat"
+            style="@style/KButton"
+            android:background="#9C27B0"
+            android:text="指定分享到微信" />
+
+        <EditText
+            android:id="@+id/et_intent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入路由"
+            />
+
+        <Button
+            android:id="@+id/btnRouter"
+            style="@style/KButton"
+            android:background="#9C27B0"
+            android:text="路由跳转" />
+
+    </LinearLayout>
+</ScrollView>
