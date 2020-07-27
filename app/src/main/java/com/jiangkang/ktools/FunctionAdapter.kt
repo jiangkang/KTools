@@ -12,7 +12,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.jiangkang.hack.HackActivity
-import com.jiangkang.kdownloader.KDownloaderActivity
 import com.jiangkang.ktools.BaseActivity.Companion.VIEW_NAME_HEADER_TITLE
 import com.jiangkang.ktools.effect.EffectActivity
 import com.jiangkang.ktools.web.HybridActivity
@@ -29,7 +28,6 @@ class FunctionAdapter(private val mContext: Context) : RecyclerView.Adapter<Func
         functionList.add(FunctionEntity("UI", WidgetActivity::class.java, R.drawable.ic_widget))
         functionList.add(FunctionEntity("Storage", StorageActivity::class.java, R.drawable.ic_storage))
         functionList.add(FunctionEntity("Device", DeviceActivity::class.java, R.drawable.ic_device))
-        functionList.add(FunctionEntity("Download", KDownloaderActivity::class.java, R.drawable.ic_download))
         functionList.add(FunctionEntity("Image", ImageActivity::class.java, R.drawable.ic_image))
         functionList.add(FunctionEntity("Scan", ScanActivity::class.java, R.drawable.ic_scan))
         functionList.add(FunctionEntity("Audio", AudioActivity::class.java, R.drawable.ic_audio))

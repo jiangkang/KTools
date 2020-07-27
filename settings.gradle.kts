@@ -5,7 +5,6 @@ include(
         ":storage",
         ":hack",
         ":widget",
-        ":kdownloader",
         ":compiler",
         ":hybrid",
         ":design",
