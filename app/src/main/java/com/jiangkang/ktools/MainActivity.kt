@@ -2,29 +2,19 @@ package com.jiangkang.ktools
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.transition.Explode
 import android.view.Menu
 import android.view.MenuItem
-import android.view.Window
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jiangkang.hybrid.Khybrid
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //转场动画
-            window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
-            window.enterTransition = Explode()
-            window.exitTransition = Explode()
-        }
         setContentView(R.layout.activity_main)
         initViews()
-        reportFullyDrawn()
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -57,7 +47,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initViews() {
-        rc_function_list.apply {
+        findViewById<RecyclerView>(R.id.rc_function_list).apply {
             layoutManager = GridLayoutManager(this@MainActivity, 4)
             adapter = FunctionAdapter(this@MainActivity)
         }
@@ -65,9 +55,7 @@ class MainActivity : BaseActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            finishAfterTransition()
-        }
+        finishAfterTransition()
     }
 
     companion object {
@@ -76,7 +64,5 @@ class MainActivity : BaseActivity() {
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)
         }
-
-        private const val TAG = "MainActivity"
     }
 }

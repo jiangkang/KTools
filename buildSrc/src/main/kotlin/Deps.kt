@@ -20,6 +20,7 @@ object AndroidX {
     const val dynamicAnimation = "androidx.dynamicanimation:dynamicanimation:1.0.0"
     const val uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"
     const val multiDex = "androidx.multidex:multidex:2.0.1"
+    const val viewpager2 = "androidx.viewpager2:viewpager2:1.0.0"
 
     object Navigation {
         const val fragment = "androidx.navigation:navigation-fragment:2.3.0"
