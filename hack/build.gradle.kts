@@ -50,8 +50,8 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(AndroidX.appcompat)
-    implementation("androidx.appcompat:appcompat:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
+    implementation(AndroidX.appcompat)
+    implementation(AndroidX.constraintLayout)
     testImplementation(junit)
     androidTestImplementation(AndroidX.testRunner)
     androidTestImplementation(AndroidX.espressoCore)

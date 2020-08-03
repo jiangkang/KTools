@@ -1,21 +1,20 @@
 package com.jiangkang.tools.utils
 
-import com.orhanobut.logger.Logger
+import android.util.Log
 
 /**
  * Created by jiangkang on 2017/9/28.
  */
 object LogUtils {
-    private const val LOG_DEFAULT = "LogUtils"
     fun d(msg: Any?) {
-        Logger.d(msg)
+        Log.d("KTools", msg.toString())
     }
 
     fun d(format: String?, vararg msg: Any?) {
-        Logger.d(format!!, *msg)
+        Log.d("KTools", msg.toString())
     }
 
     fun json(jsonString: String?) {
-        Logger.json(jsonString)
+        Log.d("KTools",jsonString)
     }
 }

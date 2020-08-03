@@ -43,8 +43,8 @@ dependencies {
     androidTestImplementation(AndroidX.espressoCore)
     implementation(kotlin("stdlib-jdk7"))
     implementation(project(":tools"))
-    implementation("com.google.code.gson:gson:2.8.6")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
+    implementation(gson)
+    implementation(Kotlin.coroutines)
 }
 
 repositories {

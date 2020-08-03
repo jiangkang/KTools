@@ -9,8 +9,8 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.os.SystemClock
+import com.jiangkang.tools.extend.activityManager
 import com.jiangkang.tools.widget.FloatingWindow
-import org.jetbrains.anko.activityManager
 import java.util.*
 
 class WatchingTopActivityService : Service() {

@@ -9,14 +9,13 @@ import android.graphics.Point
 import android.os.Build
 import android.provider.Settings
 import android.view.WindowManager
-import org.jetbrains.anko.keyguardManager
-import org.jetbrains.anko.windowManager
+import com.jiangkang.tools.extend.keyguardManager
+import com.jiangkang.tools.extend.windowManager
 
 /**
  * Created by jiangkang on 2018/3/22.
  * description：屏幕相关工具类
  */
-
 object ScreenUtils {
 
     /*

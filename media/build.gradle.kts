@@ -37,8 +37,6 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.legacy:legacy-support-v13:1.0.0")
     implementation(AndroidX.appcompat)
     implementation(AndroidX.core)
     implementation(AndroidX.constraintLayout)

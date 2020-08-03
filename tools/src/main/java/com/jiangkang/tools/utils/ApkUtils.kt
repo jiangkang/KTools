@@ -3,8 +3,8 @@ package com.jiangkang.tools.utils
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.FileProvider
+import com.jiangkang.tools.extend.runOnUiThread
 import okhttp3.*
-import org.jetbrains.anko.runOnUiThread
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException

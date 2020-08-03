@@ -3,9 +3,12 @@ import org.gradle.kotlin.dsl.DependencyHandlerScope
 const val junit = "junit:junit:4.13"
 const val eventBus = "org.greenrobot:eventbus:3.1.1"
 const val material = "com.google.android.material:material:1.1.0"
+const val zxing = "com.google.zxing:core:3.4.0"
+const val lottie = "com.airbnb.android:lottie:3.4.1"
+const val gson = "com.google.code.gson:gson:2.8.6"
 
 object Kotlin {
-    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
 }
 
 object AndroidX {
@@ -21,6 +24,7 @@ object AndroidX {
     const val uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"
     const val multiDex = "androidx.multidex:multidex:2.0.1"
     const val viewpager2 = "androidx.viewpager2:viewpager2:1.0.0"
+    const val print = "androidx.print:print:1.0.0"
 
     object Navigation {
         const val fragment = "androidx.navigation:navigation-fragment:2.3.0"

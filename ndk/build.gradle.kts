@@ -51,10 +51,8 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(AndroidX.constraintLayout)
-    implementation("org.jetbrains.anko:anko:0.10.8")
     implementation(AndroidX.appcompat)
     implementation(AndroidX.cardView)
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     androidTestImplementation(AndroidX.testRunner)
     androidTestImplementation(AndroidX.espressoCore)
     implementation(project(":tools"))

@@ -46,7 +46,7 @@ dependencies {
 
     implementation(AndroidX.constraintLayout)
 
-    implementation("com.airbnb.android:lottie:3.4.1")
+    implementation(lottie)
     implementation(project(":tools"))
 
 }

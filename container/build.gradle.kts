@@ -38,11 +38,8 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-
     implementation(AndroidX.core)
     implementation(AndroidX.appcompat)
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-
     testImplementation(junit)
     androidTestImplementation(AndroidX.testRunner)
     androidTestImplementation(AndroidX.espressoCore)
