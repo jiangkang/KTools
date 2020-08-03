@@ -14,8 +14,12 @@ import java.util.concurrent.Executors
  * Created by jiangkang on 2017/10/16.
  */
 class DownloadUtils private constructor() {
-    private val client: OkHttpClient
-    private val downloadService: ExecutorService
+
+    private val client: OkHttpClient = OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor())
+            .build()
+    private val downloadService: ExecutorService = Executors.newCachedThreadPool()
+
     fun downloadImage(url: String): Bitmap? {
         val result = arrayOfNulls<Bitmap>(1)
         return if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -54,10 +58,4 @@ class DownloadUtils private constructor() {
             }
     }
 
-    init {
-        client = OkHttpClient.Builder()
-                .addInterceptor(HttpLoggingInterceptor())
-                .build()
-        downloadService = Executors.newCachedThreadPool()
-    }
 }

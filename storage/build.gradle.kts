@@ -53,14 +53,9 @@ dependencies {
     testImplementation(junit)
 
     implementation(AndroidX.recyclerView)
-    implementation("com.jakewharton:butterknife:10.2.0")
-    kapt("com.jakewharton:butterknife-compiler:10.2.0")
-
-    implementation("com.squareup.okhttp3:okhttp:4.4.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.2.0")
-    implementation("com.squareup.okhttp3:mockwebserver:4.2.0")
+    okHttp()
     implementation(kotlin("stdlib-jdk7"))
-    implementation("org.jetbrains.anko:anko:0.10.8")
+    implementation(project(":tools"))
 }
 
 repositories {

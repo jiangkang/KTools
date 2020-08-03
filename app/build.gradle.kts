@@ -1,9 +1,10 @@
+import com.android.build.gradle.internal.tasks.manifest.mergeManifestsForApplication
+
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    id("kotlin-android")
 }
 
 android {
@@ -101,6 +102,16 @@ android {
             path = file("CMakeLists.txt")
         }
     }
+
+    onVariantProperties {
+        project.tasks.register<plugins.tasks.VerifyManifestTask>("${name}VerifyManifest"){
+            applicationVariants.all{
+                outputs.all {
+                   mergedManifest.set( processManifestProvider.get().manifestOutputDirectory.get().asFile)
+                }
+            }
+        }
+    }
     
 }
 
@@ -146,7 +157,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime:2.2.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.room:room-runtime:2.2.5")
-    implementation("androidx.room:room-rxjava2:2.2.5")
     kapt("androidx.room:room-compiler:2.2.5")
     implementation(kotlin("stdlib-jdk7"))
     implementation("org.jetbrains.anko:anko:0.10.8")
@@ -169,15 +179,6 @@ dependencies {
     lintChecks(project (":klint"))
     implementation(project(":design"))
     implementation(project(":container"))
-}
-
-configurations.all {
-    resolutionStrategy.eachDependency {
-        val group = this.requested.group
-        val name = this.requested.name
-        val version = this.requested.version
-        println("$group:$name:$version")
-    }
 }
 
 task("copy", Copy::class) {

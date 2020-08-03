@@ -16,10 +16,6 @@ buildscript {
 }
 
 allprojects {
-    println(this.name)
-    this.subprojects {
-        println("sub:${this.name}")
-    }
     repositories {
         jcenter()
         google()

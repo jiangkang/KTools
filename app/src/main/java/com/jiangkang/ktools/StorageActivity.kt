@@ -6,14 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.jiangkang.storage.sqlite.LoginDbActivity
+import com.jiangkang.tools.utils.ApkUtils
 import com.jiangkang.tools.utils.SpUtils
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KDialog
-import kotlinx.android.synthetic.main.activity_storage.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.startActivity
 
 class StorageActivity : AppCompatActivity() {
@@ -26,22 +26,26 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun handleClick() {
-        btn_set_pref.onClick {
+        findViewById<Button>(R.id.btn_set_pref).setOnClickListener {
             onBtnSetPrefClicked()
         }
 
-        btn_get_pref.onClick {
+        findViewById<Button>(R.id.btn_get_pref).setOnClickListener {
             onBtnGetPrefClicked()
         }
 
 
-        btn_sqlite.onClick {
+        findViewById<Button>(R.id.btn_sqlite).setOnClickListener {
             startActivity<LoginDbActivity>()
+        }
+
+        findViewById<Button>(R.id.btn_install).setOnClickListener {
+            ApkUtils.installApk(this@StorageActivity)
         }
 
     }
 
-    fun onBtnSetPrefClicked() {
+    private fun onBtnSetPrefClicked() {
 
         val dialogView = LayoutInflater.from(this)
                 .inflate(R.layout.layout_dialog_key_value, null)
@@ -70,7 +74,7 @@ class StorageActivity : AppCompatActivity() {
                 .putString("author", "姜康")
     }
 
-    fun onBtnGetPrefClicked() {
+    private fun onBtnGetPrefClicked() {
 
         val dialogView = LayoutInflater.from(this)
                 .inflate(R.layout.layout_dialog_key_value, null)

@@ -32,6 +32,12 @@
             android:background="#9C27B0"
             android:text="SQLite Demo" />
 
+        <Button
+            android:id="@+id/btn_install"
+            style="@style/KButton"
+            android:background="#9C27B0"
+            android:text="Install APK" />
+
     </LinearLayout>
 
 

@@ -1,19 +1,23 @@
 package com.jiangkang.storage.sqlite
 
+import android.app.Activity
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
 import android.text.TextUtils
+import android.widget.Button
+import android.widget.EditText
 import com.jiangkang.storage.R
-import kotlinx.android.synthetic.main.activity_login_db.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.toast
+import com.jiangkang.tools.utils.ToastUtils
+import kotlin.concurrent.thread
 
-class LoginDbActivity : AppCompatActivity() {
+class LoginDbActivity : Activity() {
 
+    private val etPassword:EditText by lazy { findViewById<EditText>(R.id.et_password) }
+    private val etUsername: EditText by lazy { findViewById<EditText>(R.id.et_username) }
+    
     private lateinit var dbHelper: UserInfoDbHelper
 
     private val projection = arrayOf(
@@ -22,7 +26,6 @@ class LoginDbActivity : AppCompatActivity() {
             UserInfoContract.UserInfoEntity.TABLE_NAME_PASSWORD,
             UserInfoContract.UserInfoEntity.TABLE_NAME_LOGIN_TIME_LATEST
     )
-
 
     private val sortOder = "${UserInfoContract.UserInfoEntity.TABLE_NAME_USERNAME} DESC"
 
@@ -36,8 +39,8 @@ class LoginDbActivity : AppCompatActivity() {
     }
 
     private fun handleLogic(present: ((cursor: Cursor) -> Unit), absent: (() -> Unit)) {
-        if (TextUtils.isEmpty(et_username.text) || TextUtils.isEmpty(et_password.text)) {
-            toast("用户名或密码不能为空").show()
+        if (TextUtils.isEmpty(etUsername.text) || TextUtils.isEmpty(etPassword.text)) {
+            ToastUtils.showShortToast("用户名或密码不能为空")
             return
         }
 
@@ -46,10 +49,10 @@ class LoginDbActivity : AppCompatActivity() {
 
         val selection = "${UserInfoContract.UserInfoEntity.TABLE_NAME_USERNAME} = ?"
 
-        val selectionArgs = arrayOf(et_username.text.toString())
+        val selectionArgs = arrayOf(etUsername.text.toString())
 
 
-        doAsync {
+        thread {
             val cursor = db.query(
                     UserInfoContract.UserInfoEntity.TABLE_NAME,
                     projection,
@@ -66,25 +69,23 @@ class LoginDbActivity : AppCompatActivity() {
             } else {
                 present(cursor)
             }
-
-        }
-
+        }.start()
     }
 
 
     private fun handleClick() {
-        btn_login_db.setOnClickListener {
+        findViewById<Button>(R.id.btn_login_db).setOnClickListener {
             handleLogic(
                     present = {
                         with(it) {
                             while (moveToNext()) {
                                 val pwd = getString(getColumnIndexOrThrow(UserInfoContract.UserInfoEntity.TABLE_NAME_PASSWORD))
                                 runOnUiThread {
-                                    if (et_password.text.toString() == pwd) {
-                                        toast("登录成功").show()
+                                    if (etPassword.text.toString() == pwd) {
+                                        ToastUtils.showShortToast("登录成功")
                                         finish()
                                     } else {
-                                        toast("密码错误").show()
+                                        ToastUtils.showShortToast("密码错误")
                                     }
                                 }
                             }
@@ -92,22 +93,17 @@ class LoginDbActivity : AppCompatActivity() {
 
                     },
                     absent = {
-                        runOnUiThread {
-                            toast("您的账号还没有注册，请先进行注册").show()
-                        }
+                        ToastUtils.showShortToast("您的账号还没有注册，请先进行注册")
 
                     }
             )
         }
 
 
-        btn_register_db.setOnClickListener {
+        findViewById<Button>(R.id.btn_register_db).setOnClickListener {
             handleLogic(
                     present = {
-                        runOnUiThread {
-                            toast("您的账户已经存在，请直接登录").show()
-                        }
-
+                        ToastUtils.showShortToast("您的账户已经存在，请直接登录")
                     },
                     absent = {
                         insertDb(dbHelper.readableDatabase)
@@ -119,8 +115,8 @@ class LoginDbActivity : AppCompatActivity() {
 
     private fun insertDb(db: SQLiteDatabase) {
         val values = ContentValues().apply {
-            put(UserInfoContract.UserInfoEntity.TABLE_NAME_USERNAME, et_username.text.toString())
-            put(UserInfoContract.UserInfoEntity.TABLE_NAME_PASSWORD, et_password.text.toString())
+            put(UserInfoContract.UserInfoEntity.TABLE_NAME_USERNAME, etUsername.text.toString())
+            put(UserInfoContract.UserInfoEntity.TABLE_NAME_PASSWORD, etPassword.text.toString())
             put(UserInfoContract.UserInfoEntity.TABLE_NAME_LOGIN_TIME_LATEST, System.currentTimeMillis().toString())
         }
 
@@ -130,9 +126,7 @@ class LoginDbActivity : AppCompatActivity() {
                 values
         )
 
-        runOnUiThread {
-            toast("注册成功").show()
-        }
+        ToastUtils.showShortToast("注册成功")
 
     }
 }
