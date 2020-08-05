@@ -1,5 +1,6 @@
 package com.jiangkang.media.audio
 
+import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.media.AudioManager
@@ -8,11 +9,10 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import com.jiangkang.media.R
 
-class MusicActivity : AppCompatActivity() {
+class MusicActivity : Activity() {
 
     private lateinit var mMediaBrowser: MediaBrowserCompat
 

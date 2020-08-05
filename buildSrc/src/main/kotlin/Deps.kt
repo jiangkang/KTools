@@ -1,3 +1,4 @@
+import Google.vHilt
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 
 const val junit = "junit:junit:4.13"
@@ -6,6 +7,16 @@ const val material = "com.google.android.material:material:1.1.0"
 const val zxing = "com.google.zxing:core:3.4.0"
 const val lottie = "com.airbnb.android:lottie:3.4.1"
 const val gson = "com.google.code.gson:gson:2.8.6"
+const val anrWatchDog = "com.github.anrwatchdog:anrwatchdog:1.4.0"
+
+object Google {
+    const val vHilt =  "2.28-alpha"
+    const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$vHilt"
+}
+fun DependencyHandlerScope.hilt() {
+    impl("com.google.dagger:hilt-android:$vHilt")
+    kapt("com.google.dagger:hilt-android-compiler:$vHilt")
+}
 
 object Kotlin {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
@@ -30,8 +41,14 @@ object AndroidX {
         const val fragment = "androidx.navigation:navigation-fragment:2.3.0"
         const val ui = "androidx.navigation:navigation-ui:2.3.0"
     }
-    object Room {}
-    object Lifecycle {}
+    object Room {
+        const val runtime = "androidx.room:room-runtime:2.2.5"
+        const val compiler = "androidx.room:room-compiler:2.2.5"
+    }
+    object Lifecycle {
+        const val runtime = "androidx.lifecycle:lifecycle-runtime:2.2.0"
+        const val extension = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    }
 }
 
 fun DependencyHandlerScope.okHttp() {
@@ -43,4 +60,10 @@ fun DependencyHandlerScope.okHttp() {
 fun DependencyHandlerScope.retrofit() {
     impl("com.squareup.retrofit2:retrofit:2.6.1")
     impl("com.squareup.retrofit2:converter-gson:2.6.1")
+}
+
+fun DependencyHandlerScope.glide(){
+    impl("com.github.bumptech.glide:glide:4.11.0")
+    impl("com.github.bumptech.glide:okhttp3-integration:4.11.0")
+    kapt("com.github.bumptech.glide:compiler:4.11.0")
 }

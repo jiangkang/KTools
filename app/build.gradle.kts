@@ -1,10 +1,10 @@
-import com.android.build.gradle.internal.tasks.manifest.mergeManifestsForApplication
 
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("com.jiangkang.kplugin")
 }
 
 android {
@@ -102,16 +102,6 @@ android {
             path = file("CMakeLists.txt")
         }
     }
-
-    onVariantProperties {
-        project.tasks.register<plugins.tasks.VerifyManifestTask>("${name}VerifyManifest"){
-            applicationVariants.all{
-                outputs.all {
-                   mergedManifest.set( processManifestProvider.get().manifestOutputDirectory.get().asFile)
-                }
-            }
-        }
-    }
     
 }
 
@@ -147,27 +137,22 @@ dependencies {
     retrofit()
     debugImplementation("com.readystatesoftware.chuck:library:1.1.0")
     releaseImplementation("com.readystatesoftware.chuck:library-no-op:1.1.0")
-    implementation("com.google.dagger:dagger-android:2.24")
-    implementation("com.google.dagger:dagger-android-support:2.24")
-    kapt("com.google.dagger:dagger-android-processor:2.24")
-    implementation("com.github.bumptech.glide:glide:4.11.0")
-    implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
-    kapt("com.github.bumptech.glide:compiler:4.11.0")
+    glide()
     okHttp()
-    implementation("androidx.lifecycle:lifecycle-runtime:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.room:room-runtime:2.2.5")
-    kapt("androidx.room:room-compiler:2.2.5")
+    implementation(AndroidX.Lifecycle.runtime)
+    implementation(AndroidX.Lifecycle.extension)
+    implementation(AndroidX.Room.runtime)
+    kapt(AndroidX.Room.compiler)
     implementation(kotlin("stdlib-jdk7"))
     implementation("org.jetbrains.anko:anko:0.10.8")
     implementation(Kotlin.coroutines)
-    implementation("androidx.multidex:multidex:2.0.1")
-    implementation("org.greenrobot:eventbus:3.1.1")
-    implementation("com.github.anrwatchdog:anrwatchdog:1.4.0")
-    implementation("androidx.navigation:navigation-fragment:2.3.0")
-    implementation("androidx.navigation:navigation-ui:2.3.0")
-
-    implementation("androidx.dynamicanimation:dynamicanimation:1.0.0")
+    implementation(AndroidX.multiDex)
+    implementation(eventBus)
+    implementation(anrWatchDog)
+    implementation(AndroidX.Navigation.fragment)
+    implementation(AndroidX.Navigation.ui)
+    hilt()
+    implementation(AndroidX.dynamicAnimation)
     implementation(project(":widget"))
     implementation(project(":annotations"))
     implementation(project(":hack"))
@@ -193,4 +178,8 @@ repositories {
     jcenter()
     mavenCentral()
     google()
+}
+
+traceMethod {
+    enable = true
 }

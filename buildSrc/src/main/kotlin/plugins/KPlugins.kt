@@ -1,5 +1,0 @@
-package plugins
-
-object KPlugins {
-
-}
