@@ -8,16 +8,11 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.jiangkang.tools.utils.DeviceUtils
-import com.jiangkang.tools.utils.ScreenUtils
+import com.jiangkang.tools.extend.activityManager
 import com.jiangkang.tools.service.WatchingTopActivityService
-import com.jiangkang.tools.utils.NetworkUtils
-import com.jiangkang.tools.utils.ShellUtils
+import com.jiangkang.tools.utils.*
 import com.jiangkang.tools.widget.KDialog
-import org.jetbrains.anko.activityManager
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.sdk27.coroutines.onClick
-import org.jetbrains.anko.toast
+import kotlin.concurrent.thread
 
 class DeviceActivity : AppCompatActivity() {
 
@@ -32,18 +27,18 @@ class DeviceActivity : AppCompatActivity() {
 
     private fun handleClick() {
 
-        findViewById<Button>(R.id.btnCheckNetworkInfo).onClick {
+        findViewById<Button>(R.id.btnCheckNetworkInfo).setOnClickListener {
             val builder = StringBuilder()
             builder.append(String.format("网络类型: %s\n", NetworkUtils.netWorkType))
                     .append(String.format("Mac地址: %s\n", NetworkUtils.macAddress))
             KDialog.showMsgDialog(this@DeviceActivity, builder.toString())
         }
 
-        findViewById<Button>(R.id.btnScreenBrightness).onClick {
+        findViewById<Button>(R.id.btnScreenBrightness).setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (!Settings.System.canWrite(this@DeviceActivity)) {
                     startActivity(Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:$packageName")))
-                    toast("授权用来修改系统屏幕亮度").show()
+                    ToastUtils.showShortToast("授权用来修改系统屏幕亮度")
                 } else {
                     val currentScreenBrightness = ScreenUtils.getScreenBrightness(this@DeviceActivity)
                     ScreenUtils.setScreenBrightness(this@DeviceActivity, 255)
@@ -53,21 +48,21 @@ class DeviceActivity : AppCompatActivity() {
 
         }
 
-        findViewById<Button>(R.id.btnCurrentWindowBrightness).onClick {
+        findViewById<Button>(R.id.btnCurrentWindowBrightness).setOnClickListener {
             ScreenUtils.setCurrentWindowScreenBrightness(this@DeviceActivity, 125)
-            toast("将亮度修改到了125,只对当前页面有效").show()
+            ToastUtils.showShortToast("将亮度修改到了125,只对当前页面有效")
         }
 
 
-        findViewById<Button>(R.id.btnCheckCurrentActivity).onClick {
+        findViewById<Button>(R.id.btnCheckCurrentActivity).setOnClickListener {
 //            KDialog.showMsgDialog(this@DeviceActivity, AppUtils.currentActivity)
             startService(Intent(this@DeviceActivity,WatchingTopActivityService::class.java))
         }
 
 
 
-        findViewById<Button>(R.id.btnAdbWireless).onClick {
-            doAsync {
+        findViewById<Button>(R.id.btnAdbWireless).setOnClickListener {
+            thread {
                 val command = "setprop service.adb.tcp.port 5555 && stop adbd && start adbd"
                 ShellUtils.execCmd(command, true)
                 runOnUiThread {
@@ -77,7 +72,7 @@ class DeviceActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.btnGetMaxMemory).onClick {
+        findViewById<Button>(R.id.btnGetMaxMemory).setOnClickListener {
             val maxMemory = Runtime.getRuntime().maxMemory() / (1024 * 1024)
             val memoryInfo = getAvailableMemory()
 

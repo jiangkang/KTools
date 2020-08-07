@@ -5,17 +5,16 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import androidx.appcompat.app.AppCompatActivity
 import android.transition.Fade
 import android.view.Window
+import android.widget.Button
 import android.widget.RemoteViews
+import androidx.appcompat.app.AppCompatActivity
 import com.jiangkang.ktools.widget.*
 import com.jiangkang.tools.extend.launch
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.FloatingWindow
 import com.jiangkang.tools.widget.KNotification
-import kotlinx.android.synthetic.main.activity_widget.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class WidgetActivity : AppCompatActivity() {
 
@@ -23,24 +22,19 @@ class WidgetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //转场动画
-            window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
-            window.enterTransition = Fade()
-            window.exitTransition = Fade()
-        }
+        //转场动画
+        window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+        window.enterTransition = Fade()
+        window.exitTransition = Fade()
         setContentView(R.layout.activity_widget)
         handleOnClick()
     }
 
     private fun handleOnClick() {
-
-        btn_coordinator_layout.onClick {
+        findViewById<Button>(R.id.btn_coordinator_layout).setOnClickListener {
             CoordinatorActivity.launch(mContext, null)
         }
-
-        btn_show_floating_window.onClick {
-
+        findViewById<Button>(R.id.btn_show_floating_window).setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (!Settings.canDrawOverlays(this@WidgetActivity)) {
                     startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
@@ -50,23 +44,20 @@ class WidgetActivity : AppCompatActivity() {
             }
         }
 
-
-        btn_dismiss_floating_window.onClick {
+        findViewById<Button>(R.id.btn_dismiss_floating_window).setOnClickListener {
             FloatingWindow.dismiss()
         }
 
-
-        btn_set_toast_show_time.onClick {
+        findViewById<Button>(R.id.btn_set_toast_show_time).setOnClickListener {
             ToastUtils.showToast("测试自定义显示时间Toast:20s", 1000 * 20)
         }
 
-
-        btn_create_simple_notification.onClick {
+        findViewById<Button>(R.id.btn_create_simple_notification).setOnClickListener {
             KNotification.createNotification(mContext, R.mipmap.ic_launcher, "测试标题", "测试内容", Intent(mContext, MainActivity::class.java))
         }
 
 
-        btn_show_custom_notification.onClick {
+        findViewById<Button>(R.id.btn_show_custom_notification).setOnClickListener {
             val views = RemoteViews(mContext.packageName, R.layout.layout_big_notification)
             views.setImageViewResource(R.id.iv_notification_img, R.drawable.demo)
             KNotification.createNotification(mContext, R.mipmap.ic_launcher, views,
@@ -74,25 +65,24 @@ class WidgetActivity : AppCompatActivity() {
         }
 
 
-        btn_widget_dialog.onClick {
+        findViewById<Button>(R.id.btn_widget_dialog).setOnClickListener {
             launch(KDialogActivity::class.java, null)
         }
 
 
-        btn_floating_action_button.onClick {
+        findViewById<Button>(R.id.btn_floating_action_button).setOnClickListener {
             FabActivity.launch(mContext, null)
         }
 
-
-        btn_scroll.onClick {
+        findViewById<Button>(R.id.btn_scroll).setOnClickListener {
             ScrollingActivity.launch(mContext, null)
         }
 
-        btn_bottom_nav.onClick {
+        findViewById<Button>(R.id.btn_bottom_nav).setOnClickListener {
             BottomNavigationActivity.launch(mContext, null)
         }
 
-        btn_constraint_layout.onClick {
+        findViewById<Button>(R.id.btn_constraint_layout).setOnClickListener {
             ConstraintLayoutActivity.launch(mContext, null)
         }
 

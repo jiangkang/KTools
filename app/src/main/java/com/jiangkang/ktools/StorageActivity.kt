@@ -2,19 +2,19 @@ package com.jiangkang.ktools
 
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.jiangkang.storage.sqlite.LoginDbActivity
+import com.jiangkang.tools.extend.startActivity
 import com.jiangkang.tools.utils.ApkUtils
 import com.jiangkang.tools.utils.SpUtils
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KDialog
-import org.jetbrains.anko.startActivity
 
 class StorageActivity : AppCompatActivity() {
 

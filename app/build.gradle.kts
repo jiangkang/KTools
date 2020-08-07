@@ -144,7 +144,6 @@ dependencies {
     implementation(AndroidX.Room.runtime)
     kapt(AndroidX.Room.compiler)
     implementation(kotlin("stdlib-jdk7"))
-    implementation("org.jetbrains.anko:anko:0.10.8")
     implementation(Kotlin.coroutines)
     implementation(AndroidX.multiDex)
     implementation(eventBus)

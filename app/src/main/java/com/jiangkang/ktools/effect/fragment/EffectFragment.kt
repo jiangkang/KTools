@@ -9,24 +9,22 @@ import android.graphics.Color
 import android.graphics.Path
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.*
 import android.view.animation.BounceInterpolator
-import android.view.animation.PathInterpolator
 import android.widget.*
+import androidx.fragment.app.Fragment
 import com.jiangkang.container.fragment.ViewDataBinder
 import com.jiangkang.container.loadFragment
 import com.jiangkang.ktools.R
 import com.jiangkang.ktools.animation.CardFlipActivity
 import com.jiangkang.ktools.animation.SpringAnimationActivity
+import com.jiangkang.tools.extend.findViewById
+import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.utils.screenHeight
 import com.jiangkang.tools.utils.screenSize
 import com.jiangkang.tools.utils.screenWidth
-import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KDialog
 import com.jiangkang.widget.view.TaiChiView
-import kotlinx.android.synthetic.main.fragment_effect.*
-import org.jetbrains.anko.backgroundColor
 
 
 val colors = arrayOf(
@@ -50,9 +48,7 @@ class EffectFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_effect, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_effect, container, false)
     }
 
 
@@ -70,7 +66,7 @@ class EffectFragment : Fragment() {
      * 通过PathInterpolator实现曲线运动
      */
     private fun handleCurvedMotion() {
-        btnCurvedMotionAnim.setOnClickListener {
+        activity?.findViewById<Button>(R.id.btnCurvedMotionAnim)?.setOnClickListener {
             activity?.loadFragment(
                     R.layout.fragment_value_animator,
                     "Curved Motion Animation",
@@ -99,7 +95,7 @@ class EffectFragment : Fragment() {
      * 圆形显示动画
      */
     private fun handleCircleRevealAnimation() {
-        btnCircleRevealAnim.setOnClickListener {
+        activity?.findViewById<Button>(R.id.btnCircleRevealAnim)?.setOnClickListener {
             activity?.loadFragment(
                     R.layout.fragment_value_animator,
                     "Circle Reveal Animation",
@@ -140,20 +136,20 @@ class EffectFragment : Fragment() {
      * Spring Animation
      */
     private fun handleSpringAnimation() {
-        btnSpringAnim.setOnClickListener {
+        findViewById<Button>(R.id.btnSpringAnim)?.setOnClickListener {
             activity?.startActivity(Intent(activity, SpringAnimationActivity::class.java))
         }
     }
 
     private fun handleFlipCard() {
-        btnCardFlip.setOnClickListener {
+        findViewById<Button>(R.id.btnCardFlip)?.setOnClickListener {
             activity?.startActivity(Intent(activity, CardFlipActivity::class.java))
         }
     }
 
     //实际上就是淡入淡出效果，调整透明度动画
     private fun handleCrossFadeView() {
-        btnCrossFadeAnimator.setOnClickListener {
+        findViewById<Button>(R.id.btnCrossFadeAnimator)?.setOnClickListener {
             activity?.loadFragment(
                     R.layout.layout_crossfade,
                     "CrossFade Animator",
@@ -190,28 +186,28 @@ class EffectFragment : Fragment() {
 
     private fun handleViewClicked() {
 
-        effect_shape.setOnClickListener {
+        findViewById<Button>(R.id.effect_shape)?.setOnClickListener {
             handleClick(ShapeViewFragment())
         }
 
-        tai_chi.setOnClickListener {
+        findViewById<Button>(R.id.tai_chi)?.setOnClickListener {
             val taiChiView = TaiChiView(this@EffectFragment.activity)
             KDialog.showCustomViewDialog(this@EffectFragment.activity, "太极图", taiChiView
                     , DialogInterface.OnClickListener { dialog, which -> dialog?.dismiss() },DialogInterface.OnClickListener { dialog, which -> dialog?.dismiss() })
             taiChiView.startRotate()
         }
 
-        animated_shape_view.setOnClickListener {
+        findViewById<Button>(R.id.animated_shape_view)?.setOnClickListener {
             handleClick(AnimatedShapeViewFragment())
         }
 
-        shape_path_view.setOnClickListener {
+        findViewById<Button>(R.id.shape_path_view)?.setOnClickListener {
             handleClick(ShapePathViewFragment())
             val (x, y) = mContext.screenSize
         }
 
         //自动布局动画
-        btnAutoLayoutAnimation.setOnClickListener {
+        findViewById<Button>(R.id.btnAutoLayoutAnimation)?.setOnClickListener {
             activity?.loadFragment(
                     R.layout.fragment_auto_animation_layout,
                     "Auto Animation Layout Updates",
@@ -245,7 +241,7 @@ class EffectFragment : Fragment() {
                                     view.addView(Button(view.context).apply {
                                         text = view.childCount.toString()
                                         gravity = Gravity.CENTER
-                                        backgroundColor = colors[IntRange(0, colors.size - 1).random()]
+                                        setBackgroundColor(colors[IntRange(0, colors.size - 1).random()])
                                         setOnClickListener { ToastUtils.showShortToast(this@apply.text.toString()) }
                                     }, layoutParams)
                                 }
@@ -264,7 +260,7 @@ class EffectFragment : Fragment() {
         }
 
         //ValueAnimator的动效
-        btnValueAnimator.setOnClickListener {
+        findViewById<Button>(R.id.btnValueAnimator)?.setOnClickListener {
             activity?.loadFragment(
                     R.layout.fragment_value_animator,
                     "Value Animator",
@@ -289,7 +285,7 @@ class EffectFragment : Fragment() {
             )
         }
 
-        btnVectorDrawable.setOnClickListener {
+        findViewById<Button>(R.id.btnVectorDrawable)?.setOnClickListener {
             activity?.loadFragment(
                     R.layout.fragment_vector_drawable,
                     "Vector Drawable",

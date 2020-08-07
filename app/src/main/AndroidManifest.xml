@@ -62,11 +62,6 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity-alias
@@ -160,7 +155,13 @@
 
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".widget.ConstraintLayoutActivity" />
         <activity android:name=".service.AIDLDemoActivity" />
         <activity android:name=".web.HybridActivity" />

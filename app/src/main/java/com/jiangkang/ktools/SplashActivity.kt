@@ -5,19 +5,12 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.PagerAdapter
-import com.jiangkang.ktools.MainActivity.Companion.launch
-import kotlinx.android.synthetic.main.activity_splash.*
-import java.util.*
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 
 class SplashActivity : AppCompatActivity() {
-
-    private lateinit var item0: View
-    private lateinit var item1: View
-    private lateinit var item2: View
-
-    private lateinit var views: ArrayList<View>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
         val timer: CountDownTimer = object : CountDownTimer(3000, 1000) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                launch(this@SplashActivity)
+                MainActivity.launch(this@SplashActivity)
                 finish()
             }
         }
@@ -38,32 +31,27 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        item0 = inflater.inflate(R.layout.item_splash_image, null)
-        item1 = inflater.inflate(R.layout.item_splash_image, null)
-        item2 = inflater.inflate(R.layout.item_splash_image, null)
-        views = ArrayList()
-        views.add(item0)
-        views.add(item1)
-        views.add(item2)
-        val adapter: PagerAdapter = object : PagerAdapter() {
-            override fun getCount(): Int {
-                return views.size
+        val data = listOf<Int>(
+                R.drawable.wallpaper1,
+                R.drawable.wallpaper2,
+                R.drawable.wallpaper3,
+                R.drawable.wallpaper4
+        )
+        findViewById<ViewPager2>(R.id.viewpager_splash).adapter = object : RecyclerView.Adapter<SplashViewHolder>() {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SplashViewHolder{
+                val inflater = LayoutInflater.from(this@SplashActivity)
+               return SplashViewHolder(inflater.inflate(R.layout.item_splash_image, parent,false))
             }
 
-            override fun isViewFromObject(view: View, `object`: Any): Boolean {
-                return view === `object`
-            }
+            override fun getItemCount(): Int  = data.size
 
-            override fun instantiateItem(container: ViewGroup, position: Int): Any {
-                container.addView(views[position])
-                return views[position]
-            }
-
-            override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-                container.removeView(views[position])
+            override fun onBindViewHolder(holder: SplashViewHolder, position: Int) {
+                   holder.ivSplash.setImageResource(data[position])
             }
         }
-        viewpager_splash.adapter = adapter
     }
+}
+
+class SplashViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
+    val ivSplash: ImageView = itemView.findViewById<ImageView>(R.id.iv_splash)
 }

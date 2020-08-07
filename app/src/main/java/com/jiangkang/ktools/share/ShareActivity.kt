@@ -8,15 +8,15 @@ import android.os.Environment
 import androidx.core.content.FileProvider
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import com.jiangkang.ktools.BuildConfig
 import com.jiangkang.ktools.R
 import com.jiangkang.tools.utils.FileUtils
 import com.jiangkang.tools.utils.LogUtils
 import com.jiangkang.tools.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_share.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.io.File
+import kotlin.concurrent.thread
 
 
 class ShareActivity : AppCompatActivity() {
@@ -91,32 +91,32 @@ class ShareActivity : AppCompatActivity() {
 
 
     private fun handleClick() {
-        btnShareText.onClick {
+        findViewById<Button>(R.id.btnShareText).setOnClickListener {
             shareText()
         }
 
 
-        btnShareSingleImage.onClick {
+        findViewById<Button>(R.id.btnShareSingleImage).setOnClickListener {
             shareSingleImage()
         }
 
-        btnShareMultiImages.onClick {
+        findViewById<Button>(R.id.btnShareMultiImages).setOnClickListener {
             shareMultiImages()
         }
 
-        btnShareToQQ.onClick {
+        findViewById<Button>(R.id.btnShareToQQ).setOnClickListener {
             val packageName = "com.tencent.mobileqq"
             shareToTarget(packageName)
         }
 
-        btnShareToWeChat.onClick {
+        findViewById<Button>(R.id.btnShareToWeChat).setOnClickListener {
             val packageName = "com.tencent.mm"
             shareToTarget(packageName)
         }
 
 
-        btnRouter.onClick {
-            val intentString = et_intent.text.toString()
+       findViewById<Button>(R.id.btnRouter).setOnClickListener {
+            val intentString = findViewById<EditText>(R.id.et_intent).text.toString()
             intentString.let {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.addCategory(Intent.CATEGORY_DEFAULT)
@@ -140,7 +140,7 @@ class ShareActivity : AppCompatActivity() {
     }
 
     private fun shareMultiImages() {
-        doAsync {
+        thread {
             val file1 = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "ktools", "share0.jpg")
             val imageUri1 = FileProvider.getUriForFile(
                     this@ShareActivity,
@@ -168,7 +168,7 @@ class ShareActivity : AppCompatActivity() {
     }
 
     private fun shareSingleImage() {
-        doAsync {
+        thread {
             val file = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "ktools", "share0.jpg")
             val uriToImage = FileProvider.getUriForFile(
                     this@ShareActivity,
