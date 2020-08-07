@@ -1,4 +1,6 @@
 # KTools
+![Android CI](https://github.com/jiangkang/KTools/workflows/Android%20CI/badge.svg)
+
 Android常用功能的封装库
 
 ## 效果图
