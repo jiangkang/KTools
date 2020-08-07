@@ -12,6 +12,7 @@ import com.github.anrwatchdog.ANRWatchDog
 import com.jiangkang.tools.King
 import com.jiangkang.tools.utils.ToastUtils
 import com.squareup.leakcanary.LeakCanary
+import java.lang.StringBuilder
 
 /**
  * @author jiangkang
@@ -22,14 +23,19 @@ open class KApplication : Application() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
 
-        // TODO: 2018/1/30 测试框架与MultiDex不兼容，待处理
         MultiDex.install(this)
 
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
+            val stackTrace = e.stackTrace
+            val reason = StringBuilder()
+            reason.appendln(e.message)
+            stackTrace.forEach {
+                reason.appendln(it.toString())
+            }
             val intent = Intent(applicationContext,CrashInfoActivity::class.java)
                     .apply {
                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        putExtra("crash_info",e.message)
+                        putExtra("crash_info",reason.toString())
                     }
             startActivity(intent)
         }

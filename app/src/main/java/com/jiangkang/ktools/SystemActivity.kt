@@ -31,6 +31,7 @@ import kotlinx.coroutines.runBlocking
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
+import kotlin.concurrent.thread
 
 
 /**
@@ -45,28 +46,42 @@ class SystemActivity : AppCompatActivity() {
 
     private var jsonObject: JSONObject? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_system)
         title = "System"
         handleClick()
+    }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            when(requestCode){
+                REQUEST_OPEN_CONTACTS -> {
+                    gotoContactPage()
+                }
+                REQUEST_GET_CONTACTS -> {
+                    getContactList()
+                }
+            }
+        }
     }
 
     private fun handleClick() {
-
         findViewById<Button>(R.id.btn_open_contacts).setOnClickListener {
             if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                 gotoContactPage()
             } else {
-                requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), 1111)
+                requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), REQUEST_OPEN_CONTACTS)
             }
         }
 
-
         findViewById<Button>(R.id.btn_get_all_contacts).setOnClickListener {
-            onBtnGetAllContactsClicked()
+            if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED){
+                getContactList()
+            } else {
+                requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS),REQUEST_GET_CONTACTS)
+            }
         }
 
         findViewById<Button>(R.id.btn_set_clipboard).setOnClickListener {
@@ -170,17 +185,9 @@ class SystemActivity : AppCompatActivity() {
         return result
     }
 
-    private fun onBtnGetAllContactsClicked() {
-        if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED){
-            getContactList()
-        } else {
-            requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS),1111)
-        }
-    }
-
     private fun getContactList() {
         val helper = ContactHelper(this)
-        Thread(Runnable {
+        thread {
             jsonObject = helper.queryContactList()
             runOnUiThread {
                 try {
@@ -203,8 +210,7 @@ class SystemActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
             }
-        }).start()
-
+        }
     }
 
     private fun onBtnSetClipboardClicked() {
@@ -366,8 +372,9 @@ class SystemActivity : AppCompatActivity() {
     }
 
     companion object {
-
-        private val REQUEST_PICK_CONTACT = 1112
-        private val TAG = SystemActivity::class.java.simpleName
+        private val REQUEST_OPEN_CONTACTS = 1000
+        private val REQUEST_GET_CONTACTS = 1001
+        private val REQUEST_PICK_CONTACT = 1002
+                private val TAG = SystemActivity::class.java.simpleName
     }
 }

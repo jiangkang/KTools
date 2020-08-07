@@ -7,7 +7,6 @@ import android.content.Loader
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.util.Log
 import com.jiangkang.tools.struct.JsonGenerator
 import org.json.JSONArray
 import org.json.JSONObject
@@ -18,7 +17,7 @@ import org.json.JSONObject
 class ContactsLoaderCallback(private val context: Context) : LoaderManager.LoaderCallbacks<Cursor> {
     private var result: JSONObject? = null
     private var listener: QueryListener? = null
-    override fun onCreateLoader(id: Int, args: Bundle): Loader<Cursor> {
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         //指定获取_id和display_name两列数据，display_name即为姓名
         val projection = arrayOf(
                 ContactsContract.Contacts._ID,
@@ -81,13 +80,7 @@ class ContactsLoaderCallback(private val context: Context) : LoaderManager.Loade
         result = JsonGenerator()
                 .put("list", jsonArray)
                 .gen()
-        if (listener != null) {
-            listener!!.success(result)
-        }
-        Log.d(TAG, """
-     onLoadFinished: result =
-     ${result.toString()}
-     """.trimIndent())
+        listener?.success(result)
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {}
@@ -96,11 +89,6 @@ class ContactsLoaderCallback(private val context: Context) : LoaderManager.Loade
     }
 
     interface QueryListener {
-        fun success(`object`: JSONObject?)
+        fun success(json: JSONObject?)
     }
-
-    companion object {
-        private const val TAG = "ContactsLoaderCallback"
-    }
-
 }
