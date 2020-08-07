@@ -181,5 +181,5 @@ repositories {
 }
 
 traceMethod {
-    enable = true
+    enable = false
 }

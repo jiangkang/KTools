@@ -10,8 +10,8 @@ abstract class KPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.extensions.create("traceMethod",TraceMethodConfig::class.java)
-        val android = target.extensions.getByType(AppExtension::class.java)
-        android.registerTransform(MethodTraceTransform(target))
+//        val android = target.extensions.getByType(AppExtension::class.java)
+//        android.registerTransform(MethodTraceTransform(target))
     }
 
 }

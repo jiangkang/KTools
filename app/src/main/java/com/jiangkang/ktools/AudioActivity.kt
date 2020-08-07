@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.jiangkang.annotations.Safe
 import com.jiangkang.ktools.audio.VoiceBroadcastReceiver
 import com.jiangkang.tools.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_audio.*
 import java.util.*
 
 /**
@@ -29,15 +28,15 @@ class AudioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audio)
-        btn_text_to_speech.setOnClickListener {
+        findViewById<Button>(R.id.btn_text_to_speech).setOnClickListener {
             onBtnTextToSpeechClicked()
         }
 
-        btn_play_single_sound.setOnClickListener {
+        findViewById<Button>(R.id.btn_play_single_sound).setOnClickListener {
             onBtnPlaySingleSoundClicked()
         }
 
-        btn_play_multi_sounds.setOnClickListener {
+        findViewById<Button>(R.id.btn_play_multi_sounds).setOnClickListener {
             onBtnPlayMultiSoundsClicked()
         }
 

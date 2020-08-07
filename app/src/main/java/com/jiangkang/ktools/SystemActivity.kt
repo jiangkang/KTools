@@ -1,7 +1,6 @@
 package com.jiangkang.ktools
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ComponentName
@@ -14,9 +13,12 @@ import android.provider.ContactsContract
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.jiangkang.ktools.service.AIDLDemoActivity
 import com.jiangkang.ktools.share.ShareActivity
+import com.jiangkang.tools.extend.wallpaperManager
 import com.jiangkang.tools.struct.JsonGenerator
 import com.jiangkang.tools.system.ContactHelper
 import com.jiangkang.tools.utils.ClipboardUtils
@@ -24,13 +26,8 @@ import com.jiangkang.tools.utils.ShellUtils
 import com.jiangkang.tools.utils.SpUtils
 import com.jiangkang.tools.utils.ToastUtils
 import dalvik.system.DexClassLoader
-import kotlinx.android.synthetic.main.activity_system.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.anko.sdk27.coroutines.onClick
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.wallpaperManager
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
@@ -44,7 +41,6 @@ import java.io.File
  * 3.设置文本到剪贴板，从剪贴板中取出文本
  */
 
-@SuppressLint("LogUtilsNotUsed")
 class SystemActivity : AppCompatActivity() {
 
     private var jsonObject: JSONObject? = null
@@ -60,7 +56,7 @@ class SystemActivity : AppCompatActivity() {
 
     private fun handleClick() {
 
-        btn_open_contacts.onClick {
+        findViewById<Button>(R.id.btn_open_contacts).setOnClickListener {
             if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                 gotoContactPage()
             } else {
@@ -69,19 +65,19 @@ class SystemActivity : AppCompatActivity() {
         }
 
 
-        btn_get_all_contacts.onClick {
+        findViewById<Button>(R.id.btn_get_all_contacts).setOnClickListener {
             onBtnGetAllContactsClicked()
         }
 
-        btn_set_clipboard.onClick {
+        findViewById<Button>(R.id.btn_set_clipboard).setOnClickListener {
             onBtnSetClipboardClicked()
         }
 
-        btn_exit_app.onClick {
+        findViewById<Button>(R.id.btn_exit_app).setOnClickListener {
             onClickBtnExitApp()
         }
 
-        btnQuickSettings.setOnClickListener {
+        findViewById<Button>(R.id.btnQuickSettings).setOnClickListener {
 
             runBlocking {
                 val result = async {
@@ -90,7 +86,7 @@ class SystemActivity : AppCompatActivity() {
                 async {
                     ShellUtils.execCmd("adb shell am start com.android.settings/.DevelopmentSettings", false)
                 }
-                toast("result : $result")
+                ToastUtils.showShortToast("result : $result")
             }
 
         }
@@ -100,6 +96,10 @@ class SystemActivity : AppCompatActivity() {
 
     private fun gotoContactPage() {
         val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+                .apply {
+                    flags += Intent.FLAG_ACTIVITY_NEW_TASK
+                    flags += Intent.FLAG_GRANT_READ_URI_PERMISSION
+                }
         startActivityForResult(intent, REQUEST_PICK_CONTACT)
     }
 
@@ -208,8 +208,8 @@ class SystemActivity : AppCompatActivity() {
     }
 
     private fun onBtnSetClipboardClicked() {
-        if (!TextUtils.isEmpty(et_content.text)) {
-            val content = et_content.text.toString()
+        if (!TextUtils.isEmpty(findViewById<EditText>(R.id.et_content).text)) {
+            val content = findViewById<EditText>(R.id.et_content).text.toString()
             ClipboardUtils.putStringToClipboard(content)
             ToastUtils.showShortToast("设置成功")
         } else {
@@ -357,12 +357,12 @@ class SystemActivity : AppCompatActivity() {
     }
 
     fun onBtnChangeWallpaper() {
-        wallpaperManager.setResource(R.raw.wallpaper)
+        this.wallpaperManager.setResource(R.raw.wallpaper)
         ToastUtils.showShortToast("壁纸更换成功！")
     }
 
     fun onBtnShare(view: View) {
-        startActivity<ShareActivity>()
+        startActivity(Intent(this,ShareActivity::class.java))
     }
 
     companion object {

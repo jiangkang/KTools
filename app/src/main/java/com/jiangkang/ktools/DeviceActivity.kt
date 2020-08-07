@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.jiangkang.tools.utils.DeviceUtils
 import com.jiangkang.tools.utils.ScreenUtils
@@ -13,7 +14,6 @@ import com.jiangkang.tools.service.WatchingTopActivityService
 import com.jiangkang.tools.utils.NetworkUtils
 import com.jiangkang.tools.utils.ShellUtils
 import com.jiangkang.tools.widget.KDialog
-import kotlinx.android.synthetic.main.activity_device.*
 import org.jetbrains.anko.activityManager
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -32,14 +32,14 @@ class DeviceActivity : AppCompatActivity() {
 
     private fun handleClick() {
 
-        btnCheckNetworkInfo.onClick {
+        findViewById<Button>(R.id.btnCheckNetworkInfo).onClick {
             val builder = StringBuilder()
             builder.append(String.format("网络类型: %s\n", NetworkUtils.netWorkType))
                     .append(String.format("Mac地址: %s\n", NetworkUtils.macAddress))
             KDialog.showMsgDialog(this@DeviceActivity, builder.toString())
         }
 
-        btnScreenBrightness.onClick {
+        findViewById<Button>(R.id.btnScreenBrightness).onClick {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (!Settings.System.canWrite(this@DeviceActivity)) {
                     startActivity(Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:$packageName")))
@@ -53,20 +53,20 @@ class DeviceActivity : AppCompatActivity() {
 
         }
 
-        btnCurrentWindowBrightness.onClick {
+        findViewById<Button>(R.id.btnCurrentWindowBrightness).onClick {
             ScreenUtils.setCurrentWindowScreenBrightness(this@DeviceActivity, 125)
             toast("将亮度修改到了125,只对当前页面有效").show()
         }
 
 
-        btnCheckCurrentActivity.onClick {
+        findViewById<Button>(R.id.btnCheckCurrentActivity).onClick {
 //            KDialog.showMsgDialog(this@DeviceActivity, AppUtils.currentActivity)
             startService(Intent(this@DeviceActivity,WatchingTopActivityService::class.java))
         }
 
 
 
-        btnAdbWireless.onClick {
+        findViewById<Button>(R.id.btnAdbWireless).onClick {
             doAsync {
                 val command = "setprop service.adb.tcp.port 5555 && stop adbd && start adbd"
                 ShellUtils.execCmd(command, true)
@@ -77,7 +77,7 @@ class DeviceActivity : AppCompatActivity() {
             }
         }
 
-        btnGetMaxMemory.onClick {
+        findViewById<Button>(R.id.btnGetMaxMemory).onClick {
             val maxMemory = Runtime.getRuntime().maxMemory() / (1024 * 1024)
             val memoryInfo = getAvailableMemory()
 

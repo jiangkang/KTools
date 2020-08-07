@@ -81,8 +81,8 @@ class MusicConnectionCallback(var context: Context, var browser: MediaBrowserCom
         }
 
         //display a init state
-        val metadata = mediaController.metadata
-        val pbState = mediaController.playbackState
+//        val metadata = mediaController.metadata
+//        val pbState = mediaController.playbackState
 
         mediaController.registerCallback(musicControllerCallback)
     }

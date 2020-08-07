@@ -1,7 +1,11 @@
 package com.jiangkang.tools.utils
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.ACTION_INSTALL_PACKAGE
+import android.content.pm.PackageInstaller
+import android.net.Uri
 import androidx.core.content.FileProvider
 import com.jiangkang.tools.extend.runOnUiThread
 import okhttp3.*
@@ -13,6 +17,7 @@ import kotlin.concurrent.thread
 object ApkUtils {
 
     fun installApk(context: Context) {
+        (context as Activity).callingPackage
         val okHttpClient = OkHttpClient.Builder().build()
         val request = Request.Builder().url("https://github.com/jiangkang/flutter-system/releases/download/v0.1.0/app-debug.apk")
                 .build()
