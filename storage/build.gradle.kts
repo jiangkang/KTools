@@ -55,9 +55,3 @@ dependencies {
     implementation(kotlin("stdlib-jdk7"))
     implementation(project(":tools"))
 }
-
-repositories {
-    jcenter()
-    google()
-    mavenCentral()
-}

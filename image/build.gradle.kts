@@ -49,9 +49,3 @@ dependencies {
     implementation(kotlin("stdlib-jdk7"))
     implementation(AndroidX.constraintLayout)
 }
-
-repositories {
-    jcenter()
-    google()
-    mavenCentral()
-}

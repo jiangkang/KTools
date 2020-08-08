@@ -47,9 +47,3 @@ dependencies {
     androidTestImplementation(AndroidX.testRunner)
     androidTestImplementation(AndroidX.espressoCore)
 }
-
-repositories {
-    jcenter()
-    google()
-    mavenCentral()
-}

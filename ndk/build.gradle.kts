@@ -57,9 +57,3 @@ dependencies {
     androidTestImplementation(AndroidX.espressoCore)
     implementation(project(":tools"))
 }
-
-repositories {
-    jcenter()
-    google()
-    mavenCentral()
-}

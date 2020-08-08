@@ -50,7 +50,6 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(AndroidX.appcompat)
-    implementation(AndroidX.appcompat)
     implementation(AndroidX.constraintLayout)
     testImplementation(junit)
     androidTestImplementation(AndroidX.testRunner)
@@ -58,10 +57,4 @@ dependencies {
     implementation(project(":tools"))
     implementation(kotlin("stdlib-jdk7"))
     lintChecks(project(":klint"))
-}
-
-repositories {
-    jcenter()
-    google()
-    mavenCentral()
 }

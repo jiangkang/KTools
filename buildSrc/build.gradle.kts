@@ -12,7 +12,7 @@ dependencies {
 //    implementation(localGroovy())
 //    implementation("org.ow2.asm:asm:7.1")
 //    implementation("javassist:javassist:3.12.1.GA")
-    implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("stdlib-jdk7"))
 }
 
 sourceSets {
@@ -26,11 +26,12 @@ repositories {
     jcenter()
     google()
 }
+
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "1.7"
 }
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "1.7"
 }

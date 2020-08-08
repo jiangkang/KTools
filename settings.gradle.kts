@@ -13,6 +13,7 @@ include(
         ":kanimation",
         ":container",
         ":media",
-        ":ndk"
+        ":ndk",
+        ":vpn"
 )
-rootProject.buildFileName = "build.gradle.kts.kts"
+rootProject.buildFileName = "build.gradle.kts"

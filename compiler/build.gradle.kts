@@ -13,9 +13,3 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.9")
     implementation("org.apache.commons:commons-collections4:4.4")
 }
-
-repositories {
-    jcenter()
-    mavenCentral()
-    google()
-}

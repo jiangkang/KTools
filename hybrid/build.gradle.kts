@@ -46,9 +46,3 @@ dependencies {
     implementation(gson)
     implementation(Kotlin.coroutines)
 }
-
-repositories {
-    jcenter()
-    google()
-    mavenCentral()
-}

@@ -48,9 +48,3 @@ dependencies {
     androidTestImplementation(AndroidX.espressoCore)
     implementation(kotlin("stdlib-jdk7"))
 }
-
-repositories {
-    jcenter()
-    google()
-    mavenCentral()
-}

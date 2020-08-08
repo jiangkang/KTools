@@ -21,8 +21,3 @@ val jar by tasks.getting(Jar::class) {
     }
 }
 
-repositories {
-    jcenter()
-    google()
-    mavenCentral()
-}

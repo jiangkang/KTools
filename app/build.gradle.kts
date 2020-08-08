@@ -172,13 +172,6 @@ task("copy", Copy::class) {
     delete("build/outputs/apk/debug/*")
 }
 
-
-repositories {
-    jcenter()
-    mavenCentral()
-    google()
-}
-
 traceMethod {
     enable = false
 }

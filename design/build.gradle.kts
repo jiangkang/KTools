@@ -50,9 +50,3 @@ dependencies {
     implementation(project(":tools"))
 
 }
-
-repositories {
-    jcenter()
-    google()
-    mavenCentral()
-}

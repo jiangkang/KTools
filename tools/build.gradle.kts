@@ -44,19 +44,10 @@ dependencies {
     }
     testImplementation(junit)
     testImplementation("org.mockito:mockito-core:3.3.3")
-
     implementation(zxing)
-    
     okHttp()
     implementation(AndroidX.annotation)
     implementation(AndroidX.appcompat)
-    
     implementation("com.github.bumptech.glide:glide:4.11.0")
-
     implementation(kotlin("stdlib-jdk7"))
-}
-repositories {
-    jcenter()
-    mavenCentral()
-    google()
 }
