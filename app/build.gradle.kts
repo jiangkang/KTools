@@ -163,6 +163,7 @@ dependencies {
     lintChecks(project (":klint"))
     implementation(project(":design"))
     implementation(project(":container"))
+    implementation(project(":vpn"))
 }
 
 task("copy", Copy::class) {
