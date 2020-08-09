@@ -1,3 +1,4 @@
+//rootProject.buildFileName = "build.gradle.kts"
 include(
         ":app",
         ":tools",
@@ -14,6 +15,8 @@ include(
         ":container",
         ":media",
         ":ndk",
-        ":vpn"
+        ":vpn",
+        ":sensor",
+        ":bluetooth",
+        ":nfc"
 )
-rootProject.buildFileName = "build.gradle.kts"
