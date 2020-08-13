@@ -43,7 +43,7 @@ dependencies {
         exclude("com.android.support","support-annotations")
     }
     testImplementation(junit)
-    testImplementation("org.mockito:mockito-core:3.3.3")
+    testImplementation(mockito)
     implementation(zxing)
     okHttp()
     implementation(AndroidX.annotation)

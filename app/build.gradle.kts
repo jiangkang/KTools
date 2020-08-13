@@ -115,16 +115,14 @@ dependencies {
 
     androidTestImplementation(AndroidX.annotation)
 
-    androidTestImplementation("org.hamcrest:hamcrest-library:2.1")
+    androidTestImplementation(hamcrest)
     // Optional -- UI testing with UI Automator
-    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+    androidTestImplementation(AndroidX.uiautomator)
 
     testImplementation(junit)
-    testImplementation("org.mockito:mockito-core:3.3.3")
+    testImplementation(mockito)
 
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:1.5.1")
-    releaseImplementation("com.squareup.leakcanary:leakcanary-android-no-op:1.5.1")
-
+    leakcanary()
     debugImplementation("com.amitshekhar.android:debug-db:1.0.0")
     debugImplementation("com.facebook.sonar:sonar:0.6.13") {
         exclude("android.arch.lifecycle", "runtime")

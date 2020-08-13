@@ -2,12 +2,15 @@ import Google.vHilt
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 
 const val junit = "junit:junit:4.13"
+const val mockito = "org.mockito:mockito-core:3.3.3"
 const val eventBus = "org.greenrobot:eventbus:3.1.1"
 const val material = "com.google.android.material:material:1.1.0"
 const val zxing = "com.google.zxing:core:3.4.0"
 const val lottie = "com.airbnb.android:lottie:3.4.1"
 const val gson = "com.google.code.gson:gson:2.8.6"
 const val anrWatchDog = "com.github.anrwatchdog:anrwatchdog:1.4.0"
+const val hamcrest = "org.hamcrest:hamcrest-library:2.2"
+const val javapoet = "com.squareup:javapoet:1.13.0"
 
 object Google {
     const val vHilt =  "2.28-alpha"
@@ -66,4 +69,19 @@ fun DependencyHandlerScope.glide(){
     impl("com.github.bumptech.glide:glide:4.11.0")
     impl("com.github.bumptech.glide:okhttp3-integration:4.11.0")
     kapt("com.github.bumptech.glide:compiler:4.11.0")
+}
+
+fun DependencyHandlerScope.fresco(){
+    val vFresco = "2.3.0"
+    api("com.facebook.fresco:fresco:$vFresco")
+    api("com.facebook.fresco:animated-gif:$vFresco")
+    api("com.facebook.fresco:webpsupport:$vFresco")
+    api("com.facebook.fresco:animated-webp:$vFresco")
+}
+
+fun DependencyHandlerScope.leakcanary(){
+    val vLeakCanary = "1.6.3"
+    debugImpl("com.squareup.leakcanary:leakcanary-android:$vLeakCanary")
+    releaseImpl("com.squareup.leakcanary:leakcanary-android-no-op:$vLeakCanary")
+
 }

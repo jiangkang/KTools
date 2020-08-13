@@ -38,14 +38,11 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(AndroidX.appcompat)
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation(AndroidX.Lifecycle.extension)
     testImplementation(junit)
     androidTestImplementation(AndroidX.testRunner)
     androidTestImplementation(AndroidX.espressoCore)
-    api("com.facebook.fresco:fresco:2.0.0")
-    api("com.facebook.fresco:animated-gif:2.0.0")
-    api("com.facebook.fresco:webpsupport:2.0.0")
-    api("com.facebook.fresco:animated-webp:2.0.0")
+    fresco()
     implementation(kotlin("stdlib-jdk7"))
     implementation(AndroidX.constraintLayout)
 }
