@@ -8,10 +8,12 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.multidex.MultiDex
 import com.jiangkang.tools.extend.activityManager
 import com.jiangkang.tools.service.WatchingTopActivityService
 import com.jiangkang.tools.utils.*
 import com.jiangkang.tools.widget.KDialog
+import kotlinx.android.synthetic.main.activity_device.*
 import kotlin.concurrent.thread
 
 class DeviceActivity : AppCompatActivity() {
@@ -29,8 +31,15 @@ class DeviceActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btnCheckNetworkInfo).setOnClickListener {
             val builder = StringBuilder()
-            builder.append(String.format("网络类型: %s\n", NetworkUtils.netWorkType))
-                    .append(String.format("Mac地址: %s\n", NetworkUtils.macAddress))
+            builder.appendln("网络类型: ${NetworkUtils.netWorkType}")
+                    .appendln("Mac地址:${ NetworkUtils.macAddress}")
+            KDialog.showMsgDialog(this@DeviceActivity, builder.toString())
+        }
+
+        btn_get_device_info.setOnClickListener {
+            val builder = StringBuilder().apply {
+                appendln("java.vm.version:${DeviceUtils.vmVersion}")
+            }
             KDialog.showMsgDialog(this@DeviceActivity, builder.toString())
         }
 

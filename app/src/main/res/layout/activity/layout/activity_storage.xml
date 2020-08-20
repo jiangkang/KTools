@@ -38,6 +38,12 @@
             android:background="#9C27B0"
             android:text="Install APK" />
 
+        <Button
+            android:id="@+id/btn_parse_apk"
+            style="@style/KButton"
+            android:background="#9C27B0"
+            android:text="Parse APK" />
+
     </LinearLayout>
 
 

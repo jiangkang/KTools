@@ -8,7 +8,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
-import android.os.Environment
 import android.provider.ContactsContract
 import android.text.TextUtils
 import android.util.Log
@@ -21,16 +20,16 @@ import com.jiangkang.ktools.share.ShareActivity
 import com.jiangkang.tools.extend.wallpaperManager
 import com.jiangkang.tools.struct.JsonGenerator
 import com.jiangkang.tools.system.ContactHelper
-import com.jiangkang.tools.utils.ClipboardUtils
-import com.jiangkang.tools.utils.ShellUtils
-import com.jiangkang.tools.utils.SpUtils
-import com.jiangkang.tools.utils.ToastUtils
+import com.jiangkang.tools.utils.*
 import dalvik.system.DexClassLoader
+import kotlinx.android.synthetic.main.activity_system.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
+import java.io.FileOutputStream
+import java.nio.file.Files
 import kotlin.concurrent.thread
 
 
@@ -55,8 +54,8 @@ class SystemActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            when(requestCode){
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            when (requestCode) {
                 REQUEST_OPEN_CONTACTS -> {
                     gotoContactPage()
                 }
@@ -77,10 +76,10 @@ class SystemActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_get_all_contacts).setOnClickListener {
-            if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED){
+            if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                 getContactList()
             } else {
-                requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS),REQUEST_GET_CONTACTS)
+                requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), REQUEST_GET_CONTACTS)
             }
         }
 
@@ -104,6 +103,25 @@ class SystemActivity : AppCompatActivity() {
                 ToastUtils.showShortToast("result : $result")
             }
 
+        }
+
+        btn_load_dex.setOnClickListener {
+            val jarFile = File(
+                    filesDir,
+                    "hello_world_dex.jar"
+            )
+            if (!jarFile.exists()) {
+                ToastUtils.showShortToast("文件不存在，复制内容到文件中")
+                Files.copy(FileUtils.getInputStreamFromAssets("code/hello_world_dex.jar"),jarFile.toPath())
+            }
+            val loader = DexClassLoader(
+                    jarFile.absolutePath,
+                    codeCacheDir.absolutePath, null,
+                    classLoader
+            )
+            val clazz = loader.loadClass("com.jiangkang.ktools.HelloWorld")
+            val iSayHello = clazz.newInstance() as ISayHello
+            ToastUtils.showLongToast("执行dex中方法：" + iSayHello.sayHello())
         }
 
     }
@@ -324,40 +342,6 @@ class SystemActivity : AppCompatActivity() {
         hideVirtualNavbar(this)
     }
 
-    fun onBtnLoadDexClicked(view: View) {
-        val jarFile = File(
-                Environment.getExternalStorageDirectory().absolutePath + File.separator + "ktools",
-                "hello_world_dex.jar"
-        )
-
-        if (!jarFile.exists()) {
-            //todo:这里应该从assets中复制到sdcard中
-            ToastUtils.showShortToast("文件不存在")
-        } else {
-            val loader = DexClassLoader(
-                    jarFile.absolutePath,
-                    externalCacheDir!!.absolutePath, null,
-                    classLoader
-            )
-            try {
-
-                val clazz = loader.loadClass("com.jiangkang.ktools.HelloWorld")
-
-                val iSayHello = clazz.newInstance() as ISayHello
-
-                ToastUtils.showLongToast("执行dex中方法：" + iSayHello.sayHello())
-
-            } catch (e: ClassNotFoundException) {
-                e.printStackTrace()
-            } catch (e: IllegalAccessException) {
-                e.printStackTrace()
-            } catch (e: InstantiationException) {
-                e.printStackTrace()
-            }
-
-        }
-    }
-
     fun onBtnGetClipboardClicked(view: View) {
         ToastUtils.showShortToast(ClipboardUtils.stringFromClipboard)
     }
@@ -368,13 +352,13 @@ class SystemActivity : AppCompatActivity() {
     }
 
     fun onBtnShare(view: View) {
-        startActivity(Intent(this,ShareActivity::class.java))
+        startActivity(Intent(this, ShareActivity::class.java))
     }
 
     companion object {
         private val REQUEST_OPEN_CONTACTS = 1000
         private val REQUEST_GET_CONTACTS = 1001
         private val REQUEST_PICK_CONTACT = 1002
-                private val TAG = SystemActivity::class.java.simpleName
+        private val TAG = SystemActivity::class.java.simpleName
     }
 }

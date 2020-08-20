@@ -70,7 +70,7 @@ object FileUtils {
     }
 
     fun copyAssetsToFile(assetFilename: String?, dstName: String?) {
-        Executors.newCachedThreadPool().execute(Runnable {
+        Executors.newCachedThreadPool().execute {
             var fos: FileOutputStream? = null
             try {
                 val dstFile = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "ktools", dstName)
@@ -92,7 +92,7 @@ object FileUtils {
                     }
                 }
             }
-        })
+        }
     }
 
     /**

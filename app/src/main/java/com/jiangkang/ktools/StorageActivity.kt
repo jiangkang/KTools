@@ -15,6 +15,8 @@ import com.jiangkang.tools.utils.ApkUtils
 import com.jiangkang.tools.utils.SpUtils
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KDialog
+import kotlinx.android.synthetic.main.activity_storage.*
+import java.io.File
 
 class StorageActivity : AppCompatActivity() {
 
@@ -41,6 +43,11 @@ class StorageActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btn_install).setOnClickListener {
             ApkUtils.installApk(this@StorageActivity)
+        }
+
+        btn_parse_apk.setOnClickListener {
+            val baseApk = this.applicationInfo.sourceDir
+            ApkUtils.parseApk(this@StorageActivity, File(baseApk))
         }
 
     }

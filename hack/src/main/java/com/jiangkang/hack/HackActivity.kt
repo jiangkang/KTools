@@ -1,10 +1,14 @@
 package com.jiangkang.hack
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import com.jiangkang.tools.utils.ReflectUtils
+import com.jiangkang.tools.utils.ReflectionUtil
 import com.jiangkang.tools.utils.ToastUtils
+import kotlinx.android.synthetic.main.activity_hack.*
 
 class HackActivity : Activity() {
 
@@ -15,8 +19,17 @@ class HackActivity : Activity() {
             ToastUtils.showShortToast("Hook 点击事件")
         }
         hookOnClickListener(findViewById<Button>(R.id.btn_hook_OnClick))
+        handleClick()
     }
 
+    private fun handleClick() {
+        btn_dex_path_list.setOnClickListener {
+            val field = ReflectionUtil.findField(classLoader,"pathList")
+            val dexPathList = field?.get(classLoader)
+        }
+    }
+
+    @SuppressLint("PrivateApi", "DiscouragedPrivateApi")
     private fun hookOnClickListener(view:View) {
         try {
             //getListenerInfo()
@@ -30,7 +43,7 @@ class HackActivity : Activity() {
             val listenerInfoClz = Class.forName("android.view.View\$ListenerInfo")
             val mOnClickListener = listenerInfoClz.getDeclaredField("mOnClickListener")
             mOnClickListener.isAccessible = true
-            
+
             // 获取到原来的listener值
             val originOnClickListener = mOnClickListener[listenerInfo] as View.OnClickListener
 

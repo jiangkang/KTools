@@ -49,10 +49,16 @@ object DeviceUtils {
      * @param ip
      * @return
      */
-    fun intIP2StringIP(ip: Int): String {
+    private fun intIP2StringIP(ip: Int): String {
         return (ip and 0xFF).toString() + "." +
                 (ip shr 8 and 0xFF) + "." +
                 (ip shr 16 and 0xFF) + "." +
                 (ip shr 24 and 0xFF)
     }
+
+    /**
+     * 虚拟机版本
+     */
+    val vmVersion = System.getProperty("java.vm.version")
+
 }

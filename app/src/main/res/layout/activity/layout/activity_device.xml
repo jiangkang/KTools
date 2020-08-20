@@ -18,6 +18,13 @@
             />
 
         <Button
+            android:id="@+id/btn_get_device_info"
+            style="@style/KButton"
+            android:background="#f44336"
+            android:text="查看设备信息"
+            />
+
+        <Button
             android:id="@+id/btnScreenBrightness"
             style="@style/KButton"
             android:background="#f44336"

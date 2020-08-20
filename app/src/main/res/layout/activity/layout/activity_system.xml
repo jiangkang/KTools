@@ -102,7 +102,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="#FF9966"
-            android:onClick="onBtnLoadDexClicked"
             android:text="加载本地jar包中的dex文件"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
