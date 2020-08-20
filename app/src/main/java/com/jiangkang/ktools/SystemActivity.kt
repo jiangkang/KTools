@@ -40,7 +40,6 @@ import kotlin.concurrent.thread
  * 2.获取联系人列表
  * 3.设置文本到剪贴板，从剪贴板中取出文本
  */
-
 class SystemActivity : AppCompatActivity() {
 
     private var jsonObject: JSONObject? = null
@@ -120,8 +119,13 @@ class SystemActivity : AppCompatActivity() {
                     classLoader
             )
             val clazz = loader.loadClass("com.jiangkang.ktools.HelloWorld")
-            val iSayHello = clazz.newInstance() as ISayHello
-            ToastUtils.showLongToast("执行dex中方法：" + iSayHello.sayHello())
+            val sayHelloMethod = clazz.getDeclaredMethod("sayHello")
+            if (!sayHelloMethod.isAccessible){
+                sayHelloMethod.isAccessible = true
+            }
+            val msg = sayHelloMethod.invoke(clazz.newInstance()) as String?
+//            val iSayHello = clazz.newInstance() as ISayHello
+            ToastUtils.showLongToast("执行dex中方法：$msg")
         }
 
     }
