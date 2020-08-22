@@ -5,8 +5,11 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Environment
 import com.jiangkang.tools.King
+import okhttp3.internal.closeQuietly
 import java.io.*
+import java.nio.channels.FileChannel
 import java.util.concurrent.Executors
+import kotlin.concurrent.thread
 
 /**
  * Created by jiangkang on 2017/9/20.
@@ -171,5 +174,17 @@ object FileUtils {
             builder.append(line)
         }
         return builder.toString()
+    }
+
+    /**
+     * 使用FileChannel完成文件复制
+     */
+    fun copyFile(source:File,dest:File){
+        thread { val fisChannel = FileInputStream(source).channel
+            val fosChannel = FileOutputStream(dest).channel
+            fosChannel.transferFrom(fisChannel,0,fisChannel.size())
+            fosChannel.closeQuietly()
+            fisChannel.closeQuietly()
+        }
     }
 }

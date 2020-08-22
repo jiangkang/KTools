@@ -11,19 +11,24 @@ import java.util.*
  * Created by jiangkang on 2017/9/8.
  */
 object ToastUtils {
+
+    @JvmStatic
     fun showShortToast(msg: String?) {
         Handler(Looper.getMainLooper()).post { Toast.makeText(King.applicationContext, msg, Toast.LENGTH_SHORT).show() }
     }
 
+    @JvmStatic
     fun showShortToast(context: Context, msg: String?) {
         Handler(Looper.getMainLooper()).post { Toast.makeText(context.applicationContext, msg, Toast.LENGTH_SHORT).show() }
     }
 
+    @JvmStatic
     fun showLongToast(msg: String?) {
         Handler(Looper.getMainLooper())
                 .post { Toast.makeText(King.applicationContext, msg, Toast.LENGTH_LONG).show() }
     }
 
+    @JvmStatic
     fun showToast(msg: String?, duration: Int) {
         val timer = Timer()
         val toast = Toast.makeText(King.applicationContext, msg, Toast.LENGTH_LONG)

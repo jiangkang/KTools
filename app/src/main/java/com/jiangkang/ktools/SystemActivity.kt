@@ -104,30 +104,6 @@ class SystemActivity : AppCompatActivity() {
 
         }
 
-        btn_load_dex.setOnClickListener {
-            val jarFile = File(
-                    filesDir,
-                    "hello_world_dex.jar"
-            )
-            if (!jarFile.exists()) {
-                ToastUtils.showShortToast("文件不存在，复制内容到文件中")
-                Files.copy(FileUtils.getInputStreamFromAssets("code/hello_world_dex.jar"),jarFile.toPath())
-            }
-            val loader = DexClassLoader(
-                    jarFile.absolutePath,
-                    codeCacheDir.absolutePath, null,
-                    classLoader
-            )
-            val clazz = loader.loadClass("com.jiangkang.ktools.HelloWorld")
-            val sayHelloMethod = clazz.getDeclaredMethod("sayHello")
-            if (!sayHelloMethod.isAccessible){
-                sayHelloMethod.isAccessible = true
-            }
-            val msg = sayHelloMethod.invoke(clazz.newInstance()) as String?
-//            val iSayHello = clazz.newInstance() as ISayHello
-            ToastUtils.showLongToast("执行dex中方法：$msg")
-        }
-
     }
 
 

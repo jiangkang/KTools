@@ -2,15 +2,22 @@ package com.jiangkang.hack
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.activity.ComponentActivity
+import com.jiangkang.tools.extend.startActivity
+import com.jiangkang.tools.utils.FileUtils
 import com.jiangkang.tools.utils.ReflectUtils
 import com.jiangkang.tools.utils.ReflectionUtil
 import com.jiangkang.tools.utils.ToastUtils
+import dalvik.system.DexClassLoader
 import kotlinx.android.synthetic.main.activity_hack.*
+import java.io.File
+import java.nio.file.Files
 
-class HackActivity : Activity() {
+class HackActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +33,34 @@ class HackActivity : Activity() {
         btn_dex_path_list.setOnClickListener {
             val field = ReflectionUtil.findField(classLoader,"pathList")
             val dexPathList = field?.get(classLoader)
+        }
+
+        btn_load_dex.setOnClickListener {
+            val jarFile = File(
+                    filesDir,
+                    "hello_world_dex.jar"
+            )
+            if (!jarFile.exists()) {
+                ToastUtils.showShortToast("文件不存在，复制内容到文件中")
+                Files.copy(FileUtils.getInputStreamFromAssets("code/hello_world_dex.jar"),jarFile.toPath())
+            }
+            val loader = DexClassLoader(
+                    jarFile.absolutePath,
+                    codeCacheDir.absolutePath, null,
+                    classLoader
+            )
+            val clazz = loader.loadClass("com.jiangkang.ktools.HelloWorld")
+            val sayHelloMethod = clazz.getDeclaredMethod("sayHello")
+            if (!sayHelloMethod.isAccessible){
+                sayHelloMethod.isAccessible = true
+            }
+            val msg = sayHelloMethod.invoke(clazz.newInstance()) as String?
+            ToastUtils.showLongToast("执行dex中方法：$msg")
+        }
+
+        btn_hook_instrumentation.setOnClickListener {
+            HookUtils.hookInstrumentation(this@HackActivity)
+            startActivity<HackActivity>()
         }
     }
 

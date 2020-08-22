@@ -1,9 +1,12 @@
 package com.jiangkang.hack
 
+import android.app.Activity
 import android.app.Instrumentation
 import android.view.View
 import com.jiangkang.hack.activity.LogInstrumentation
+import com.jiangkang.hack.hook.ProxyInstrumentation
 import com.jiangkang.tools.utils.LogUtils
+import java.lang.reflect.Field
 import java.lang.reflect.Proxy
 
 /**
@@ -24,19 +27,18 @@ object HookUtils {
         mInstrumentationField.isAccessible = true
         val mInstrumentation = mInstrumentationField[currentActivityThread] as Instrumentation
         val logInstrumentation: Instrumentation = LogInstrumentation(mInstrumentation)
-
         //替换
         mInstrumentationField[currentActivityThread] = logInstrumentation
     }
 
-    fun hookViewOnclickListener() {
-        val listener = Proxy.newProxyInstance(
-                View.OnClickListener::class.java.classLoader, arrayOf<Class<*>>(View.OnClickListener::class.java)
-        ) { proxy, method, args ->
-            LogUtils.d(TAG, "点击按钮之前")
-            val result = method.invoke(proxy, *args)
-            LogUtils.d(TAG, "点击按钮之后")
-            result
-        } as View.OnClickListener
+    @JvmStatic
+    fun hookInstrumentation(sourceActivity:Activity){
+        val instrumentationField = Activity::class.java.getDeclaredField("mInstrumentation")
+        if (!instrumentationField.isAccessible){
+            instrumentationField.isAccessible = true
+        }
+        val originInstrumentation:Instrumentation = instrumentationField.get(sourceActivity) as Instrumentation
+        instrumentationField.set(sourceActivity,ProxyInstrumentation(originInstrumentation))
     }
+
 }

@@ -8,6 +8,7 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jiangkang.hybrid.Khybrid
+import com.jiangkang.tools.utils.EnvUtils
 
 class MainActivity : BaseActivity() {
 

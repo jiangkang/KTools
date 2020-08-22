@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jiangkang.hack">
 
-    <application
-        android:theme="@style/AppTheme">
+    <application android:theme="@style/AppTheme">
+        <activity android:name=".activity.ReplacementActivity"></activity>
         <activity android:name=".HackActivity" />
     </application>
 

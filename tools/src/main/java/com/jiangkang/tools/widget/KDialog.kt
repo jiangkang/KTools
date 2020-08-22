@@ -16,6 +16,7 @@ import java.util.*
  * Created by jiangkang on 2017/9/13.
  */
 object KDialog {
+    @JvmStatic
     fun showImgInDialog(context: Context?, bitmap: Bitmap?) {
         val imageView = ImageView(context)
         imageView.setImageBitmap(bitmap)
@@ -24,7 +25,7 @@ object KDialog {
                 .setNegativeButton("关闭") { dialog, which -> dialog.dismiss() }
                 .show()
     }
-
+    @JvmStatic
     fun showMsgDialog(context: Context?, content: String?) {
         Handler(Looper.getMainLooper())
                 .post {
@@ -35,6 +36,7 @@ object KDialog {
                 }
     }
 
+    @JvmStatic
     fun showJsAlertDialog(context: Context?, content: String?, result: JsResult) {
         Handler(Looper.getMainLooper())
                 .post {
@@ -48,6 +50,7 @@ object KDialog {
                 }
     }
 
+    @JvmStatic
     fun showCustomViewDialog(context: Context?, title: String?, view: View?,
                              positiveListener: DialogInterface.OnClickListener?, negativeListener: DialogInterface.OnClickListener?) {
         Handler(Looper.getMainLooper())
@@ -61,6 +64,7 @@ object KDialog {
                 }
     }
 
+    @JvmStatic
     fun showSingleChoiceDialog(context: Context?, title: String?, items: Array<String>, callback: SingleSelectedCallback?) {
         val selectedIndex = IntArray(1)
         AlertDialog.Builder(context!!)
@@ -75,6 +79,7 @@ object KDialog {
                 .show()
     }
 
+    @JvmStatic
     fun showMultiChoicesDialog(context: Context?, title: String?, items: Array<CharSequence?>, callback: MultiSelectedCallback?) {
         val selectedItems: IntArray
         val selected = BooleanArray(items.size)
@@ -104,6 +109,8 @@ object KDialog {
     }
 
     private var progressDialog: ProgressDialog? = null
+
+    @JvmStatic
     fun showProgressDialog(context: Context?, progress: Int) {
         if (progressDialog == null) {
             progressDialog = ProgressDialog(context)

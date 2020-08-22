@@ -11,8 +11,7 @@
 
         <Button
             android:id="@+id/btn_hook_OnClick"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/KButton"
             android:background="#E91E63"
             android:text="Hook OnClick"
             android:textAllCaps="false"
@@ -20,10 +19,25 @@
 
         <Button
             android:id="@+id/btn_dex_path_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/KButton"
             android:background="#E91E63"
             android:text="Dex pathList"
+            android:textAllCaps="false"
+            />
+
+        <Button
+            android:id="@+id/btn_load_dex"
+            style="@style/KButton"
+            android:background="#FF9966"
+            android:text="加载本地jar包中的dex文件"
+            android:textAllCaps="false"
+            />
+
+        <Button
+            android:id="@+id/btn_hook_instrumentation"
+            style="@style/KButton"
+            android:background="#FF9966"
+            android:text="Hook Instrumentation(拦截Activity启动)"
             android:textAllCaps="false"
             />
 

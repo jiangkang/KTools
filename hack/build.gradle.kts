@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("kotlin-android")
 }
 
 android {
@@ -53,6 +54,7 @@ dependencies {
     androidTestImplementation(AndroidX.testRunner)
     androidTestImplementation(AndroidX.espressoCore)
     implementation(project(":tools"))
+    implementation(project(":widget"))
     implementation(kotlin("stdlib-jdk7"))
     lintChecks(project(":klint"))
 }
