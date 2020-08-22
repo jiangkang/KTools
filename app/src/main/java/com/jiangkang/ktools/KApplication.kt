@@ -1,5 +1,6 @@
 package com.jiangkang.ktools
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.Intent
@@ -9,6 +10,8 @@ import androidx.core.util.LogWriter
 import androidx.multidex.MultiDex
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.github.anrwatchdog.ANRWatchDog
+import com.jiangkang.hack.HookUtils
+import com.jiangkang.hack.hook.ActivityStartingCallback
 import com.jiangkang.tools.King
 import com.jiangkang.tools.utils.ToastUtils
 import com.squareup.leakcanary.LeakCanary
@@ -22,9 +25,7 @@ open class KApplication : Application() {
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
-
         MultiDex.install(this)
-
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             val stackTrace = e.stackTrace
             val reason = StringBuilder()
@@ -39,6 +40,11 @@ open class KApplication : Application() {
                     }
             startActivity(intent)
         }
+        HookUtils.attachBaseContext(object : ActivityStartingCallback{
+            override fun activityStarting(source: Context, target: Activity, intent: Intent) {
+                ToastUtils.showShortToast("启动了${intent.component?.shortClassName}")
+            }
+        })
     }
 
     override fun onCreate() {

@@ -2,16 +2,19 @@ package com.jiangkang.hack
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.activity.ComponentActivity
+import com.jiangkang.hack.activity.ReplacementActivity
+import com.jiangkang.hack.hook.ActivityStartingCallback
 import com.jiangkang.tools.extend.startActivity
 import com.jiangkang.tools.utils.FileUtils
-import com.jiangkang.tools.utils.ReflectUtils
 import com.jiangkang.tools.utils.ReflectionUtil
 import com.jiangkang.tools.utils.ToastUtils
+import com.jiangkang.tools.utils.ToastUtils.showShortToast
 import dalvik.system.DexClassLoader
 import kotlinx.android.synthetic.main.activity_hack.*
 import java.io.File
@@ -59,7 +62,11 @@ class HackActivity : ComponentActivity() {
         }
 
         btn_hook_instrumentation.setOnClickListener {
-            HookUtils.hookInstrumentation(this@HackActivity)
+            HookUtils.hookInstrumentationWithActivity(this@HackActivity,object : ActivityStartingCallback{
+                override fun activityStarting(source: Context, target: Activity, intent: Intent) {
+                    intent.setClass(source,ReplacementActivity::class.java)
+                }
+            })
             startActivity<HackActivity>()
         }
     }

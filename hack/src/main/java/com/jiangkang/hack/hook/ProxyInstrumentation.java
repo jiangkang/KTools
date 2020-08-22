@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 
-import com.jiangkang.hack.activity.ReplacementActivity;
 import com.jiangkang.tools.utils.LogUtils;
-import com.jiangkang.tools.utils.ToastUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -20,11 +18,17 @@ public class ProxyInstrumentation extends Instrumentation {
     private static final String TAG = "Hook";
 
     private final Instrumentation mInstrumentation;
+    private ActivityStartingCallback mCallback;
 
     private final String EXEC_START_ACTIVITY = "execStartActivity";
 
     public ProxyInstrumentation(Instrumentation instrumentation) {
         this.mInstrumentation = instrumentation;
+    }
+
+    public ProxyInstrumentation(Instrumentation instrumentation, ActivityStartingCallback callback) {
+        this.mInstrumentation = instrumentation;
+        mCallback = callback;
     }
 
     /**
@@ -35,8 +39,9 @@ public class ProxyInstrumentation extends Instrumentation {
             Context who, IBinder contextThread, IBinder token, Activity target,
             Intent intent, int requestCode, Bundle options) {
         LogUtils.d(TAG, "Hook Instrumentation#execStartActivity");
-        processIntent(who, contextThread, token, target, intent, requestCode, options);
-        intent = new Intent(who, ReplacementActivity.class);
+        if (mCallback != null){
+            mCallback.activityStarting(who,target,intent);
+        }
         try {
             Method execStartActivityMethod = Instrumentation.class.getDeclaredMethod(
                     EXEC_START_ACTIVITY,
@@ -50,9 +55,4 @@ public class ProxyInstrumentation extends Instrumentation {
         return null;
     }
 
-    private void processIntent(Context who, IBinder contextThread, IBinder token, Activity target, Intent intent, int requestCode, Bundle options) {
-        LogUtils.d(TAG, "activity=" + target);
-        LogUtils.d(TAG, "intent=" + intent);
-        ToastUtils.showShortToast("target activity=" + target + "\nintent=" + intent);
-    }
 }
