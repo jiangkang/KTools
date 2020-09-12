@@ -2,10 +2,9 @@ package com.jiangkang.tools.utils
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.logging.HttpLoggingInterceptor
-import java.io.IOException
+import okhttp3.*
+import okhttp3.internal.closeQuietly
+import java.io.*
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -13,49 +12,63 @@ import java.util.concurrent.Executors
 /**
  * Created by jiangkang on 2017/10/16.
  */
-class DownloadUtils private constructor() {
+object DownloadUtils {
 
-    private val client: OkHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor())
-            .build()
+    private val client: OkHttpClient = OkHttpClient.Builder().build()
+
     private val downloadService: ExecutorService = Executors.newCachedThreadPool()
 
-    fun downloadImage(url: String): Bitmap? {
-        val result = arrayOfNulls<Bitmap>(1)
-        return if (url.startsWith("https://") || url.startsWith("http://")) {
-            val request = Request.Builder()
-                    .url(url)
-                    .build()
-            val latch = CountDownLatch(1)
-            downloadService.execute {
-                try {
-                    val response = client.newCall(request).execute()
-                    result[0] = BitmapFactory.decodeStream(response.body!!.byteStream())
-                    latch.countDown()
-                } catch (e: IOException) {
-                    latch.countDown()
+    @JvmStatic
+    fun downloadBitmap(url: String, callback: DownloadBitmapCallback?) {
+        val request = Request.Builder().url(url).build()
+        downloadService.submit {
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    callback?.onFailed(e.message)
                 }
-            }
-            try {
-                latch.await()
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
-            }
-            result[0]
-        } else {
-            null
+
+                override fun onResponse(call: Call, response: Response) {
+                    val bitmap = BitmapFactory.decodeStream(response.body?.byteStream())
+                    callback?.onSuccess(bitmap)
+                }
+            })
         }
     }
 
-    companion object {
-        private var sInstance: DownloadUtils? = null
-        val instance: DownloadUtils?
-            get() {
-                if (sInstance == null) {
-                    sInstance = DownloadUtils()
+    @JvmStatic
+    fun downloadFile(url: String,outputFile:File,callback: DownloadCallback?){
+        val request = Request.Builder().url(url).build()
+        downloadService.submit {
+            client.newCall(request).enqueue(object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                    callback?.onFailed(e.message)
                 }
-                return sInstance
-            }
+
+                override fun onResponse(call: Call, response: Response) {
+                    if (!outputFile.exists()){
+                        outputFile.createNewFile()
+                    }
+                    FileOutputStream(outputFile).apply {
+                        write(response.body?.bytes())
+                        flush()
+                        closeQuietly()
+                    }
+                    callback?.onSuccess(outputFile)
+                }
+            })
+        }
+    }
+
+    interface DownloadCallback {
+        fun onSuccess(downloadedFile: File)
+        fun onFailed(msg: String?)
+    }
+
+    abstract class DownloadBitmapCallback: DownloadCallback{
+        abstract fun onSuccess(bitmap:Bitmap?)
+        override fun onSuccess(downloadedFile: File) {
+            // do nothing
+        }
     }
 
 }

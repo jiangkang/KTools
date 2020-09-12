@@ -14,7 +14,7 @@ object HookUtils {
     private const val TAG = "Hook"
 
     @Throws(Exception::class)
-    fun attachBaseContext(callback: ActivityStartingCallback) {
+    fun hookInstrumentation(callback: ActivityStartingCallback) {
         //获取ActivityThread类
         val activityThreadClass = Class.forName("android.app.ActivityThread")
         val currentActivityThreadMethod = activityThreadClass.getDeclaredMethod("currentActivityThread")
@@ -23,9 +23,9 @@ object HookUtils {
         val mInstrumentationField = activityThreadClass.getDeclaredField("mInstrumentation")
         mInstrumentationField.isAccessible = true
         val mInstrumentation = mInstrumentationField[currentActivityThread] as Instrumentation
-        val logInstrumentation: Instrumentation = ProxyInstrumentation(mInstrumentation,callback)
+        val proxyInstrumentation: Instrumentation = ProxyInstrumentation(mInstrumentation,callback)
         //替换
-        mInstrumentationField[currentActivityThread] = logInstrumentation
+        mInstrumentationField[currentActivityThread] = proxyInstrumentation
     }
 
     @JvmStatic

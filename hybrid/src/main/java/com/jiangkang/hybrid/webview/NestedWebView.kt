@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat
 /**
  * 支持嵌套滑动的WebView
  */
-class NestedWebView(context: Context?, attrs: AttributeSet?) : WebView(context, attrs), NestedScrollingChild {
+class NestedWebView(context: Context, attrs: AttributeSet?) : WebView(context, attrs), NestedScrollingChild {
     private var mLastY = 0
     private val mScrollOffset = IntArray(2)
     private val mScrollConsumed = IntArray(2)

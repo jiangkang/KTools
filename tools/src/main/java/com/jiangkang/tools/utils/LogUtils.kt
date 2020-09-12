@@ -18,6 +18,6 @@ object LogUtils {
 
     @JvmStatic
     fun json(jsonString: String?) {
-        Log.d("KTools",jsonString)
+        Log.d("KTools", jsonString ?: "")
     }
 }

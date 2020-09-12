@@ -1,11 +1,7 @@
 package com.jiangkang.tools.utils
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.Intent.ACTION_INSTALL_PACKAGE
-import android.content.pm.PackageInstaller
-import android.net.Uri
 import androidx.core.content.FileProvider
 import com.jiangkang.tools.extend.runOnUiThread
 import com.jiangkang.tools.widget.KDialog
@@ -13,8 +9,6 @@ import okhttp3.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.lang.StringBuilder
-import java.util.zip.ZipEntry
 import java.util.zip.ZipException
 import java.util.zip.ZipFile
 import kotlin.concurrent.thread

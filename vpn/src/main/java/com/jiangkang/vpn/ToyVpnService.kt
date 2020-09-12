@@ -78,10 +78,10 @@ class ToyVpnService : VpnService(), Handler.Callback {
                         addAddress(server,port)
                         addRoute("0:0:0:0",0)
                         setSession(server)
-                        setConfigureIntent(mConfigIntent)
+                        setConfigureIntent(mConfigIntent!!)
                     }.establish()
-            val fis = FileInputStream(pfd.fileDescriptor)
-            val fos = FileOutputStream(pfd.fileDescriptor)
+            val fis = FileInputStream(pfd?.fileDescriptor)
+            val fos = FileOutputStream(pfd?.fileDescriptor)
 
             val packet =  ByteBuffer.allocate(Short.MAX_VALUE.toInt())
             while (true){

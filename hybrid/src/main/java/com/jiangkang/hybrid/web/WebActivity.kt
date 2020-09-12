@@ -4,11 +4,11 @@ import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.print.PrintAttributes
 import android.print.PrintManager
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
@@ -26,8 +26,6 @@ import com.jiangkang.tools.utils.LogUtils
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KDialog
 import kotlinx.android.synthetic.main.activity_web.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 
 class WebActivity : Activity(), WebContract.IView {
 
@@ -77,14 +75,19 @@ class WebActivity : Activity(), WebContract.IView {
         webContainer.hitTestResult?.let {
             val url = it.extra
             if (CONTEXT_MENU_ID_DOWNLOAD_IMAGE == item.itemId) {
-                if (isHttpUrl(url) or isHttpsUrl(url)) {
-                    GlobalScope.async {
-                        val bmpDownloaded = DownloadUtils.instance?.downloadImage(url!!)
-                        runOnUiThread {
-                            ToastUtils.showShortToast("图片下载成功")
-                            KDialog.showImgInDialog(this@WebActivity, bmpDownloaded)
+                if (url != null && (isHttpUrl(url) or isHttpsUrl(url))) {
+                    DownloadUtils.downloadBitmap(url, object : DownloadUtils.DownloadBitmapCallback() {
+                        override fun onSuccess(bitmap: Bitmap?) {
+                            runOnUiThread {
+                                ToastUtils.showShortToast("图片下载成功")
+                                KDialog.showImgInDialog(this@WebActivity, bitmap)
+                            }
                         }
-                    }
+
+                        override fun onFailed(msg: String?) {
+                            ToastUtils.showShortToast(msg)
+                        }
+                    })
                 } else {
                     ToastUtils.showShortToast("图片链接不是http或者https，无法下载")
                 }
@@ -151,7 +154,7 @@ class WebActivity : Activity(), WebContract.IView {
 
         WebView.setWebContentsDebuggingEnabled(true)
 
-        webContainer?.loadUrl(launchUrl)
+        webContainer?.loadUrl(launchUrl!!)
 
     }
 
@@ -159,7 +162,7 @@ class WebActivity : Activity(), WebContract.IView {
         var webArgs = WebArgs()
         webArgs.isLoadImgLazy = intent.getBooleanExtra(WebArgs.IS_LOAD_IMG_LAZY, false)
         webArgs.isInterceptResources = intent.getBooleanExtra(WebArgs.IS_INTERCEPT_RESOURCES, false)
-        webArgs.jsInjected = intent.getStringExtra(WebArgs.STR_INJECTED_JS)
+        webArgs.jsInjected = intent.getStringExtra(WebArgs.STR_INJECTED_JS)!!
         return webArgs
     }
 

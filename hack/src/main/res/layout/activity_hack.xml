@@ -41,6 +41,14 @@
             android:textAllCaps="false"
             />
 
+        <Button
+            android:id="@+id/btn_load_apk"
+            style="@style/KButton"
+            android:background="#FF9966"
+            android:text="插件化加载APK"
+            android:textAllCaps="false"
+            />
+
 
 
     </LinearLayout>

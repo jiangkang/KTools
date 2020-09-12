@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Debug
 import android.os.StrictMode
-import androidx.core.util.LogWriter
 import androidx.multidex.MultiDex
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.github.anrwatchdog.ANRWatchDog
@@ -40,7 +39,7 @@ open class KApplication : Application() {
                     }
             startActivity(intent)
         }
-        HookUtils.attachBaseContext(object : ActivityStartingCallback{
+        HookUtils.hookInstrumentation(object : ActivityStartingCallback{
             override fun activityStarting(source: Context, target: Activity, intent: Intent) {
                 ToastUtils.showShortToast("启动了${intent.component?.shortClassName}")
             }

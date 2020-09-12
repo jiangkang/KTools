@@ -73,7 +73,7 @@ class ShareActivity : AppCompatActivity() {
     }
 
     private fun handleMultiImage(intent: Intent) {
-        val imageUris: ArrayList<Uri> = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM)
+        val imageUris: ArrayList<Uri> = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM)!!
         imageUris.let {
             imageUris.map {
                 LogUtils.d(TAG, it.toString())
@@ -82,7 +82,7 @@ class ShareActivity : AppCompatActivity() {
     }
 
     private fun handleSendImage(intent: Intent) {
-        val imageUri: Uri = intent.getParcelableExtra(Intent.EXTRA_STREAM)
+        val imageUri: Uri = intent.getParcelableExtra(Intent.EXTRA_STREAM)!!
         imageUri.let {
             Log.d(TAG, it.toString())
             ToastUtils.showShortToast(it.toString())

@@ -13,6 +13,7 @@ import com.jiangkang.tools.utils.LogUtils
 import com.jiangkang.tools.utils.ToastUtils
 
 import java.util.ArrayList
+import kotlin.concurrent.thread
 
 /**
  * Created by jiangkang on 2017/10/31.
@@ -23,14 +24,12 @@ class ScanMusicService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-
         //带限定符的this
-        Thread(Runnable {
+        thread {
             val songs = scanSongs(this@ScanMusicService)
             LogUtils.d(songs)
             ToastUtils.showLongToast(songs.toString())
-        }).start()
-
+        }
     }
 
 
