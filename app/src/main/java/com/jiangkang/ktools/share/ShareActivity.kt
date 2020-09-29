@@ -21,7 +21,7 @@ import kotlin.concurrent.thread
 
 class ShareActivity : AppCompatActivity() {
 
-    val TAG: String = "Share"
+    private val TAG: String = "Share"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -194,8 +194,4 @@ class ShareActivity : AppCompatActivity() {
         sendIntent.type = "text/plain"
         startActivity(Intent.createChooser(sendIntent, "分享内容到指定App"))
     }
-
-
-
-
 }

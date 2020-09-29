@@ -1,3 +1,5 @@
+include(":video")
+include(":audio")
 //rootProject.buildFileName = "build.gradle.kts"
 include(
         ":app",

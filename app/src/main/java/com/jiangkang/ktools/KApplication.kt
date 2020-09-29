@@ -52,15 +52,10 @@ open class KApplication : Application() {
 
         enableStrictMode()
 
-        initLeakCanary()
-
         King.init(this)
 
-        initANRWatchDog()
-
         Debug.stopMethodTracing()
-
-
+        
         Fresco.initialize(this)
     }
 

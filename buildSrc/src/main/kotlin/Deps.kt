@@ -15,6 +15,7 @@ const val javapoet = "com.squareup:javapoet:1.13.0"
 object Google {
     const val vHilt =  "2.28-alpha"
     const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$vHilt"
+    const val oboe = "com.google.oboe:oboe:1.4.3"
 }
 fun DependencyHandlerScope.hilt() {
     impl("com.google.dagger:hilt-android:$vHilt")

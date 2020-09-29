@@ -162,6 +162,7 @@ dependencies {
     implementation(project(":design"))
     implementation(project(":container"))
     implementation(project(":vpn"))
+    implementation(project(":ndk"))
 }
 
 task("copy", Copy::class) {

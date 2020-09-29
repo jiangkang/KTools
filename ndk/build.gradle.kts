@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
+    id("kotlin-android")
 }
 
 android {
@@ -25,6 +26,11 @@ android {
         ndk {
             abiFilters("arm64-v8a")
         }
+//        externalNativeBuild {
+//            cmake {
+//                arguments("-DANDROID_STL=c++_shared")
+//            }
+//        }
     }
 
     buildTypes {
@@ -53,6 +59,8 @@ dependencies {
     implementation(AndroidX.constraintLayout)
     implementation(AndroidX.appcompat)
     implementation(AndroidX.cardView)
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
     androidTestImplementation(AndroidX.testRunner)
     androidTestImplementation(AndroidX.espressoCore)
     implementation(project(":tools"))
