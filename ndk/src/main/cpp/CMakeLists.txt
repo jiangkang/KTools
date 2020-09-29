@@ -27,7 +27,10 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        ktools.cpp)
+        ktools.cpp
+        skia_demo.cpp
+        utils.cpp
+        )
 
 target_include_directories(ktools PRIVATE
         ${DIR_INCLUDE}/${ANDROID_ABI}
