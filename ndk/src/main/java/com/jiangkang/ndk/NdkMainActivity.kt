@@ -1,9 +1,11 @@
 package com.jiangkang.ndk
 
 import android.app.Activity
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.jiangkang.tools.utils.ToastUtils
+import com.jiangkang.tools.widget.KDialog
 import kotlinx.android.synthetic.main.activity_ndk_main.*
 
 class NdkMainActivity : Activity() {
@@ -11,7 +13,6 @@ class NdkMainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ndk_main)
         System.loadLibrary("ktools")
-
         handleLogic()
     }
 
@@ -24,6 +25,7 @@ class NdkMainActivity : Activity() {
         btn_draw_shape.setOnClickListener {
             val file = createTempFile("line_",".png")
             drawShapeTest(file.absolutePath)
+            KDialog.showImgInDialog(this@NdkMainActivity,BitmapFactory.decodeFile(file.absolutePath))
         }
     }
 

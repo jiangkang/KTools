@@ -1,6 +1,7 @@
 #include <jni.h>
 #include <string>
 #include <iostream>
+#include <android/log.h>
 #include <include/core/SkEncodedImageFormat.h>
 #include <include/core/SkImageEncoder.h>
 #include "include/core/SkCanvas.h"
@@ -9,14 +10,20 @@
 #include "include/core/SkRect.h"
 #include "include/core/SkRRect.h"
 
+void logd(const char *msg) {
+    __android_log_print(ANDROID_LOG_DEBUG, "ktools:", "%s", msg);
+}
+
 SkBitmap createSkBitmap(int width, int height) {
     SkBitmap skBitmap;
     skBitmap.setInfo(SkImageInfo::Make(width, height, kRGBA_8888_SkColorType, kOpaque_SkAlphaType));
     skBitmap.allocPixels();
+    logd("创建SKBitmap成功");
     return skBitmap;
 }
 
 void saveAsPng(const char *filename, const SkBitmap &bitmap) {
+    logd(filename);
     sk_sp<SkData> encodedData = SkEncodeBitmap(bitmap, SkEncodedImageFormat::kPNG, 100);
     FILE *pFile = fopen(filename, "wb+");
     if (!pFile) {
@@ -60,17 +67,17 @@ void drawShape(SkCanvas *canvas) {
     canvas->drawCircle(150, 150, 60, paint);
 }
 
-void drawShapeTest(const char *filename){
-    SkBitmap skBitmap = createSkBitmap(1080,2340);
+void drawShapeTest(const char *filename) {
+    SkBitmap skBitmap = createSkBitmap(600, 600);
     SkCanvas skCanvas(skBitmap);
     drawShape(&skCanvas);
-    saveAsPng(filename,skBitmap);
+    saveAsPng(filename, skBitmap);
 }
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_jiangkang_ndk_NdkMainActivity_drawShapeTest(JNIEnv *env, jobject thiz, jstring filename) {
-    drawShapeTest(reinterpret_cast<const char *>(filename));
-
+    logd(env->GetStringUTFChars(filename,JNI_FALSE));
+    drawShapeTest(env->GetStringUTFChars(filename,JNI_FALSE));
 }
 
 
