@@ -22,4 +22,12 @@
         android:textAllCaps="false"
         />
 
+    <Button
+        android:id="@+id/btn_draw_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Skia Draw Text"
+        android:textAllCaps="false"
+        />
+
 </LinearLayout>

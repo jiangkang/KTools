@@ -14,6 +14,10 @@
 #include "include/core/SkPaint.h"
 #include "include/core/SkRect.h"
 #include "include/core/SkRRect.h"
+#include "include/core/SkFontMgr.h"
+#include "include/core/SkFontStyle.h"
+#include "include/core/SkFont.h"
+#include "include/core/SkTextBlob.h"
 
 SkBitmap createSkBitmap(int width, int height) {
     SkBitmap skBitmap;
@@ -74,6 +78,54 @@ void drawShape(const char *filename) {
     drawShape(&skCanvas);
     saveAsPng(filename, skBitmap);
 }
+
+
+void drawText(SkCanvas *canvas) {
+
+    canvas->drawColor(SK_ColorWHITE);
+
+    const char *fontFamily = nullptr;
+    SkFontStyle fontStyle;
+    sk_sp<SkFontMgr> fontManager = SkFontMgr::RefDefault();
+    sk_sp<SkTypeface> typeface = fontManager->legacyMakeTypeface(fontFamily, fontStyle);
+
+    SkFont font1(typeface, 64.0f);
+    SkFont font2(typeface, 32.0f, 1.5f, 0.0f);
+    font1.setEdging(SkFont::Edging::kAntiAlias);
+    font2.setEdging(SkFont::Edging::kAntiAlias);
+
+    //这里可能会失败，因为有不支持的语言，比如中文
+    sk_sp<SkTextBlob> blob1 = SkTextBlob::MakeFromString("Jiang Kang", font1);
+    sk_sp<SkTextBlob> blob2 = SkTextBlob::MakeFromString("Jiang Kang", font2);
+    sk_sp<SkTextBlob> blob3 = SkTextBlob::MakeFromString("Skia", font2);
+
+    SkPaint paint1, paint2, paint3;
+
+    paint1.setAntiAlias(true);
+    paint1.setColor(SkColorSetARGB(0xFF, 0x42, 0x85, 0xF4));
+
+    paint2.setAntiAlias(true);
+    paint2.setColor(SkColorSetARGB(0xFF, 0xDB, 0x44, 0x37));
+    paint2.setStyle(SkPaint::kStroke_Style);
+    paint2.setStrokeWidth(3.0f);
+
+    paint3.setAntiAlias(true);
+    paint3.setColor(SkColorSetARGB(0xFF, 0x0F, 0x9D, 0x58));
+
+    canvas->clear(SK_ColorWHITE);
+    canvas->drawTextBlob(blob1.get(), 20.0f, 64.0f, paint1);
+    canvas->drawTextBlob(blob2.get(), 20.0f, 144.0f, paint2);
+    canvas->drawTextBlob(blob3.get(), 20.0f, 224.0f, paint3);
+
+}
+
+void drawText(const char *filename){
+    SkBitmap skBitmap = createSkBitmap(600, 600);
+    SkCanvas skCanvas(skBitmap);
+    drawText(&skCanvas);
+    saveAsPng(filename, skBitmap);
+}
+
 
 
 

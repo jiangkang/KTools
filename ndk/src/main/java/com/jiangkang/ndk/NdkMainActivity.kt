@@ -23,11 +23,19 @@ class NdkMainActivity : Activity() {
 
         
         btn_draw_shape.setOnClickListener {
-            val file = createTempFile("line_",".png")
+            val file = createTempFile("shape_",".png")
             drawShapeTest(file.absolutePath)
             KDialog.showImgInDialog(this@NdkMainActivity,BitmapFactory.decodeFile(file.absolutePath))
         }
+
+        btn_draw_text.setOnClickListener {
+            val file = createTempFile("text_",".png")
+            drawText(file.absolutePath)
+            KDialog.showImgInDialog(this@NdkMainActivity,BitmapFactory.decodeFile(file.absolutePath))
+        }
     }
+
+    private external fun drawText(filename:String)
 
     private external fun drawShapeTest(filename:String)
 

@@ -11,6 +11,11 @@ Java_com_jiangkang_ndk_NdkMainActivity_drawShapeTest(JNIEnv *env, jobject thiz, 
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_jiangkang_ndk_NdkMainActivity_sayHello(JNIEnv *env, jobject thiz) {
-    jstring js = env->NewStringUTF("Hello World");
     return env->NewStringUTF("Hello World");
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_jiangkang_ndk_NdkMainActivity_drawText(JNIEnv *env, jobject thiz, jstring filename) {
+    drawText(env->GetStringUTFChars(filename, JNI_FALSE));
 }

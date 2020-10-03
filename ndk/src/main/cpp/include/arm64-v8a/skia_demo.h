@@ -7,5 +7,6 @@
 
 void drawShape(const char *filename);
 
+void drawText(const char *filenam);
 
 #endif //KTOOLS_SKIA_DEMO_H
