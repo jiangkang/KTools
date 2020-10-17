@@ -1,5 +1,6 @@
 package com.jiangkang.ktools
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -12,9 +13,12 @@ import android.widget.RemoteViews
 import androidx.appcompat.app.AppCompatActivity
 import com.jiangkang.ktools.widget.*
 import com.jiangkang.tools.extend.launch
+import com.jiangkang.tools.extend.startActivity
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.FloatingWindow
 import com.jiangkang.tools.widget.KNotification
+import com.jiangkang.widget.ui.TouchLogicActivity
+import kotlinx.android.synthetic.main.activity_widget.*
 
 class WidgetActivity : AppCompatActivity() {
 
@@ -86,9 +90,11 @@ class WidgetActivity : AppCompatActivity() {
             ConstraintLayoutActivity.launch(mContext, null)
         }
 
+        btn_touch_logic.setOnClickListener {
+            startActivity<TouchLogicActivity>()
+        }
 
     }
-
 
     override fun onBackPressed() {
         super.onBackPressed()

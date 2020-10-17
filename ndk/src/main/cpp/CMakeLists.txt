@@ -30,6 +30,7 @@ add_library( # Sets the name of the library.
         ktools.cpp
         skia_demo.cpp
         utils.cpp
+        skia_viewer.cpp
         )
 
 target_include_directories(ktools PRIVATE
@@ -40,8 +41,6 @@ target_link_libraries( # Specifies the target library.
         ktools
         android
         jnigraphics
-        # Links the target library to the log library
-        # included in the NDK.
         log
         nativewindow
         LIB_SKIA

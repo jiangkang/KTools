@@ -1,14 +1,14 @@
 package com.jiangkang.ndk
 
-import android.app.Activity
-import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
+import com.jiangkang.ndk.skia.SkiaActivity
+import com.jiangkang.tools.extend.startActivity
 import com.jiangkang.tools.utils.ToastUtils
-import com.jiangkang.tools.widget.KDialog
 import kotlinx.android.synthetic.main.activity_ndk_main.*
 
-class NdkMainActivity : Activity() {
+class NdkMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ndk_main)
@@ -21,23 +21,10 @@ class NdkMainActivity : Activity() {
             ToastUtils.showShortToast(sayHello())
         }
 
-        
-        btn_draw_shape.setOnClickListener {
-            val file = createTempFile("shape_",".png")
-            drawShapeTest(file.absolutePath)
-            KDialog.showImgInDialog(this@NdkMainActivity,BitmapFactory.decodeFile(file.absolutePath))
-        }
-
-        btn_draw_text.setOnClickListener {
-            val file = createTempFile("text_",".png")
-            drawText(file.absolutePath)
-            KDialog.showImgInDialog(this@NdkMainActivity,BitmapFactory.decodeFile(file.absolutePath))
+        btn_skia.setOnClickListener {
+            startActivity<SkiaActivity>()
         }
     }
-
-    private external fun drawText(filename:String)
-
-    private external fun drawShapeTest(filename:String)
 
     private external fun sayHello():String
 }

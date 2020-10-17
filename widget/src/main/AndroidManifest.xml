@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jiangkang.widget">
 
-
-    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application>
+        <activity android:name=".ui.TouchLogicActivity"></activity>
     </application>
 
 </manifest>

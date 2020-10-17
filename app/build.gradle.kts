@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.utils.addIfNotNull
 
 plugins {
     id("com.android.application")
@@ -8,17 +9,17 @@ plugins {
 }
 
 android {
-    
+
     //仅仅在编译的时候起作用，建议总是使用最新版本，值是一个API Level
     compileSdkVersion(vCompileSdkVersion)
 
     //构建工具的版本，在build-tools中的那些(aapt,dexdump,zipalign,apksigner)，一般是API-Level.x.x
     buildToolsVersion(vBuildToolsVersion)
-    
+
     ndkVersion = vNdkVersion
 
     defaultConfig {
-        applicationId = "com.jiangkang.ktools"
+        applicationId =  "com.jiangkang.ktools"
         minSdkVersion(vMinSdkVersion)
         targetSdkVersion(vTargetSdkVersion)
         versionCode = 1
@@ -27,21 +28,23 @@ android {
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
         ndk {
-            abiFilters("arm64-v8a")
+            abiFilters.add("arm64-v8a")
         }
     }
 
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-        }
-        getByName("debug") {
-            isMinifyEnabled = false
-            isShrinkResources = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-        }
+        release(enableMinify = true, shrinkRes = true, proguardFiles = getDefaultProguardFile("proguard-android.txt"))
+        debug(enableMinify = false,shrinkRes = false,proguardFiles = getDefaultProguardFile("proguard-android.txt"))
+//        getByName("release") {
+//            isMinifyEnabled = true
+//            isShrinkResources = true
+//            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+//        }
+//        getByName("debug") {
+//            isMinifyEnabled = false
+//            isShrinkResources = false
+//            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+//        }
     }
 
     configurations.all {
@@ -102,7 +105,7 @@ android {
             path = file("CMakeLists.txt")
         }
     }
-    
+
 }
 
 dependencies {
@@ -156,9 +159,9 @@ dependencies {
     implementation(project(":tools"))
     implementation(project(":hybrid"))
     implementation(project(":storage"))
-    kapt(project (":compiler"))
+    kapt(project(":compiler"))
     implementation(project(":image"))
-    lintChecks(project (":klint"))
+    lintChecks(project(":klint"))
     implementation(project(":design"))
     implementation(project(":container"))
     implementation(project(":vpn"))

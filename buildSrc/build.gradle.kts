@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
-//    implementation(gradleApi())
-    implementation("com.android.tools.build:gradle:4.0.1")
+    compileOnly(gradleApi())
+    implementation("com.android.tools.build:gradle:4.1.0")
     implementation(kotlin("gradle-plugin", version = "1.3.72"))
 //    implementation(gradleApi())
 //    implementation(localGroovy())

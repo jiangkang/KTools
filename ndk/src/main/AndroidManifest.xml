@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jiangkang.ndk">
 
-    <application>
-        <activity android:name=".NdkMainActivity"></activity>
+    <application android:theme="@style/AppTheme">
+        <activity android:name=".skia.SkiaViewerActivity"></activity>
+        <activity android:name=".skia.SkiaActivity" />
+        <activity android:name=".NdkMainActivity" />
     </application>
 
 </manifest>

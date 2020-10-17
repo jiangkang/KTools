@@ -99,6 +99,14 @@
         />
 
 
+    <Button
+        android:id="@+id/btn_touch_logic"
+        style="@style/KButton"
+        android:background="#009688"
+        android:text="Touch Logic"
+        />
+
+
   </LinearLayout>
 </ScrollView>
 

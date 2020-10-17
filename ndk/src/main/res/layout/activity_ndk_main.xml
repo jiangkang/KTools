@@ -13,21 +13,15 @@
         android:textAllCaps="false"
         />
 
-
     <Button
-        android:id="@+id/btn_draw_shape"
+        android:id="@+id/btn_skia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Skia Draw Shape"
+        android:text="Skia"
         android:textAllCaps="false"
         />
 
-    <Button
-        android:id="@+id/btn_draw_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Skia Draw Text"
-        android:textAllCaps="false"
-        />
+
+
 
 </LinearLayout>

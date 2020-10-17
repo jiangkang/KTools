@@ -2,19 +2,20 @@ package com.jiangkang.ktools
 
 import android.app.Activity
 import android.app.Application
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Debug
-import android.os.StrictMode
+import android.content.IntentFilter
+import android.os.*
 import androidx.multidex.MultiDex
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.github.anrwatchdog.ANRWatchDog
 import com.jiangkang.hack.HookUtils
 import com.jiangkang.hack.hook.ActivityStartingCallback
 import com.jiangkang.tools.King
+import com.jiangkang.tools.utils.LogUtils
 import com.jiangkang.tools.utils.ToastUtils
 import com.squareup.leakcanary.LeakCanary
-import java.lang.StringBuilder
 
 /**
  * @author jiangkang
@@ -32,14 +33,14 @@ open class KApplication : Application() {
             stackTrace.forEach {
                 reason.appendln(it.toString())
             }
-            val intent = Intent(applicationContext,CrashInfoActivity::class.java)
+            val intent = Intent(applicationContext, CrashInfoActivity::class.java)
                     .apply {
                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        putExtra("crash_info",reason.toString())
+                        putExtra("crash_info", reason.toString())
                     }
             startActivity(intent)
         }
-        HookUtils.hookInstrumentation(object : ActivityStartingCallback{
+        HookUtils.hookInstrumentation(object : ActivityStartingCallback {
             override fun activityStarting(source: Context, target: Activity, intent: Intent) {
                 ToastUtils.showShortToast("启动了${intent.component?.shortClassName}")
             }
@@ -55,8 +56,13 @@ open class KApplication : Application() {
         King.init(this)
 
         Debug.stopMethodTracing()
-        
+
         Fresco.initialize(this)
+
+        Looper.getMainLooper().queue.addIdleHandler {
+            
+            true
+        }
     }
 
 
@@ -96,6 +102,5 @@ open class KApplication : Application() {
                         .build()
         )
     }
-
 
 }

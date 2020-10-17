@@ -24,7 +24,7 @@ android {
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
         ndk {
-            abiFilters("arm64-v8a")
+            abiFilters.add("arm64-v8a")
         }
 //        externalNativeBuild {
 //            cmake {
@@ -56,9 +56,10 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(AndroidX.constraintLayout)
     implementation(AndroidX.appcompat)
     implementation(AndroidX.cardView)
+    implementation(AndroidX.Lifecycle.runtime)
+    implementation(AndroidX.Lifecycle.extension)
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
     androidTestImplementation(AndroidX.testRunner)
