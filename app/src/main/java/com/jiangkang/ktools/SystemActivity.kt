@@ -21,15 +21,10 @@ import com.jiangkang.tools.extend.wallpaperManager
 import com.jiangkang.tools.struct.JsonGenerator
 import com.jiangkang.tools.system.ContactHelper
 import com.jiangkang.tools.utils.*
-import dalvik.system.DexClassLoader
-import kotlinx.android.synthetic.main.activity_system.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.File
-import java.io.FileOutputStream
-import java.nio.file.Files
 import kotlin.concurrent.thread
 
 

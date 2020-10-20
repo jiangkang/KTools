@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.multidex.MultiDex
 import com.jiangkang.tools.extend.activityManager
 import com.jiangkang.tools.service.WatchingTopActivityService
 import com.jiangkang.tools.utils.*

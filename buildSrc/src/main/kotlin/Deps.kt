@@ -23,7 +23,7 @@ fun DependencyHandlerScope.hilt() {
 }
 
 object Kotlin {
-    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
 }
 
 object AndroidX {

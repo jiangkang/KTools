@@ -24,7 +24,6 @@ import com.jiangkang.ktools.R
 import com.jiangkang.tools.utils.FileUtils
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KDialog
-import com.jiangkang.tools.widget.KDialog.MultiSelectedCallback
 import kotlinx.android.synthetic.main.activity_kdialog.*
 import java.text.DateFormat
 import java.util.*

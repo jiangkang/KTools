@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.jiangkang.hybrid.Khybrid
 import com.jiangkang.ktools.R
-import com.jiangkang.tools.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_hybrid.*
 
 class HybridActivity : AppCompatActivity() {

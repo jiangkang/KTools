@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.utils.addIfNotNull
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -35,16 +33,6 @@ android {
     buildTypes {
         release(enableMinify = true, shrinkRes = true, proguardFiles = getDefaultProguardFile("proguard-android.txt"))
         debug(enableMinify = false,shrinkRes = false,proguardFiles = getDefaultProguardFile("proguard-android.txt"))
-//        getByName("release") {
-//            isMinifyEnabled = true
-//            isShrinkResources = true
-//            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-//        }
-//        getByName("debug") {
-//            isMinifyEnabled = false
-//            isShrinkResources = false
-//            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-//        }
     }
 
     configurations.all {
@@ -56,17 +44,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-
-    sourceSets {
-        getByName("main").res.srcDirs(
-                "src/main/res/layout/activity",
-                "src/main/res/layout/fragment",
-                "src/main/res/layout/widget",
-                "src/main/res/layout/item",
-                "src/main/res"
-        )
-    }
-
+    
     testOptions {
         unitTests {
 

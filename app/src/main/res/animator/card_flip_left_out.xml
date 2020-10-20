@@ -6,7 +6,7 @@
         android:valueTo="180"
         android:propertyName="rotationY"
         android:interpolator="@android:interpolator/accelerate_decelerate"
-        android:duration="@integer/duration" />
+        android:duration="1000" />
 
     <!-- Half-way through the rotation (see startOffset), set the alpha to 0. -->
     <objectAnimator

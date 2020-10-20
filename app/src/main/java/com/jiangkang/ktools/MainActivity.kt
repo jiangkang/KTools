@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.jiangkang.hybrid.Khybrid
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
 
@@ -47,7 +47,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initViews() {
-        findViewById<RecyclerView>(R.id.rc_function_list).apply {
+        rc_function_list.apply {
             layoutManager = GridLayoutManager(this@MainActivity, 4)
             adapter = FunctionAdapter(this@MainActivity)
         }
