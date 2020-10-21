@@ -46,8 +46,11 @@ dependencies {
     testImplementation(mockito)
     implementation(zxing)
     okHttp()
+    glide()
     implementation(AndroidX.annotation)
     implementation(AndroidX.appcompat)
-    implementation("com.github.bumptech.glide:glide:4.11.0")
+    implementation(AndroidX.Lifecycle.runtime)
+    implementation(AndroidX.Lifecycle.extension)
+    implementation(Kotlin.coroutines)
     implementation(kotlin("stdlib-jdk7"))
 }

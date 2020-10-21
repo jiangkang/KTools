@@ -36,8 +36,7 @@ class MainActivity : BaseActivity() {
             0 -> startActivity(Intent(this@MainActivity, AboutActivity::class.java))
             1 -> openBrowser("https://github.com/jiangkang/KTools")
             2 -> openBrowser("http://www.jianshu.com/u/2c22c64b9aff")
-            else -> {
-            }
+            else -> { }
         }
         return super.onOptionsItemSelected(item)
     }

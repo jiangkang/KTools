@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.jiangkang.tools.extend.startActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -23,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
         val timer: CountDownTimer = object : CountDownTimer(3000, 1000) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                MainActivity.launch(this@SplashActivity)
+                this@SplashActivity.startActivity<MainActivity>()
                 finish()
             }
         }

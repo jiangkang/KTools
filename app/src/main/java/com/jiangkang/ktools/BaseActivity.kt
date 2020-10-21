@@ -62,7 +62,6 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     companion object {
-
-        val VIEW_NAME_HEADER_TITLE = "activity:title"
+        const val VIEW_NAME_HEADER_TITLE = "activity:title"
     }
 }

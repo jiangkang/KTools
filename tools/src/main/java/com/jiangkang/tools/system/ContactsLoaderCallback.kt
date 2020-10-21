@@ -1,15 +1,16 @@
 package com.jiangkang.tools.system
 
-import android.app.LoaderManager
 import android.content.Context
-import android.content.CursorLoader
-import android.content.Loader
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.ContactsContract
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.CursorLoader
+import androidx.loader.content.Loader
 import com.jiangkang.tools.struct.JsonGenerator
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.concurrent.thread
 
 /**
  * Created by jiangkang on 2017/9/13.
@@ -37,7 +38,9 @@ class ContactsLoaderCallback(private val context: Context) : LoaderManager.Loade
         if (data.isClosed) {
             return
         }
-        Thread(Runnable { handleCursor(data) }).start()
+        thread {
+            handleCursor(data)
+        }
     }
 
     private fun handleCursor(data: Cursor?) {

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.jiangkang.annotations.Safe
 import com.jiangkang.ktools.audio.VoiceBroadcastReceiver
 import com.jiangkang.tools.utils.ToastUtils
+import kotlinx.android.synthetic.main.activity_audio.*
 import java.util.*
 
 /**
@@ -28,15 +29,15 @@ class AudioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audio)
-        findViewById<Button>(R.id.btn_text_to_speech).setOnClickListener {
+        btn_text_to_speech.setOnClickListener {
             onBtnTextToSpeechClicked()
         }
 
-        findViewById<Button>(R.id.btn_play_single_sound).setOnClickListener {
+        btn_play_single_sound.setOnClickListener {
             onBtnPlaySingleSoundClicked()
         }
 
-        findViewById<Button>(R.id.btn_play_multi_sounds).setOnClickListener {
+        btn_play_multi_sounds.setOnClickListener {
             onBtnPlayMultiSoundsClicked()
         }
 
@@ -61,11 +62,7 @@ class AudioActivity : AppCompatActivity() {
                     if (!TextUtils.isEmpty(etTextContent.text.toString())) {
                         content = etTextContent.text.toString()
                     }
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        speech!!.speak(content, TextToSpeech.QUEUE_FLUSH, null, null)
-                    } else {
-                        speech!!.speak(content, TextToSpeech.QUEUE_FLUSH, null)
-                    }
+                    speech!!.speak(content, TextToSpeech.QUEUE_FLUSH, null, null)
                 }
             }
         }
@@ -83,7 +80,6 @@ class AudioActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TAG = "AudioActivity"
         fun launch(context: Context, bundle: Bundle?) {
             val intent = Intent(context, AudioActivity::class.java)
             if (bundle != null) {

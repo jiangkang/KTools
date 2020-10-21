@@ -40,11 +40,11 @@ open class KApplication : Application() {
                     }
             startActivity(intent)
         }
-        HookUtils.hookInstrumentation(object : ActivityStartingCallback {
-            override fun activityStarting(source: Context, target: Activity, intent: Intent) {
-                ToastUtils.showShortToast("启动了${intent.component?.shortClassName}")
-            }
-        })
+//        HookUtils.hookInstrumentation(object : ActivityStartingCallback {
+//            override fun activityStarting(source: Context, target: Activity, intent: Intent) {
+//                ToastUtils.showShortToast("启动了${intent.component?.shortClassName}")
+//            }
+//        })
     }
 
     override fun onCreate() {

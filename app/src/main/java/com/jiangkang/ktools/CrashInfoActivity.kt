@@ -1,9 +1,9 @@
 package com.jiangkang.ktools
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.jiangkang.tools.extend.startActivity
+import kotlinx.android.synthetic.main.activity_crash_info.*
 
 class CrashInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,11 +12,11 @@ class CrashInfoActivity : AppCompatActivity() {
 
         val crashInfo = intent.getStringExtra("crash_info")
         crashInfo?.let {
-            findViewById<TextView>(R.id.tv_crash_info).text = it
+            tv_crash_info.text = it
         }
 
-        findViewById<Button>(R.id.btn_crash_restart).setOnClickListener {
-            MainActivity.launch(this)
+        btn_crash_restart.setOnClickListener {
+            this@CrashInfoActivity.startActivity<MainActivity>()
             finish()
         }
     }

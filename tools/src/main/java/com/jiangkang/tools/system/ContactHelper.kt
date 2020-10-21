@@ -3,13 +3,15 @@ package com.jiangkang.tools.system
 import android.app.Activity
 import android.provider.ContactsContract
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.loader.app.LoaderManager
 import org.json.JSONObject
 import java.util.concurrent.CountDownLatch
 
 /**
  * Created by jiangkang on 2017/9/8.
  */
-class ContactHelper(private val context: Activity) {
+class ContactHelper(private val context: AppCompatActivity) {
     private var contacts: JSONObject? = null
     fun queryContactList(): JSONObject? {
         val latch = CountDownLatch(1)
@@ -20,7 +22,9 @@ class ContactHelper(private val context: Activity) {
                 latch.countDown()
             }
         })
-        context.loaderManager.restartLoader(0, null, callback)
+        context.runOnUiThread {
+            LoaderManager.getInstance(context).restartLoader(0, null, callback)
+        }
         try {
             latch.await()
         } catch (e: InterruptedException) {
