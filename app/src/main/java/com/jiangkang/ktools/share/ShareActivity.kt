@@ -26,12 +26,9 @@ class ShareActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_share)
-
         receiveIntent()
-
         FileUtils.copyAssetsToFile("img/dog.jpg", "share0.jpg")
         FileUtils.copyAssetsToFile("img/demo.jpeg", "share1.jpeg")
-
         handleClick()
     }
 

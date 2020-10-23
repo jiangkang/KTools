@@ -8,6 +8,7 @@ import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import com.jiangkang.tools.struct.JsonGenerator
+import okhttp3.internal.closeQuietly
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.concurrent.thread
@@ -78,8 +79,10 @@ class ContactsLoaderCallback(private val context: Context) : LoaderManager.Loade
                         )
                     } while (cursor.moveToNext())
                 }
+                cursor?.closeQuietly()
             } while (data.moveToNext())
         }
+
         result = JsonGenerator()
                 .put("list", jsonArray)
                 .gen()

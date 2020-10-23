@@ -2,20 +2,18 @@ package com.jiangkang.ktools
 
 import android.app.Activity
 import android.app.Application
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
-import android.os.*
+import android.os.Debug
+import android.os.StrictMode
 import androidx.multidex.MultiDex
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.github.anrwatchdog.ANRWatchDog
 import com.jiangkang.hack.HookUtils
 import com.jiangkang.hack.hook.ActivityStartingCallback
+import com.jiangkang.ktools.works.AppOptWorker
 import com.jiangkang.tools.King
-import com.jiangkang.tools.utils.LogUtils
 import com.jiangkang.tools.utils.ToastUtils
-import com.squareup.leakcanary.LeakCanary
 
 /**
  * @author jiangkang
@@ -40,11 +38,11 @@ open class KApplication : Application() {
                     }
             startActivity(intent)
         }
-//        HookUtils.hookInstrumentation(object : ActivityStartingCallback {
-//            override fun activityStarting(source: Context, target: Activity, intent: Intent) {
-//                ToastUtils.showShortToast("启动了${intent.component?.shortClassName}")
-//            }
-//        })
+        HookUtils.hookInstrumentation(object : ActivityStartingCallback {
+            override fun activityStarting(source: Context, target: Activity, intent: Intent) {
+                ToastUtils.showShortToast("启动了${intent.component?.shortClassName}")
+            }
+        })
     }
 
     override fun onCreate() {
@@ -59,24 +57,14 @@ open class KApplication : Application() {
 
         Fresco.initialize(this)
 
-        Looper.getMainLooper().queue.addIdleHandler {
-            
-            true
-        }
+        AppOptWorker.launch(this)
+
     }
 
 
     private fun initANRWatchDog() {
         ANRWatchDog().start()
     }
-
-    private fun initLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return
-        }
-        LeakCanary.install(this)
-    }
-
 
     private fun enableStrictMode() {
         if (BuildConfig.DEBUG) {

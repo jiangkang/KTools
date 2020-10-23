@@ -44,11 +44,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    
-    testOptions {
-        unitTests {
 
-        }
+    kotlinOptions{
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     dexOptions {
@@ -131,6 +129,10 @@ dependencies {
     implementation(AndroidX.Navigation.ui)
     hilt()
     implementation(AndroidX.dynamicAnimation)
+    implementation(AndroidX.WorkManager.runtimeKtx)
+    implementation(AndroidX.DataStore.core)
+    implementation(AndroidX.DataStore.preferences)
+    implementation(Square.LeakCanary.android)
     implementation(project(":widget"))
     implementation(project(":annotations"))
     implementation(project(":hack"))

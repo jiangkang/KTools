@@ -20,9 +20,12 @@ import com.jiangkang.ktools.share.ShareActivity
 import com.jiangkang.tools.extend.wallpaperManager
 import com.jiangkang.tools.struct.JsonGenerator
 import com.jiangkang.tools.system.ContactHelper
-import com.jiangkang.tools.utils.*
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
+import com.jiangkang.tools.utils.ClipboardUtils
+import com.jiangkang.tools.utils.ShellUtils
+import com.jiangkang.tools.utils.SpUtils
+import com.jiangkang.tools.utils.ToastUtils
+import kotlinx.android.synthetic.main.activity_system.*
+import kotlinx.coroutines.*
 import org.json.JSONException
 import org.json.JSONObject
 import kotlin.concurrent.thread
@@ -39,11 +42,18 @@ class SystemActivity : AppCompatActivity() {
 
     private var jsonObject: JSONObject? = null
 
+    private val mainScope = MainScope()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_system)
         title = "System"
         handleClick()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mainScope.cancel()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -61,7 +71,7 @@ class SystemActivity : AppCompatActivity() {
     }
 
     private fun handleClick() {
-        findViewById<Button>(R.id.btn_open_contacts).setOnClickListener {
+        btn_open_contacts.setOnClickListener {
             if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                 gotoContactPage()
             } else {
@@ -69,7 +79,7 @@ class SystemActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.btn_get_all_contacts).setOnClickListener {
+        btn_get_all_contacts.setOnClickListener {
             if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                 getContactList()
             } else {
@@ -77,26 +87,55 @@ class SystemActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.btn_set_clipboard).setOnClickListener {
+        btn_set_clipboard.setOnClickListener {
             onBtnSetClipboardClicked()
         }
 
-        findViewById<Button>(R.id.btn_exit_app).setOnClickListener {
+        btn_get_clipboard.setOnClickListener {
+            ToastUtils.showShortToast(ClipboardUtils.stringFromClipboard)
+        }
+
+        btn_exit_app.setOnClickListener {
             onClickBtnExitApp()
         }
 
-        findViewById<Button>(R.id.btnQuickSettings).setOnClickListener {
-
-            runBlocking {
-                val result = async {
+        btnQuickSettings.setOnClickListener {
+            mainScope.launch {
+                val result = async(Dispatchers.IO) {
                     ShellUtils.execCmd("adb shell setprop debug.layout true", false)
-                }
-                async {
                     ShellUtils.execCmd("adb shell am start com.android.settings/.DevelopmentSettings", false)
                 }
-                ToastUtils.showShortToast("result : $result")
+                ToastUtils.showShortToast("result : ${result.await()}")
             }
+        }
 
+        btn_aidl.setOnClickListener {
+            AIDLDemoActivity.launch(this, null)
+        }
+
+        btnShare.setOnClickListener {
+            startActivity(Intent(this, ShareActivity::class.java))
+        }
+
+        btn_change_wallpaper.setOnClickListener {
+            this.wallpaperManager.setResource(R.raw.wallpaper)
+            ToastUtils.showShortToast("壁纸更换成功！")
+        }
+
+        btn_hide_app_icon.setOnClickListener {
+            onHideAppIconClicked()
+        }
+
+        btn_change_icon.setOnClickListener {
+            changeLauncherIcon()
+        }
+
+        btn_hide_virtual_navbar.setOnClickListener {
+            hideVirtualNavbar(this@SystemActivity)
+        }
+
+        btn_load_dex.setOnClickListener {
+            ToastUtils.showShortToast("代码遗失")
         }
 
     }
@@ -223,16 +262,7 @@ class SystemActivity : AppCompatActivity() {
         decroView.systemUiVisibility = uiOptions
     }
 
-    private fun hideStatusBar() {
-        val decorView = window.decorView
-        // Hide the status bar.
-        val uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
-        decorView.systemUiVisibility = uiOptions
-        // Remember that you should never show the action bar if the
-        // status bar is hidden, so hide that too if necessary.
-        val actionBar = actionBar
-        actionBar?.hide()
-    }
+
 
     private fun changeLauncherIcon() {
         val packageManager = packageManager
@@ -290,15 +320,7 @@ class SystemActivity : AppCompatActivity() {
         hideVirtualNavbar(this)
     }
 
-    fun onBtnChangeIconClicked(view: View) {
-        changeLauncherIcon()
-    }
-
-    fun onAIDLClicked(view: View) {
-        AIDLDemoActivity.launch(this, null)
-    }
-
-    fun onHideAppIconClicked() {
+    private fun onHideAppIconClicked() {
         val manager = packageManager
         val componentName = ComponentName(this, MainActivity::class.java)
         val status = manager.getComponentEnabledSetting(componentName)
@@ -309,26 +331,7 @@ class SystemActivity : AppCompatActivity() {
         }
     }
 
-    fun onBtnHideStatusBarClicked() {
-        hideStatusBar()
-    }
 
-    fun onBtnHideVirtualNavbarClicked(view: View) {
-        hideVirtualNavbar(this)
-    }
-
-    fun onBtnGetClipboardClicked(view: View) {
-        ToastUtils.showShortToast(ClipboardUtils.stringFromClipboard)
-    }
-
-    fun onBtnChangeWallpaper() {
-        this.wallpaperManager.setResource(R.raw.wallpaper)
-        ToastUtils.showShortToast("壁纸更换成功！")
-    }
-
-    fun onBtnShare(view: View) {
-        startActivity(Intent(this, ShareActivity::class.java))
-    }
 
     companion object {
         private val REQUEST_OPEN_CONTACTS = 1000

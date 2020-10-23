@@ -1,5 +1,6 @@
 package com.jiangkang.ktools.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -21,12 +22,13 @@ class CoordinatorActivity : AppCompatActivity() {
         initViews()
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initViews() {
         mToolbar.title = "Demo"
         mToolbar.setTitleTextColor(Color.WHITE)
         setSupportActionBar(mToolbar)
         mWebView.settings.javaScriptEnabled = true
-        mWebView.loadUrl("http://www.jianshu.com/u/2c22c64b9aff")
+        mWebView.loadUrl("https://jiangkang.tech")
         fab.setOnClickListener {
             mWebView.reload()
         }

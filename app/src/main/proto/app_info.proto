@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "com.jiangkang.ktools";
+option java_multiple_files = true;
+
+message AppSize {
+  float appSize = 1;
+  float dataSize = 2;
+  float cacheSize = 3;
+}

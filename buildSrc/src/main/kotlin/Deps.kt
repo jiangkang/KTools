@@ -17,6 +17,17 @@ object Google {
     const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$vHilt"
     const val oboe = "com.google.oboe:oboe:1.4.3"
 }
+
+object Square {
+    object LeakCanary {
+        private const val version = "2.5"
+        const val android = "com.squareup.leakcanary:leakcanary-android:$version"
+        const val sharkHprof = "com.squareup.leakcanary:shark-hprof:$version"
+        const val sharkGraph = "com.squareup.leakcanary:shark-graph:$version"
+        const val sharkAndroid = "com.squareup.leakcanary:shark-android:$version"
+    }
+}
+
 fun DependencyHandlerScope.hilt() {
     impl("com.google.dagger:hilt-android:$vHilt")
     kapt("com.google.dagger:hilt-android-compiler:$vHilt")
@@ -52,6 +63,18 @@ object AndroidX {
     object Lifecycle {
         const val runtime = "androidx.lifecycle:lifecycle-runtime:2.2.0"
         const val extension = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    }
+
+    object WorkManager {
+        private const val version = "2.4.0"
+        const val runtime = "androidx.work:work-runtime:$version"         // java only
+        const val runtimeKtx = "androidx.work:work-runtime-ktx:$version"  // kotlin + coroutines
+    }
+
+    object DataStore {
+        private const val version= "1.0.0-alpha01"
+        const val preferences = "androidx.datastore:datastore-preferences:$version"   // preferences
+        const val core = "androidx.datastore:datastore-core:$version"  // proto
     }
 }
 

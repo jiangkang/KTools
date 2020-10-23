@@ -34,28 +34,27 @@ class WidgetActivity : AppCompatActivity() {
     }
 
     private fun handleOnClick() {
-        findViewById<Button>(R.id.btn_coordinator_layout).setOnClickListener {
+        btn_coordinator_layout.setOnClickListener {
             CoordinatorActivity.launch(mContext, null)
         }
-        findViewById<Button>(R.id.btn_show_floating_window).setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (!Settings.canDrawOverlays(this@WidgetActivity)) {
-                    startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
-                } else {
-                    FloatingWindow.show(mContext, "来来来，看这里\n这是一个悬浮框")
-                }
+        
+        btn_show_floating_window.setOnClickListener {
+            if (!Settings.canDrawOverlays(this@WidgetActivity)) {
+                startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
+            } else {
+                FloatingWindow.show(mContext, "来来来，看这里\n这是一个悬浮框")
             }
         }
 
-        findViewById<Button>(R.id.btn_dismiss_floating_window).setOnClickListener {
+        btn_dismiss_floating_window.setOnClickListener {
             FloatingWindow.dismiss()
         }
 
-        findViewById<Button>(R.id.btn_set_toast_show_time).setOnClickListener {
+        btn_set_toast_show_time.setOnClickListener {
             ToastUtils.showToast("测试自定义显示时间Toast:20s", 1000 * 20)
         }
 
-        findViewById<Button>(R.id.btn_create_simple_notification).setOnClickListener {
+        btn_create_simple_notification.setOnClickListener {
             KNotification.createNotification(mContext, R.mipmap.ic_launcher, "测试标题", "测试内容", Intent(mContext, MainActivity::class.java))
         }
 

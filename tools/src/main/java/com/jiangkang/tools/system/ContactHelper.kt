@@ -1,6 +1,5 @@
 package com.jiangkang.tools.system
 
-import android.app.Activity
 import android.provider.ContactsContract
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
