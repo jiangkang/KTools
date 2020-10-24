@@ -2,19 +2,23 @@ package com.jiangkang.ktools
 
 import android.app.Activity
 import android.app.Application
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Debug
 import android.os.StrictMode
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.multidex.MultiDex
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.github.anrwatchdog.ANRWatchDog
 import com.jiangkang.hack.HookUtils
 import com.jiangkang.hack.hook.ActivityStartingCallback
 import com.jiangkang.ktools.works.AppOptWorker
+import com.jiangkang.ndk.NdkMainActivity
 import com.jiangkang.tools.King
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KNotification
+import com.jiangkang.tools.widget.KShortcut
 
 /**
  * @author jiangkang
@@ -61,6 +65,22 @@ open class KApplication : Application() {
 
         AppOptWorker.launch(this)
 
+        initShortcuts()
+
+    }
+
+    private fun initShortcuts() {
+        val shortcutSystem = KShortcut.createShortcutInfo(this,"system","System","System Demos",R.drawable.ic_system,Intent(this,SystemActivity::class.java))
+        val shortcutUI = KShortcut.createShortcutInfo(this,"ui","UI","UI Demos",R.drawable.ic_widget,Intent(this,WidgetActivity::class.java))
+        val shortcutNdk = KShortcut.createShortcutInfo(this,"ndk","NDK","NDK Demos",R.drawable.ic_cpp,Intent(this,NdkMainActivity::class.java))
+
+        ShortcutManagerCompat.addDynamicShortcuts(this,listOf(shortcutSystem,shortcutUI,shortcutNdk))
+
+        if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)){
+            val pinIntent = ShortcutManagerCompat.createShortcutResultIntent(this,shortcutNdk)
+            val successCallback = PendingIntent.getBroadcast(this,0,pinIntent,0)
+            ShortcutManagerCompat.requestPinShortcut(this,shortcutNdk,successCallback.intentSender)
+        }
     }
 
 

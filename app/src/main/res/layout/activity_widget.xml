@@ -49,6 +49,13 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_open_notification_settings"
+        android:text="打开通知设置页"
+        style="@style/KButton"
+        android:background="#667799"
+        />
+
+    <Button
         android:id="@+id/btn_create_simple_notification"
         android:text="创建简单的通知栏"
         style="@style/KButton"
@@ -60,6 +67,13 @@
         android:text="显示自定义通知栏"
         style="@style/KButton"
         android:background="#663399"
+        />
+
+    <Button
+        android:id="@+id/btn_show_bubble"
+        android:text="显示气泡"
+        style="@style/KButton"
+        android:background="#664499"
         />
 
       <Button

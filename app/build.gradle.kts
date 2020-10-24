@@ -4,6 +4,7 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("com.jiangkang.kplugin")
+    id("kotlin-android")
 }
 
 android {
@@ -88,6 +89,8 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(AndroidX.recyclerView)
     implementation(AndroidX.viewpager2)
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.2")
     androidTestImplementation(AndroidX.espressoCore) {
         exclude("com.android.support", "support-annotations")
     }

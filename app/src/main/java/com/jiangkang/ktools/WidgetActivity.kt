@@ -2,6 +2,7 @@ package com.jiangkang.ktools
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -59,32 +60,42 @@ class WidgetActivity : AppCompatActivity() {
         }
 
 
-        findViewById<Button>(R.id.btn_show_custom_notification).setOnClickListener {
-            val views = RemoteViews(mContext.packageName, R.layout.layout_big_notification)
-            views.setImageViewResource(R.id.iv_notification_img, R.drawable.demo)
-            KNotification.createNotification(mContext, R.mipmap.ic_launcher, views,
+        btn_show_custom_notification.setOnClickListener {
+            KNotification.createNotification(mContext, R.mipmap.ic_launcher, BitmapFactory.decodeResource(resources,R.drawable.demo),
                     Intent(mContext, MainActivity::class.java))
         }
 
+        btn_show_bubble.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+                KNotification.createBubble<BubbleActivity>(this@WidgetActivity)
+            } else {
+                ToastUtils.showShortToast("Android 11及以上系统才可以")
+            }
+        }
 
-        findViewById<Button>(R.id.btn_widget_dialog).setOnClickListener {
+        btn_open_notification_settings.setOnClickListener {
+            KNotification.openSettingsPage(this@WidgetActivity)
+        }
+
+
+        btn_widget_dialog.setOnClickListener {
             launch(KDialogActivity::class.java, null)
         }
 
 
-        findViewById<Button>(R.id.btn_floating_action_button).setOnClickListener {
+        btn_floating_action_button.setOnClickListener {
             FabActivity.launch(mContext, null)
         }
 
-        findViewById<Button>(R.id.btn_scroll).setOnClickListener {
+        btn_scroll.setOnClickListener {
             ScrollingActivity.launch(mContext, null)
         }
 
-        findViewById<Button>(R.id.btn_bottom_nav).setOnClickListener {
+        btn_bottom_nav.setOnClickListener {
             BottomNavigationActivity.launch(mContext, null)
         }
 
-        findViewById<Button>(R.id.btn_constraint_layout).setOnClickListener {
+        btn_constraint_layout.setOnClickListener {
             ConstraintLayoutActivity.launch(mContext, null)
         }
 
@@ -96,9 +107,7 @@ class WidgetActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            finishAfterTransition()
-        }
+        finishAfterTransition()
     }
 
 
