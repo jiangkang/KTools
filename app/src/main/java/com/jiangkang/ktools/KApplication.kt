@@ -14,6 +14,7 @@ import com.jiangkang.hack.hook.ActivityStartingCallback
 import com.jiangkang.ktools.works.AppOptWorker
 import com.jiangkang.tools.King
 import com.jiangkang.tools.utils.ToastUtils
+import com.jiangkang.tools.widget.KNotification
 
 /**
  * @author jiangkang
@@ -24,6 +25,7 @@ open class KApplication : Application() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         MultiDex.install(this)
+        KNotification.createNotificationChannel(base)
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             val stackTrace = e.stackTrace
             val reason = StringBuilder()
