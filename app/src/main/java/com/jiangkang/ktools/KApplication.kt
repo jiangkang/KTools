@@ -3,6 +3,8 @@ package com.jiangkang.ktools
 import android.app.Activity
 import android.app.Application
 import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Debug
@@ -13,6 +15,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.github.anrwatchdog.ANRWatchDog
 import com.jiangkang.hack.HookUtils
 import com.jiangkang.hack.hook.ActivityStartingCallback
+import com.jiangkang.ktools.receiver.KToolsAppWidgetProvider
 import com.jiangkang.ktools.works.AppOptWorker
 import com.jiangkang.ndk.NdkMainActivity
 import com.jiangkang.tools.King
@@ -67,6 +70,26 @@ open class KApplication : Application() {
 
         initShortcuts()
 
+        initWidgets()
+
+    }
+
+    /**
+     * 创建固定微件
+     */
+    private fun initWidgets() {
+        val appWidgetManager: AppWidgetManager = applicationContext.getSystemService(AppWidgetManager::class.java)
+        val myProvider = ComponentName(applicationContext, KToolsAppWidgetProvider::class.java)
+        val successCallback: PendingIntent? = if (appWidgetManager.isRequestPinAppWidgetSupported) {
+            Intent(applicationContext,MainActivity::class.java).let { intent ->
+                PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            }
+        } else {
+            null
+        }
+        successCallback?.also { pendingIntent ->
+            appWidgetManager.requestPinAppWidget(myProvider, null, pendingIntent)
+        }
     }
 
     private fun initShortcuts() {

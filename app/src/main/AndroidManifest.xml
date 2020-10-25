@@ -38,14 +38,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".system.AppWidgetConfigActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".receiver.KToolsAppWidgetProvider"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ktools_appwidget_info" />
+        </receiver>
+
         <activity
             android:name=".BubbleActivity"
             android:allowEmbedded="true"
             android:documentLaunchMode="always"
             android:launchMode="standard"
-            android:resizeableActivity="true"
-            />
+            android:resizeableActivity="true" />
         <activity android:name=".CrashInfoActivity" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}"
@@ -58,9 +77,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTop"
             android:immersive="true"
-            ></activity>
+            android:launchMode="singleTop" />
 
         <activity-alias
             android:name=".MainActivity1"
