@@ -17,6 +17,7 @@ import com.jiangkang.ktools.effect.EffectActivity
 import com.jiangkang.ktools.web.HybridActivity
 import com.jiangkang.ndk.NdkMainActivity
 import com.jiangkang.vpn.ToyVpnClientActivity
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 /**
@@ -29,6 +30,7 @@ class FunctionAdapter(private val mContext: Context) : RecyclerView.Adapter<Func
         functionList.add(FunctionEntity("System", SystemActivity::class.java, R.drawable.ic_system))
         functionList.add(FunctionEntity("UI", WidgetActivity::class.java, R.drawable.ic_widget))
         functionList.add(FunctionEntity("Storage", StorageActivity::class.java, R.drawable.ic_storage))
+        functionList.add(FunctionEntity("HTTP", HttpRequestActivity::class.java, R.drawable.ic_requests))
         functionList.add(FunctionEntity("Device", DeviceActivity::class.java, R.drawable.ic_device))
         functionList.add(FunctionEntity("Image", ImageActivity::class.java, R.drawable.ic_image))
         functionList.add(FunctionEntity("Scan", ScanActivity::class.java, R.drawable.ic_scan))
@@ -38,6 +40,7 @@ class FunctionAdapter(private val mContext: Context) : RecyclerView.Adapter<Func
         functionList.add(FunctionEntity("Hack", HackActivity::class.java, R.drawable.ic_widget))
         functionList.add(FunctionEntity("VPN", ToyVpnClientActivity::class.java, R.drawable.ic_web))
         functionList.add(FunctionEntity("NDK", NdkMainActivity::class.java,R.drawable.ic_cpp))
+        functionList.add(FunctionEntity("Flutter", FlutterEntryActivity::class.java,R.drawable.ic_flutter))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

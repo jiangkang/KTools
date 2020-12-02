@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.jiangkang.hybrid.Khybrid
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * Adapter : [FunctionAdapter]
+ */
 open class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

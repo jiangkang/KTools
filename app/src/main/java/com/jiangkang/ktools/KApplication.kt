@@ -12,7 +12,6 @@ import android.os.StrictMode
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.multidex.MultiDex
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.github.anrwatchdog.ANRWatchDog
 import com.jiangkang.hack.HookUtils
 import com.jiangkang.hack.hook.ActivityStartingCallback
 import com.jiangkang.ktools.receiver.KToolsAppWidgetProvider
@@ -22,6 +21,8 @@ import com.jiangkang.tools.King
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KNotification
 import com.jiangkang.tools.widget.KShortcut
+import okhttp3.*
+import okio.ByteString
 
 /**
  * @author jiangkang
@@ -72,6 +73,7 @@ open class KApplication : Application() {
 
         initWidgets()
 
+
     }
 
     /**
@@ -104,11 +106,6 @@ open class KApplication : Application() {
             val successCallback = PendingIntent.getBroadcast(this,0,pinIntent,0)
             ShortcutManagerCompat.requestPinShortcut(this,shortcutNdk,successCallback.intentSender)
         }
-    }
-
-
-    private fun initANRWatchDog() {
-        ANRWatchDog().start()
     }
 
     private fun enableStrictMode() {

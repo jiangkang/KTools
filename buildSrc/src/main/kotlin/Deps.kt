@@ -13,7 +13,7 @@ const val hamcrest = "org.hamcrest:hamcrest-library:2.2"
 const val javapoet = "com.squareup:javapoet:1.13.0"
 
 object Google {
-    const val vHilt =  "2.28-alpha"
+    const val vHilt = "2.28-alpha"
     const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$vHilt"
     const val oboe = "com.google.oboe:oboe:1.4.3"
 }
@@ -51,15 +51,19 @@ object AndroidX {
     const val multiDex = "androidx.multidex:multidex:2.0.1"
     const val viewpager2 = "androidx.viewpager2:viewpager2:1.0.0"
     const val print = "androidx.print:print:1.0.0"
+    const val startup = "androidx.startup:startup-runtime:1.0.0-beta01"
+    const val futures = "androidx.concurrent:concurrent-futures-ktx:1.1.0"
 
     object Navigation {
         const val fragment = "androidx.navigation:navigation-fragment:2.3.0"
         const val ui = "androidx.navigation:navigation-ui:2.3.0"
     }
+
     object Room {
         const val runtime = "androidx.room:room-runtime:2.2.5"
         const val compiler = "androidx.room:room-compiler:2.2.5"
     }
+
     object Lifecycle {
         const val runtime = "androidx.lifecycle:lifecycle-runtime:2.2.0"
         const val extension = "androidx.lifecycle:lifecycle-extensions:2.2.0"
@@ -72,7 +76,7 @@ object AndroidX {
     }
 
     object DataStore {
-        private const val version= "1.0.0-alpha01"
+        private const val version = "1.0.0-alpha01"
         const val preferences = "androidx.datastore:datastore-preferences:$version"   // preferences
         const val core = "androidx.datastore:datastore-core:$version"  // proto
     }
@@ -89,13 +93,13 @@ fun DependencyHandlerScope.retrofit() {
     impl("com.squareup.retrofit2:converter-gson:2.6.1")
 }
 
-fun DependencyHandlerScope.glide(){
+fun DependencyHandlerScope.glide() {
     impl("com.github.bumptech.glide:glide:4.11.0")
     impl("com.github.bumptech.glide:okhttp3-integration:4.11.0")
     kapt("com.github.bumptech.glide:compiler:4.11.0")
 }
 
-fun DependencyHandlerScope.fresco(){
+fun DependencyHandlerScope.fresco() {
     val vFresco = "2.3.0"
     api("com.facebook.fresco:fresco:$vFresco")
     api("com.facebook.fresco:animated-gif:$vFresco")
@@ -103,9 +107,8 @@ fun DependencyHandlerScope.fresco(){
     api("com.facebook.fresco:animated-webp:$vFresco")
 }
 
-fun DependencyHandlerScope.leakcanary(){
+fun DependencyHandlerScope.leakcanary() {
     val vLeakCanary = "1.6.3"
     debugImpl("com.squareup.leakcanary:leakcanary-android:$vLeakCanary")
     releaseImpl("com.squareup.leakcanary:leakcanary-android-no-op:$vLeakCanary")
-
 }

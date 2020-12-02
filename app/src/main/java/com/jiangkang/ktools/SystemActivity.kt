@@ -138,8 +138,11 @@ class SystemActivity : AppCompatActivity() {
             ToastUtils.showShortToast("代码遗失")
         }
 
-    }
+        btn_create_note.setOnClickListener {
+            
+        }
 
+    }
 
     private fun gotoContactPage() {
         val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
@@ -331,6 +334,11 @@ class SystemActivity : AppCompatActivity() {
         }
     }
 
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAfterTransition()
+    }
 
 
     companion object {

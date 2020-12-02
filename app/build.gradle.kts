@@ -1,3 +1,5 @@
+import java.net.URI
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -6,6 +8,18 @@ plugins {
     id("com.jiangkang.kplugin")
     id("kotlin-android")
 }
+
+//val storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
+val storageUrl = "https://storage.googleapis.com"
+repositories {
+    maven {
+        url = URI.create("file://${rootDir.absolutePath}/flutter_module/build/host/outputs/repo")
+    }
+    maven {
+        url = URI.create("$storageUrl/download.flutter.io")
+    }
+}
+
 
 android {
 
@@ -113,6 +127,7 @@ dependencies {
     implementation(AndroidX.recyclerView)
     implementation(AndroidX.cardView)
     implementation(AndroidX.constraintLayout)
+    implementation(AndroidX.startup)
     implementation(material)
     retrofit()
     debugImplementation("com.readystatesoftware.chuck:library:1.1.0")
@@ -149,6 +164,11 @@ dependencies {
     implementation(project(":container"))
     implementation(project(":vpn"))
     implementation(project(":ndk"))
+    implementation("com.ktools.flutter_module:flutter_release:1.0")
+//    debugImplementation("com.ktools.flutter_module:flutter_debug:1.0")
+//    profileImplementation("com.ktools.flutter_module:flutter_profile:1.0")
+//    releaseImplementation("com.ktools.flutter_module:flutter_release:1.0")
+
 }
 
 task("copy", Copy::class) {

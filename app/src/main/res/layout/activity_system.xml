@@ -210,6 +210,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnShare" />
 
+        <Button
+            android:id="@+id/btn_create_note"
+            android:layout_width="0dp"
+            style="@style/KButton"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FF9977"
+            android:text="创建笔记"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnQuickSettings" />/
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
