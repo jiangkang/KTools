@@ -16,6 +16,7 @@ import com.jiangkang.ktools.BaseActivity.Companion.VIEW_NAME_HEADER_TITLE
 import com.jiangkang.ktools.effect.EffectActivity
 import com.jiangkang.ktools.web.HybridActivity
 import com.jiangkang.ndk.NdkMainActivity
+import com.jiangkang.video.KVideoActivity
 import com.jiangkang.vpn.ToyVpnClientActivity
 import kotlinx.coroutines.runBlocking
 import java.util.*
@@ -41,6 +42,7 @@ class FunctionAdapter(private val mContext: Context) : RecyclerView.Adapter<Func
         functionList.add(FunctionEntity("VPN", ToyVpnClientActivity::class.java, R.drawable.ic_web))
         functionList.add(FunctionEntity("NDK", NdkMainActivity::class.java,R.drawable.ic_cpp))
         functionList.add(FunctionEntity("Flutter", FlutterEntryActivity::class.java,R.drawable.ic_flutter))
+        functionList.add(FunctionEntity("Video", KVideoActivity::class.java,R.drawable.ic_music_paly))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

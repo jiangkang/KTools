@@ -6,21 +6,25 @@ import android.os.Bundle
 import android.util.Base64
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_security.*
+import com.jiangkang.ktools.databinding.ActivitySecurityBinding
 
 class SecurityActivity : AppCompatActivity() {
 
+    private lateinit var binding:ActivitySecurityBinding
     private val etOriginal: EditText by lazy { findViewById<EditText>(R.id.et_original) }
     private val tvResult: EditText by lazy { findViewById<EditText>(R.id.et_result) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_security)
+        binding = ActivitySecurityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         title = "Security"
-        btn_base64_encode.setOnClickListener {
+
+        binding.btnBase64Encode.setOnClickListener {
             onBtnBase64EncodeClicked()
         }
-        btn_base64_decode.setOnClickListener {
+
+        binding.btnBase64Decode.setOnClickListener {
             onBtnBase64DecodeClicked()
         }
     }

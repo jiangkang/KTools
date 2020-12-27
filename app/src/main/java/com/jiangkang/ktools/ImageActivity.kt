@@ -19,16 +19,18 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.jiangkang.hybrid.Khybrid
+import com.jiangkang.ktools.databinding.ActivityImageBinding
 import com.jiangkang.tools.utils.FileUtils
 import com.jiangkang.tools.utils.ImageUtils
 import com.jiangkang.tools.utils.LogUtils
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KDialog
-import kotlinx.android.synthetic.main.activity_image.*
 import java.io.File
 import java.io.IOException
 
 class ImageActivity : AppCompatActivity() {
+
+    private lateinit var binding:ActivityImageBinding
 
     private val etMaxWidth: EditText by lazy { findViewById<EditText>(R.id.et_max_width) }
     private val etMaxHeight: EditText by lazy { findViewById<EditText>(R.id.et_max_height) }
@@ -38,36 +40,40 @@ class ImageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_image)
+        binding = ActivityImageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         title = "Image"
-        btn_choose_picture_from_album.setOnClickListener {
+
+        binding.btnChoosePictureFromAlbum.setOnClickListener {
             openAlbum()
         }
-        btn_take_picture.setOnClickListener {
+
+        binding.btnTakePicture.setOnClickListener {
             onBtnTakePictureClicked()
         }
 
-        btn_take_video.setOnClickListener {
+        binding.btnTakeVideo.setOnClickListener {
             onBtnTakeVideoClicked()
         }
 
-        btn_screen_capture.setOnClickListener {
+
+        binding.btnScreenCapture.setOnClickListener {
             onBtnScreenCaptureClicked()
         }
 
-        btn_take_picture_without_compress.setOnClickListener {
+        binding.btnTakePictureWithoutCompress.setOnClickListener {
             onBtnTakePictureWithoutCompressClicked()
         }
 
-        btn_show_base64_img_in_web.setOnClickListener {
+        binding.btnShowBase64ImgInWeb.setOnClickListener {
             onBtnShowBase64ImgInWebClicked()
         }
 
-        btn_scale_image_by_max_width_and_height.setOnClickListener {
+        binding.btnScaleImageByMaxWidthAndHeight.setOnClickListener {
             onBtnScaleImageByMaxWidthAndHeightClicked()
         }
 
-        btnPrintBitmap.setOnClickListener {
+        binding.btnPrintBitmap.setOnClickListener {
             onBtnPrintBitmapClicked()
         }
     }

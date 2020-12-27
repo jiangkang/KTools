@@ -12,10 +12,10 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.jiangkang.ktools.databinding.ActivityFileSystemBinding
 import com.jiangkang.tools.utils.FileUtils
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KDialog
-import kotlinx.android.synthetic.main.activity_file_system.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.*
@@ -27,11 +27,14 @@ import java.util.concurrent.Executors
  */
 class FileSystemActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityFileSystemBinding
+
     var mProgressDialog: ProgressDialog? = null
     private var assetManager: AssetManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_file_system)
+        binding = ActivityFileSystemBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         assetManager = assets
         mProgressDialog = ProgressDialog(this)
 
@@ -39,44 +42,47 @@ class FileSystemActivity : AppCompatActivity() {
     }
 
     private fun handleClick() {
-        btn_get_general_file_path.setOnClickListener {
+
+        binding.btnGetGeneralFilePath.setOnClickListener {
             onBtnGetGeneralFilePathClicked()
         }
 
-        btn_get_img_from_assets.setOnClickListener {
+
+        binding.btnGetImgFromAssets.setOnClickListener {
             onBtnGetImgFromAssetsClicked()
         }
 
-        btn_get_audio_from_assets.setOnClickListener {
+        binding.btnGetAudioFromAssets.setOnClickListener {
             onBtnGetAudioFromAssetsClicked()
         }
 
-        btn_get_json_from_assets.setOnClickListener {
+        binding.btnGetJsonFromAssets.setOnClickListener {
             onBtnGetJsonFromAssetsClicked()
         }
 
-        btn_create_file.setOnClickListener {
+        binding.btnCreateFile.setOnClickListener {
             onBtnCreateFileClicked()
         }
 
-        btn_get_file_size.setOnClickListener {
+        binding.btnGetFileSize.setOnClickListener {
             onBtnGetFileSizeClicked()
         }
 
-        btn_get_dir_size.setOnClickListener {
+
+        binding.btnGetDirSize.setOnClickListener {
             onBtnGetDirSizeClicked()
         }
 
-        btn_delete_file.setOnClickListener {
+        binding.btnDeleteFile.setOnClickListener {
             onBtnDeleteFileClicked()
         }
 
-        btn_hide_file.setOnClickListener {
+        binding.btnHideFile.setOnClickListener {
             onBtnHideFileClicked()
         }
     }
 
-    fun onBtnGetGeneralFilePathClicked() {
+    private fun onBtnGetGeneralFilePathClicked() {
         val builder = StringBuilder()
         builder.append("""context.getExternalCacheDir():
   --${externalCacheDir!!.absolutePath}
@@ -93,7 +99,7 @@ class FileSystemActivity : AppCompatActivity() {
         KDialog.showMsgDialog(this, builder.toString())
     }
 
-    fun onBtnGetImgFromAssetsClicked() {
+    private fun onBtnGetImgFromAssetsClicked() {
         try {
             val inputStream = assetManager!!.open("img/dog.jpg")
             val bitmap = BitmapFactory.decodeStream(inputStream)
@@ -103,7 +109,7 @@ class FileSystemActivity : AppCompatActivity() {
         }
     }
 
-    fun onBtnGetAudioFromAssetsClicked() {
+    private fun onBtnGetAudioFromAssetsClicked() {
         try {
             val descriptor = FileUtils.getAssetFileDescription("music/baiyemeng.mp3")
             val player = MediaPlayer()
@@ -115,7 +121,7 @@ class FileSystemActivity : AppCompatActivity() {
         }
     }
 
-    fun onBtnGetJsonFromAssetsClicked() {
+    private fun onBtnGetJsonFromAssetsClicked() {
         var inputStreamReader: InputStreamReader? = null
         try {
             inputStreamReader = InputStreamReader(assetManager!!.open("json/demo.json"))
@@ -141,12 +147,12 @@ class FileSystemActivity : AppCompatActivity() {
         }
     }
 
-    fun onBtnCreateFileClicked() {
+    private fun onBtnCreateFileClicked() {
         val isSuccess = FileUtils.createFile("test.txt", Environment.getExternalStorageDirectory().absolutePath + File.separator + "ktools")
         ToastUtils.showShortToast(if (isSuccess) "test.txt在ktools文件夹下创建成功" else "创建失败")
     }
 
-    fun onBtnGetFileSizeClicked() {
+    private fun onBtnGetFileSizeClicked() {
         FileUtils.createFile("demo.txt", Environment.getExternalStorageDirectory().absolutePath + File.separator + "ktools")
         val file = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "ktools", "demo.txt")
         FileUtils.writeStringToFile("这只是一个测试文件，测试文件", file, false)
@@ -165,7 +171,7 @@ class FileSystemActivity : AppCompatActivity() {
         }
     }
 
-    fun onBtnGetDirSizeClicked() {
+    private fun onBtnGetDirSizeClicked() {
         Executors.newSingleThreadExecutor().execute {
             showProgressDialog()
             val size = FileUtils.getFolderSize(Environment.getExternalStorageDirectory().absolutePath)
@@ -174,7 +180,7 @@ class FileSystemActivity : AppCompatActivity() {
         }
     }
 
-    fun onBtnDeleteFileClicked() {
+    private fun onBtnDeleteFileClicked() {
         val file = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "ktools",
                 "test.txt")
         if (!file.exists()) {
@@ -225,7 +231,7 @@ class FileSystemActivity : AppCompatActivity() {
                 }.show()
     }
 
-    fun onBtnHideFileClicked() {
+    private fun onBtnHideFileClicked() {
         //隐藏文件或者文件夹只需要将文件名前面加一个‘.’号
         val isSuccess = FileUtils.hideFile(Environment.getExternalStorageDirectory().absolutePath + File.separator + "ktools", "test.txt")
         ToastUtils.showShortToast(if (isSuccess) "隐藏成功" else "隐藏失败")

@@ -8,9 +8,8 @@ import android.os.Bundle
 import android.provider.Settings
 import android.transition.Fade
 import android.view.Window
-import android.widget.Button
-import android.widget.RemoteViews
 import androidx.appcompat.app.AppCompatActivity
+import com.jiangkang.ktools.databinding.ActivityWidgetBinding
 import com.jiangkang.ktools.widget.*
 import com.jiangkang.tools.extend.launch
 import com.jiangkang.tools.extend.startActivity
@@ -18,28 +17,29 @@ import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.FloatingWindow
 import com.jiangkang.tools.widget.KNotification
 import com.jiangkang.widget.ui.TouchLogicActivity
-import kotlinx.android.synthetic.main.activity_widget.*
 
 class WidgetActivity : AppCompatActivity() {
 
+    private lateinit var binding:ActivityWidgetBinding
     private val mContext = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityWidgetBinding.inflate(layoutInflater)
         //转场动画
         window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
         window.enterTransition = Fade()
         window.exitTransition = Fade()
-        setContentView(R.layout.activity_widget)
+        setContentView(binding.root)
         handleOnClick()
     }
 
     private fun handleOnClick() {
-        btn_coordinator_layout.setOnClickListener {
+        binding.btnCoordinatorLayout.setOnClickListener {
             CoordinatorActivity.launch(mContext, null)
         }
-        
-        btn_show_floating_window.setOnClickListener {
+
+        binding.btnShowFloatingWindow.setOnClickListener {
             if (!Settings.canDrawOverlays(this@WidgetActivity)) {
                 startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
             } else {
@@ -47,25 +47,24 @@ class WidgetActivity : AppCompatActivity() {
             }
         }
 
-        btn_dismiss_floating_window.setOnClickListener {
+        binding.btnDismissFloatingWindow.setOnClickListener {
             FloatingWindow.dismiss()
         }
 
-        btn_set_toast_show_time.setOnClickListener {
+        binding.btnSetToastShowTime.setOnClickListener {
             ToastUtils.showToast("测试自定义显示时间Toast:20s", 1000 * 20)
         }
 
-        btn_create_simple_notification.setOnClickListener {
+        binding.btnCreateSimpleNotification.setOnClickListener {
             KNotification.createNotification(mContext, R.mipmap.ic_launcher, "测试标题", "测试内容", Intent(mContext, MainActivity::class.java))
         }
 
-
-        btn_show_custom_notification.setOnClickListener {
+        binding.btnShowCustomNotification.setOnClickListener {
             KNotification.createNotification(mContext, R.mipmap.ic_launcher, BitmapFactory.decodeResource(resources,R.drawable.demo),
                     Intent(mContext, MainActivity::class.java))
         }
 
-        btn_show_bubble.setOnClickListener {
+        binding.btnShowBubble.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
                 KNotification.createBubble<BubbleActivity>(this@WidgetActivity)
             } else {
@@ -73,33 +72,31 @@ class WidgetActivity : AppCompatActivity() {
             }
         }
 
-        btn_open_notification_settings.setOnClickListener {
+        binding.btnOpenNotificationSettings.setOnClickListener {
             KNotification.openSettingsPage(this@WidgetActivity)
         }
 
-
-        btn_widget_dialog.setOnClickListener {
+        binding.btnWidgetDialog.setOnClickListener {
             launch(KDialogActivity::class.java, null)
         }
 
-
-        btn_floating_action_button.setOnClickListener {
+        binding.btnFloatingActionButton.setOnClickListener {
             FabActivity.launch(mContext, null)
         }
 
-        btn_scroll.setOnClickListener {
+        binding.btnScroll.setOnClickListener {
             ScrollingActivity.launch(mContext, null)
         }
 
-        btn_bottom_nav.setOnClickListener {
+        binding.btnBottomNav.setOnClickListener {
             BottomNavigationActivity.launch(mContext, null)
         }
 
-        btn_constraint_layout.setOnClickListener {
+        binding.btnConstraintLayout.setOnClickListener {
             ConstraintLayoutActivity.launch(mContext, null)
         }
 
-        btn_touch_logic.setOnClickListener {
+        binding.btnTouchLogic.setOnClickListener {
             startActivity<TouchLogicActivity>()
         }
 

@@ -32,7 +32,7 @@ android {
     ndkVersion = vNdkVersion
 
     defaultConfig {
-        applicationId =  "com.jiangkang.ktools"
+        applicationId = "com.jiangkang.ktools"
         minSdkVersion(vMinSdkVersion)
         targetSdkVersion(vTargetSdkVersion)
         versionCode = 1
@@ -47,7 +47,7 @@ android {
 
     buildTypes {
         release(enableMinify = true, shrinkRes = true, proguardFiles = getDefaultProguardFile("proguard-android.txt"))
-        debug(enableMinify = false,shrinkRes = false,proguardFiles = getDefaultProguardFile("proguard-android.txt"))
+        debug(enableMinify = false, shrinkRes = false, proguardFiles = getDefaultProguardFile("proguard-android.txt"))
     }
 
     configurations.all {
@@ -60,7 +60,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions{
+    kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
@@ -97,6 +97,9 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -118,7 +121,7 @@ dependencies {
     testImplementation(junit)
     testImplementation(mockito)
 
-    leakcanary()
+//    leakcanary()
     debugImplementation("com.amitshekhar.android:debug-db:1.0.0")
     debugImplementation("com.facebook.sonar:sonar:0.6.13") {
         exclude("android.arch.lifecycle", "runtime")
@@ -150,7 +153,7 @@ dependencies {
     implementation(AndroidX.WorkManager.runtimeKtx)
     implementation(AndroidX.DataStore.core)
     implementation(AndroidX.DataStore.preferences)
-    implementation(Square.LeakCanary.android)
+//    implementation(Square.LeakCanary.android)
     implementation(project(":widget"))
     implementation(project(":annotations"))
     implementation(project(":hack"))
@@ -164,11 +167,8 @@ dependencies {
     implementation(project(":container"))
     implementation(project(":vpn"))
     implementation(project(":ndk"))
+    implementation(project(":video"))
     implementation("com.ktools.flutter_module:flutter_release:1.0")
-//    debugImplementation("com.ktools.flutter_module:flutter_debug:1.0")
-//    profileImplementation("com.ktools.flutter_module:flutter_profile:1.0")
-//    releaseImplementation("com.ktools.flutter_module:flutter_release:1.0")
-
 }
 
 task("copy", Copy::class) {

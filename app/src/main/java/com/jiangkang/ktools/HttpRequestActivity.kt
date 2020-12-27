@@ -1,18 +1,22 @@
 package com.jiangkang.ktools
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.jiangkang.ktools.databinding.ActivityHttpRequestBinding
 import com.jiangkang.tools.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_http_request.*
 import okhttp3.*
 import okio.ByteString
 
 class HttpRequestActivity : AppCompatActivity() {
+
+    private lateinit var binding:ActivityHttpRequestBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_http_request)
+        binding = ActivityHttpRequestBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btn_simple_websocket.setOnClickListener {
+        binding.btnSimpleWebsocket.setOnClickListener {
               initWebSocket()
         }
     }

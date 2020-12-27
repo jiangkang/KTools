@@ -6,21 +6,22 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.jiangkang.ktools.databinding.ActivityDeviceBinding
 import com.jiangkang.tools.extend.activityManager
 import com.jiangkang.tools.service.WatchingTopActivityService
 import com.jiangkang.tools.utils.*
 import com.jiangkang.tools.widget.KDialog
-import kotlinx.android.synthetic.main.activity_device.*
 import kotlin.concurrent.thread
 
 class DeviceActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityDeviceBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_device)
+        binding = ActivityDeviceBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         title = "Device"
         handleClick()
     }
@@ -28,21 +29,24 @@ class DeviceActivity : AppCompatActivity() {
 
     private fun handleClick() {
 
-        findViewById<Button>(R.id.btnCheckNetworkInfo).setOnClickListener {
+
+        binding.btnCheckNetworkInfo.setOnClickListener {
             val builder = StringBuilder()
             builder.appendln("网络类型: ${NetworkUtils.netWorkType}")
-                    .appendln("Mac地址:${ NetworkUtils.macAddress}")
+                    .appendln("Mac地址:${NetworkUtils.macAddress}")
             KDialog.showMsgDialog(this@DeviceActivity, builder.toString())
         }
 
-        btn_get_device_info.setOnClickListener {
+
+        binding.btnGetDeviceInfo.setOnClickListener {
             val builder = StringBuilder().apply {
                 appendln("java.vm.version:${DeviceUtils.vmVersion}")
             }
             KDialog.showMsgDialog(this@DeviceActivity, builder.toString())
         }
 
-        findViewById<Button>(R.id.btnScreenBrightness).setOnClickListener {
+
+        binding.btnScreenBrightness.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (!Settings.System.canWrite(this@DeviceActivity)) {
                     startActivity(Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:$packageName")))
@@ -56,20 +60,17 @@ class DeviceActivity : AppCompatActivity() {
 
         }
 
-        findViewById<Button>(R.id.btnCurrentWindowBrightness).setOnClickListener {
+        binding.btnCurrentWindowBrightness.setOnClickListener {
             ScreenUtils.setCurrentWindowScreenBrightness(this@DeviceActivity, 125)
             ToastUtils.showShortToast("将亮度修改到了125,只对当前页面有效")
         }
 
 
-        findViewById<Button>(R.id.btnCheckCurrentActivity).setOnClickListener {
-//            KDialog.showMsgDialog(this@DeviceActivity, AppUtils.currentActivity)
-            startService(Intent(this@DeviceActivity,WatchingTopActivityService::class.java))
+        binding.btnCheckCurrentActivity.setOnClickListener {
+            startService(Intent(this@DeviceActivity, WatchingTopActivityService::class.java))
         }
 
-
-
-        findViewById<Button>(R.id.btnAdbWireless).setOnClickListener {
+        binding.btnAdbWireless.setOnClickListener {
             thread {
                 val command = "setprop service.adb.tcp.port 5555 && stop adbd && start adbd"
                 ShellUtils.execCmd(command, true)
@@ -80,7 +81,7 @@ class DeviceActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.btnGetMaxMemory).setOnClickListener {
+        binding.btnGetMaxMemory.setOnClickListener {
             val maxMemory = Runtime.getRuntime().maxMemory() / (1024 * 1024)
             val memoryInfo = getAvailableMemory()
 
@@ -94,7 +95,7 @@ class DeviceActivity : AppCompatActivity() {
                     "系统可用内存：$availableMemory M\n" +
                     "系统总运行内存： $totalMem M\n" +
                     "低内存阈值：$threshold M"
-            KDialog.showMsgDialog(this@DeviceActivity,msg)
+            KDialog.showMsgDialog(this@DeviceActivity, msg)
         }
 
     }

@@ -2,22 +2,24 @@ package com.jiangkang.ktools
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.jiangkang.ktools.databinding.ActivityCrashInfoBinding
 import com.jiangkang.tools.extend.startActivity
-import kotlinx.android.synthetic.main.activity_crash_info.*
-import kotlinx.coroutines.MainScope
 
 class CrashInfoActivity : AppCompatActivity() {
 
+    private lateinit var binding:ActivityCrashInfoBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_crash_info)
+        binding = ActivityCrashInfoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val crashInfo = intent.getStringExtra("crash_info")
         crashInfo?.let {
-            tv_crash_info.text = it
+            binding.tvCrashInfo.text = it
         }
 
-        btn_crash_restart.setOnClickListener {
+        binding.btnCrashRestart.setOnClickListener {
             this@CrashInfoActivity.startActivity<MainActivity>()
             finish()
         }

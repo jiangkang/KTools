@@ -3,18 +3,16 @@ package com.jiangkang.ktools
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import android.os.Build
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.TextToSpeech.OnInitListener
 import android.text.TextUtils
-import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.jiangkang.annotations.Safe
 import com.jiangkang.ktools.audio.VoiceBroadcastReceiver
+import com.jiangkang.ktools.databinding.ActivityAudioBinding
 import com.jiangkang.tools.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_audio.*
 import java.util.*
 
 /**
@@ -22,22 +20,25 @@ import java.util.*
  */
 class AudioActivity : AppCompatActivity() {
 
+    private lateinit var binding:ActivityAudioBinding
+
     private val etTextContent: EditText by lazy { findViewById<EditText>(R.id.et_text_content) }
 
     private var onInitListener: OnInitListener? = null
     private var speech: TextToSpeech? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_audio)
-        btn_text_to_speech.setOnClickListener {
+        binding = ActivityAudioBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.btnTextToSpeech.setOnClickListener {
             onBtnTextToSpeechClicked()
         }
 
-        btn_play_single_sound.setOnClickListener {
+        binding.btnPlaySingleSound.setOnClickListener {
             onBtnPlaySingleSoundClicked()
         }
 
-        btn_play_multi_sounds.setOnClickListener {
+        binding.btnPlayMultiSounds.setOnClickListener {
             onBtnPlayMultiSoundsClicked()
         }
 

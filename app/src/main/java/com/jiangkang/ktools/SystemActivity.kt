@@ -12,9 +12,9 @@ import android.provider.ContactsContract
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.jiangkang.ktools.databinding.ActivitySystemBinding
 import com.jiangkang.ktools.service.AIDLDemoActivity
 import com.jiangkang.ktools.share.ShareActivity
 import com.jiangkang.tools.extend.wallpaperManager
@@ -24,7 +24,6 @@ import com.jiangkang.tools.utils.ClipboardUtils
 import com.jiangkang.tools.utils.ShellUtils
 import com.jiangkang.tools.utils.SpUtils
 import com.jiangkang.tools.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_system.*
 import kotlinx.coroutines.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -40,13 +39,15 @@ import kotlin.concurrent.thread
  */
 class SystemActivity : AppCompatActivity() {
 
+    private lateinit var binding:ActivitySystemBinding
     private var jsonObject: JSONObject? = null
 
     private val mainScope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_system)
+        binding = ActivitySystemBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         title = "System"
         handleClick()
     }
@@ -71,7 +72,7 @@ class SystemActivity : AppCompatActivity() {
     }
 
     private fun handleClick() {
-        btn_open_contacts.setOnClickListener {
+        binding.btnOpenContacts.setOnClickListener {
             if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                 gotoContactPage()
             } else {
@@ -79,7 +80,7 @@ class SystemActivity : AppCompatActivity() {
             }
         }
 
-        btn_get_all_contacts.setOnClickListener {
+        binding.btnGetAllContacts.setOnClickListener {
             if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                 getContactList()
             } else {
@@ -87,19 +88,19 @@ class SystemActivity : AppCompatActivity() {
             }
         }
 
-        btn_set_clipboard.setOnClickListener {
+        binding.btnSetClipboard.setOnClickListener {
             onBtnSetClipboardClicked()
         }
 
-        btn_get_clipboard.setOnClickListener {
+        binding.btnGetClipboard.setOnClickListener {
             ToastUtils.showShortToast(ClipboardUtils.stringFromClipboard)
         }
 
-        btn_exit_app.setOnClickListener {
+        binding.btnExitApp.setOnClickListener {
             onClickBtnExitApp()
         }
 
-        btnQuickSettings.setOnClickListener {
+        binding.btnQuickSettings.setOnClickListener {
             mainScope.launch {
                 val result = async(Dispatchers.IO) {
                     ShellUtils.execCmd("adb shell setprop debug.layout true", false)
@@ -109,36 +110,36 @@ class SystemActivity : AppCompatActivity() {
             }
         }
 
-        btn_aidl.setOnClickListener {
+        binding.btnAidl.setOnClickListener {
             AIDLDemoActivity.launch(this, null)
         }
 
-        btnShare.setOnClickListener {
+        binding.btnShare.setOnClickListener {
             startActivity(Intent(this, ShareActivity::class.java))
         }
 
-        btn_change_wallpaper.setOnClickListener {
+        binding.btnChangeWallpaper.setOnClickListener {
             this.wallpaperManager.setResource(R.raw.wallpaper)
             ToastUtils.showShortToast("壁纸更换成功！")
         }
 
-        btn_hide_app_icon.setOnClickListener {
+        binding.btnHideAppIcon.setOnClickListener {
             onHideAppIconClicked()
         }
 
-        btn_change_icon.setOnClickListener {
+        binding.btnChangeIcon.setOnClickListener {
             changeLauncherIcon()
         }
 
-        btn_hide_virtual_navbar.setOnClickListener {
+        binding.btnHideVirtualNavbar.setOnClickListener {
             hideVirtualNavbar(this@SystemActivity)
         }
 
-        btn_load_dex.setOnClickListener {
+        binding.btnLoadDex.setOnClickListener {
             ToastUtils.showShortToast("代码遗失")
         }
 
-        btn_create_note.setOnClickListener {
+        binding.btnCreateNote.setOnClickListener {
             
         }
 

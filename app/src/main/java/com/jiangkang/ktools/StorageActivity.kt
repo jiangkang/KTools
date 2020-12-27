@@ -9,20 +9,23 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.jiangkang.ktools.databinding.ActivityStorageBinding
 import com.jiangkang.storage.sqlite.LoginDbActivity
 import com.jiangkang.tools.extend.startActivity
 import com.jiangkang.tools.utils.ApkUtils
 import com.jiangkang.tools.utils.SpUtils
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KDialog
-import kotlinx.android.synthetic.main.activity_storage.*
 import java.io.File
 
 class StorageActivity : AppCompatActivity() {
 
+    private lateinit var binding:ActivityStorageBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_storage)
+        binding = ActivityStorageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         title = "Storage"
         handleClick()
     }
@@ -45,7 +48,7 @@ class StorageActivity : AppCompatActivity() {
             ApkUtils.installApk(this@StorageActivity)
         }
 
-        btn_parse_apk.setOnClickListener {
+        binding.btnParseApk.setOnClickListener {
             val baseApk = this.applicationInfo.sourceDir
             ApkUtils.parseApk(this@StorageActivity, File(baseApk))
         }
