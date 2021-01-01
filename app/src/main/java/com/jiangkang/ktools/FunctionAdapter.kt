@@ -43,6 +43,7 @@ class FunctionAdapter(private val mContext: Context) : RecyclerView.Adapter<Func
         functionList.add(FunctionEntity("NDK", NdkMainActivity::class.java,R.drawable.ic_cpp))
         functionList.add(FunctionEntity("Flutter", FlutterEntryActivity::class.java,R.drawable.ic_flutter))
         functionList.add(FunctionEntity("Video", KVideoActivity::class.java,R.drawable.ic_music_paly))
+        functionList.add(FunctionEntity("Tools", ToolsActivity::class.java,R.mipmap.ic_launcher))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

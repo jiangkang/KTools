@@ -40,15 +40,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ToolsActivity"></activity>
         <activity
             android:name="io.flutter.embedding.android.FlutterActivity"
-            android:theme="@style/AppTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize"
-            />
-
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".FlutterEntryActivity" />
         <activity android:name=".HttpRequestActivity" />
         <activity android:name=".system.AppWidgetConfigActivity">
@@ -91,7 +89,13 @@
         <activity
             android:name=".MainActivity"
             android:immersive="true"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity-alias
             android:name=".MainActivity1"
@@ -185,11 +189,6 @@
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".widget.ConstraintLayoutActivity" />
         <activity android:name=".service.AIDLDemoActivity" />

@@ -80,19 +80,6 @@
             android:background="#4CAF50"
             android:text="将json数据存储到文件" />
 
-
-        <!--<Button-->
-            <!--android:id="@+id/btn_"-->
-            <!--style="@style/KButton"-->
-            <!--android:background="#8BC34A"-->
-            <!--android:text="从文件中解析json数据" />-->
-
-        <Button
-            android:id="@+id/btn_parse_xml_file"
-            style="@style/KButton"
-            android:background="#CDDC39"
-            android:text="从xml文件中解析数据" />
-
         <Button
             android:id="@+id/btn_get_file_size"
             style="@style/KButton"

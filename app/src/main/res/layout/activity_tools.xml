@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <Button
+        android:id="@+id/btn_parse_xml_file"
+        style="@style/KButton"
+        android:background="#CDDC39"
+        android:text="从xml文件中解析数据" />
+
+
+</LinearLayout>

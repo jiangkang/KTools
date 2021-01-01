@@ -9,9 +9,4 @@ object AssetsUtils {
         return context.assets.openFd(fileName).fileDescriptor
     }
 
-    fun testAssets(context: Context){
-        val assetManager = context.assets
-
-    }
-
 }

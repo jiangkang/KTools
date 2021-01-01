@@ -1,0 +1,8 @@
+<root>
+    <tag1>Text1</tag1>
+    <tag2 p1="value1 tag2">Text2</tag2>
+    <tag3 p1="value1 tag3" p2="value2 tag3">Text3</tag3>
+    <tagOuter>
+        <tagInner>Text Inner</tagInner>
+    </tagOuter>
+</root>
