@@ -125,7 +125,6 @@
         <activity
             android:name="com.jiangkang.hybrid.web.WebActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:process=":web"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <service

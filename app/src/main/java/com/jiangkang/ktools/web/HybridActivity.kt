@@ -4,50 +4,36 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.jiangkang.hybrid.Khybrid
 import com.jiangkang.ktools.R
+import com.jiangkang.ktools.databinding.ActivityHybridBinding
 import kotlinx.android.synthetic.main.activity_hybrid.*
 
 class HybridActivity : AppCompatActivity() {
 
+    private lateinit var binding:ActivityHybridBinding
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hybrid)
+        binding = ActivityHybridBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         handleClick()
     }
 
     private fun handleClick() {
 
-        btnResourceInterceptor.setOnClickListener {
+        binding.btnResourceInterceptor.setOnClickListener {
             Khybrid()
                     .isInterceptResources(true)
-                    .loadUrl(this, "http://image.baidu.com/search/index?tn=baiduimage&ps=1&ct=201326592&lm=-1&cl=2&nc=1&ie=utf-8&word=%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6")
+                    .loadUrl(this, "https://www.jiangkang.tech")
         }
 
-        btnImgLazyLoading.setOnClickListener {
+        binding.btnImgLazyLoading.setOnClickListener {
             Khybrid()
                     .isLoadImgLazy(true)
-                    .loadUrl(this, "https://movie.douban.com/subject/2210031/all_photos")
+                    .loadUrl(this, "https://www.jiangkang.tech")
         }
 
-//        btnCertificateVerify.setOnClickListener {
-//            ToastUtils.showShortToast("待开发")
-//        }
-//
-//        btnGeoRequest.setOnClickListener {
-//            ToastUtils.showShortToast("待开发")
-//        }
-//
-//        btnPageCache.setOnClickListener {
-//            ToastUtils.showShortToast("待开发")
-//        }
 
-        btnJsInject.setOnClickListener {
-//            val jsString = """
-//            (function(){
-//                document.body.style.backgroundColor = "rgba(0,0,0,125)"
-//            })();
-//                """
-
-
+        binding.btnJsInject.setOnClickListener {
             val jsAttack = """
                 (function(){
                     for (var obj in window) {
@@ -59,14 +45,9 @@ class HybridActivity : AppCompatActivity() {
                     }
                 })();
                 """
-
-//            Khybrid()
-//                    .injectJs(jsString)
-//                    .loadUrl(this, "https://github.com/jiangkang/KTools")
-
             Khybrid()
                     .injectJs(jsAttack)
-                    .loadUrl(this, "https://github.com/jiangkang/KTools")
+                    .loadUrl(this, "https://www.jiangkang.tech")
 
         }
 

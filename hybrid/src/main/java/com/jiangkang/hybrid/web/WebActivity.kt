@@ -20,14 +20,16 @@ import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.jiangkang.hybrid.R
 import com.jiangkang.tools.utils.DownloadUtils
 import com.jiangkang.tools.utils.LogUtils
 import com.jiangkang.tools.utils.ToastUtils
+import com.jiangkang.tools.utils.isDebug
 import com.jiangkang.tools.widget.KDialog
 import kotlinx.android.synthetic.main.activity_web.*
 
-class WebActivity : Activity(), WebContract.IView {
+class WebActivity : AppCompatActivity(), WebContract.IView {
 
     override val tvTitle: TextView
         get() {
@@ -144,7 +146,7 @@ class WebActivity : Activity(), WebContract.IView {
 
         webContainer?.settings?.apply {
             mixedContentMode = MIXED_CONTENT_ALWAYS_ALLOW
-            javaScriptEnabled = true
+            javaScriptEnabled = false
             allowFileAccessFromFileURLs = true
             setGeolocationEnabled(true)
             allowFileAccess = true
