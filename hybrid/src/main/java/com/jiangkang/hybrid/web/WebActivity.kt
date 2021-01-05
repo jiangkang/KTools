@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.print.PrintAttributes
 import android.print.PrintManager
+import android.text.TextUtils
 import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
@@ -41,7 +42,7 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
         }
 
     //网址
-    private var launchUrl: String? = null
+    private var launchUrl: String = "https://www.jiangkang.tech"
 
     private var mContext = this
 
@@ -51,7 +52,6 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
         registerForContextMenu(webContainer)
         initVar()
         handleClick()
-
     }
 
 
@@ -131,8 +131,10 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initVar() {
-
-        launchUrl = intent.getStringExtra("launchUrl")
+        if (TextUtils.isEmpty(intent.getStringExtra("launchUrl"))){
+            return
+        }
+        launchUrl = intent.getStringExtra("launchUrl")!!
 
         var webArgs = initWebArgs()
 
@@ -156,7 +158,7 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
 
         WebView.setWebContentsDebuggingEnabled(true)
 
-        webContainer?.loadUrl(launchUrl!!)
+        webContainer?.loadUrl(launchUrl, mapOf("x-requested-with" to "good luck to you"))
 
     }
 
