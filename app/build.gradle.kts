@@ -1,14 +1,5 @@
 import java.net.URI
 
-plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("android.extensions")
-    kotlin("kapt")
-    id("com.jiangkang.kplugin")
-    id("kotlin-android")
-}
-
 //val storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
 val storageUrl = "https://storage.googleapis.com"
 repositories {
@@ -23,37 +14,12 @@ repositories {
 
 android {
 
-    //仅仅在编译的时候起作用，建议总是使用最新版本，值是一个API Level
-    compileSdkVersion(vCompileSdkVersion)
-
-    //构建工具的版本，在build-tools中的那些(aapt,dexdump,zipalign,apksigner)，一般是API-Level.x.x
-    buildToolsVersion(vBuildToolsVersion)
-
     ndkVersion = vNdkVersion
 
-    defaultConfig {
-        applicationId = "com.jiangkang.ktools"
-        minSdkVersion(vMinSdkVersion)
-        targetSdkVersion(vTargetSdkVersion)
-        versionCode = 1
-        versionName = "1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
-        multiDexEnabled = true
-        ndk {
-            abiFilters.add("arm64-v8a")
-        }
-    }
-
-    buildTypes {
-        release(enableMinify = true, shrinkRes = true, proguardFiles = getDefaultProguardFile("proguard-android.txt"))
-        debug(enableMinify = false, shrinkRes = false, proguardFiles = getDefaultProguardFile("proguard-android.txt"))
-    }
-
-    configurations.all {
-        resolutionStrategy.force("com.google.code.findbugs:jsr305:3.0.1")
-        exclude("com.google.guava", "listenablefuture")
-    }
+//    buildTypes {
+//        release(enableMinify = true, shrinkRes = true, proguardFiles = getDefaultProguardFile("proguard-android.txt"))
+//        debug(enableMinify = false, shrinkRes = false, proguardFiles = getDefaultProguardFile("proguard-android.txt"))
+//    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -96,10 +62,6 @@ android {
             path = file("CMakeLists.txt")
         }
     }
-
-    buildFeatures {
-        viewBinding = true
-    }
 }
 
 dependencies {
@@ -122,10 +84,6 @@ dependencies {
     testImplementation(mockito)
 
 //    leakcanary()
-    debugImplementation("com.amitshekhar.android:debug-db:1.0.0")
-    debugImplementation("com.facebook.sonar:sonar:0.6.13") {
-        exclude("android.arch.lifecycle", "runtime")
-    }
     implementation(AndroidX.appcompat)
     implementation(AndroidX.recyclerView)
     implementation(AndroidX.cardView)
@@ -178,6 +136,6 @@ task("copy", Copy::class) {
     delete("build/outputs/apk/debug/*")
 }
 
-traceMethod {
-    enable = false
-}
+//traceMethod {
+//    enable = false
+//}

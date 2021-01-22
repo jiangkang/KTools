@@ -100,6 +100,10 @@ class WidgetActivity : AppCompatActivity() {
             startActivity<TouchLogicActivity>()
         }
 
+        binding.btnExpandableRecyclerview.setOnClickListener {
+            
+        }
+
     }
 
     override fun onBackPressed() {

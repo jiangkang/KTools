@@ -1,4 +1,3 @@
-println("---------start:settings.gradle.kt---------------")
 include(":video")
 include(":audio")
 include(

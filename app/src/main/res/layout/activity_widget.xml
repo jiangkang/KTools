@@ -120,6 +120,12 @@
         android:text="Touch Logic"
         />
 
+    <Button
+        android:id="@+id/btn_expandable_recyclerview"
+        style="@style/KButton"
+        android:background="#009688"
+        android:text="ExpandableRecyclerView"
+        />
 
   </LinearLayout>
 </ScrollView>

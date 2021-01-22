@@ -6,7 +6,6 @@ import android.net.VpnService
 import android.os.Bundle
 import kotlinx.android.synthetic.main.layout_toy_vpn_client_activity.*
 
-
 class ToyVpnClientActivity : Activity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {

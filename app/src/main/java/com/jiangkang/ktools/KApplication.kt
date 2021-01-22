@@ -9,6 +9,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Debug
 import android.os.StrictMode
+import android.provider.Settings
+import android.util.Log
+import android.view.Choreographer
+import android.view.ViewDebug
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.multidex.MultiDex
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -21,14 +25,14 @@ import com.jiangkang.tools.King
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KNotification
 import com.jiangkang.tools.widget.KShortcut
-import okhttp3.*
-import okio.ByteString
 
 /**
  * @author jiangkang
  * @date 2017/9/6
  */
 open class KApplication : Application() {
+
+    private val tag = "KApplication"
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
@@ -73,6 +77,11 @@ open class KApplication : Application() {
 
         initWidgets()
 
+        val callback = Choreographer.FrameCallback {
+            frameTimeNanos -> Log.d(tag, frameTimeNanos.toString())
+        }
+        Choreographer.getInstance().postFrameCallback(callback)
+
 
     }
 
@@ -83,7 +92,7 @@ open class KApplication : Application() {
         val appWidgetManager: AppWidgetManager = applicationContext.getSystemService(AppWidgetManager::class.java)
         val myProvider = ComponentName(applicationContext, KToolsAppWidgetProvider::class.java)
         val successCallback: PendingIntent? = if (appWidgetManager.isRequestPinAppWidgetSupported) {
-            Intent(applicationContext,MainActivity::class.java).let { intent ->
+            Intent(applicationContext, MainActivity::class.java).let { intent ->
                 PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
             }
         } else {
@@ -95,16 +104,16 @@ open class KApplication : Application() {
     }
 
     private fun initShortcuts() {
-        val shortcutSystem = KShortcut.createShortcutInfo(this,"system","System","System Demos",R.drawable.ic_system,Intent(this,SystemActivity::class.java))
-        val shortcutUI = KShortcut.createShortcutInfo(this,"ui","UI","UI Demos",R.drawable.ic_widget,Intent(this,WidgetActivity::class.java))
-        val shortcutNdk = KShortcut.createShortcutInfo(this,"ndk","NDK","NDK Demos",R.drawable.ic_cpp,Intent(this,NdkMainActivity::class.java))
+        val shortcutSystem = KShortcut.createShortcutInfo(this, "system", "System", "System Demos", R.drawable.ic_system, Intent(this, SystemActivity::class.java))
+        val shortcutUI = KShortcut.createShortcutInfo(this, "ui", "UI", "UI Demos", R.drawable.ic_widget, Intent(this, WidgetActivity::class.java))
+        val shortcutNdk = KShortcut.createShortcutInfo(this, "ndk", "NDK", "NDK Demos", R.drawable.ic_cpp, Intent(this, NdkMainActivity::class.java))
 
-        ShortcutManagerCompat.addDynamicShortcuts(this,listOf(shortcutSystem,shortcutUI,shortcutNdk))
+        ShortcutManagerCompat.addDynamicShortcuts(this, listOf(shortcutSystem, shortcutUI, shortcutNdk))
 
-        if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)){
-            val pinIntent = ShortcutManagerCompat.createShortcutResultIntent(this,shortcutNdk)
-            val successCallback = PendingIntent.getBroadcast(this,0,pinIntent,0)
-            ShortcutManagerCompat.requestPinShortcut(this,shortcutNdk,successCallback.intentSender)
+        if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)) {
+            val pinIntent = ShortcutManagerCompat.createShortcutResultIntent(this, shortcutNdk)
+            val successCallback = PendingIntent.getBroadcast(this, 0, pinIntent, 0)
+            ShortcutManagerCompat.requestPinShortcut(this, shortcutNdk, successCallback.intentSender)
         }
     }
 

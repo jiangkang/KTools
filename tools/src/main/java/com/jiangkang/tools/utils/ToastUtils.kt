@@ -19,7 +19,7 @@ object ToastUtils {
 
     @JvmStatic
     fun showShortToast(context: Context, msg: String?) {
-        Handler(Looper.getMainLooper()).post { Toast.makeText(context.applicationContext, msg, Toast.LENGTH_SHORT).show() }
+        Handler(Looper.getMainLooper()).post { Toast.makeText(context, msg, Toast.LENGTH_SHORT).show() }
     }
 
     @JvmStatic

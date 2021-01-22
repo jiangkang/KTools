@@ -21,19 +21,35 @@ allprojects {
     }
 }
 
-println("KTools : build.gradle.kts")
+val moduleList = listOf(
+        "annotations", "buildSrc", "compiler", "klint"
+)
+
 
 subprojects {
-    println("KTools: subprojects")
-    beforeEvaluate {
-        println("-----beforeEvaluate------")
+    if (moduleList.contains(project.name)) {
+        return@subprojects
     }
-    afterEvaluate {
-        println("-----start afterEvaluate------")
-        val isAppModule = plugins.hasPlugin("android") || plugins.hasPlugin("com.android.application")
-        val isAndroidLibModule = plugins.hasPlugin("android-library") || plugins.hasPlugin("com.android.library")
-        println("${name}: isApp = ${isAppModule}, isAndroidLib = $isAndroidLibModule")
-        println("-----end afterEvaluate------")
+    val isAppModule = project.name == "app"
+    // caution: 这里的apply并不是Kotlin中的apply方法，而是Project对象用于注册插件的方法
+    project.apply {
+        if (isAppModule) {
+            plugin("com.android.application")
+        } else {
+            plugin("com.android.library")
+        }
+        plugin("kotlin-android")
+        plugin("kotlin-kapt")
+        plugin("org.jetbrains.kotlin.android.extensions")
+    }
+    if (isAppModule) {
+        project.extensions.configure<com.android.build.gradle.internal.dsl.BaseAppModuleExtension>("android") {
+            configAndroidExtension(this, project)
+        }
+    } else {
+        project.extensions.configure<com.android.build.gradle.LibraryExtension>("android") {
+            configAndroidExtension(this, project)
+        }
     }
 }
 
@@ -48,3 +64,47 @@ tasks.named<Wrapper>("wrapper") {
 }
 
 
+fun configAndroidExtension(android: com.android.build.gradle.BaseExtension, project: Project) {
+    val isAppModule = project.name == "app"
+    android.apply {
+        compileSdkVersion(vCompileSdkVersion)
+        buildToolsVersion(vBuildToolsVersion)
+        defaultConfig {
+            if (isAppModule) {
+                applicationId = "com.jiangkang.ktools"
+            }
+            minSdkVersion(vMinSdkVersion)
+            targetSdkVersion(vTargetSdkVersion)
+            versionCode = 1
+            versionName = "1.0"
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+            vectorDrawables.useSupportLibrary = true
+            multiDexEnabled = true
+            ndk {
+                abiFilters.add("arm64-v8a")
+            }
+
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments(mapOf("moduleName" to project.project.name))
+                }
+            }
+        }
+        buildTypes {
+            getByName("release") {
+                isMinifyEnabled = true
+                isShrinkResources = false
+                proguardFiles(android.getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            }
+        }
+        configurations.all {
+            resolutionStrategy.force("com.google.code.findbugs:jsr305:3.0.1")
+            exclude("com.google.guava", "listenablefuture")
+        }
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_1_8
+            targetCompatibility = JavaVersion.VERSION_1_8
+        }
+        buildFeatures.viewBinding = true
+    }
+}

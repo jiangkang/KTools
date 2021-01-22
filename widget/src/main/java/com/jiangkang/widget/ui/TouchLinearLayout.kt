@@ -23,12 +23,12 @@ class TouchLinearLayout : LinearLayout {
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         Log.d(TAG,"onTouchEvent: ${event?.action}")
-        return super.onTouchEvent(event)
+        return true
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
         Log.d(TAG,"onInterceptTouchEvent: ${ev?.action}")
-        return super.onInterceptTouchEvent(ev)
+        return false
     }
 
 }
