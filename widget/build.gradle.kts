@@ -3,7 +3,7 @@ dependencies {
     implementation(AndroidX.constraintLayout)
     implementation(AndroidX.appcompat)
     implementation(AndroidX.cardView)
-    implementation(kotlin("stdlib-jdk7"))
+    implementation(Kotlin.stdlib)
     implementation(Kotlin.coroutines)
     androidTestImplementation(AndroidX.testRunner)
     androidTestImplementation(AndroidX.espressoCore)

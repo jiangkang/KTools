@@ -7,6 +7,6 @@ dependencies {
     androidTestImplementation(AndroidX.espressoCore)
     fresco()
 //    glide()
-    implementation(kotlin("stdlib-jdk7"))
+    implementation(Kotlin.stdlib)
     implementation(AndroidX.constraintLayout)
 }

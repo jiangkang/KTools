@@ -7,6 +7,6 @@ dependencies {
     testImplementation(junit)
     androidTestImplementation(AndroidX.testRunner)
     androidTestImplementation(AndroidX.espressoCore)
-    implementation(kotlin("stdlib-jdk7"))
+    implementation(Kotlin.stdlib)
     implementation(project(":tools"))
 }

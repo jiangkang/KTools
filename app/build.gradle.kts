@@ -1,5 +1,9 @@
 import java.net.URI
 
+//plugins {
+//    id("org.jetbrains.kotlin.plugin.parcelize") version "1.4.21"
+//}
+
 //val storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
 val storageUrl = "https://storage.googleapis.com"
 repositories {
@@ -99,7 +103,7 @@ dependencies {
     implementation(AndroidX.Lifecycle.extension)
     implementation(AndroidX.Room.runtime)
     kapt(AndroidX.Room.compiler)
-    implementation(kotlin("stdlib-jdk7"))
+    implementation(Kotlin.stdlib)
     implementation(Kotlin.coroutines)
     implementation(AndroidX.multiDex)
     implementation(eventBus)

@@ -6,13 +6,13 @@ plugins {
 
 dependencies {
     compileOnly(gradleApi())
-    implementation("com.android.tools.build:gradle:4.1.0")
-    implementation(kotlin("gradle-plugin", version = "1.3.72"))
+    implementation("com.android.tools.build:gradle:4.1.1")
+    implementation(kotlin("gradle-plugin", version = "1.4.21"))
 //    implementation(gradleApi())
 //    implementation(localGroovy())
 //    implementation("org.ow2.asm:asm:7.1")
 //    implementation("javassist:javassist:3.12.1.GA")
-    implementation(kotlin("stdlib-jdk7"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.21")
 }
 
 sourceSets {

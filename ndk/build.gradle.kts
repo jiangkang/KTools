@@ -21,7 +21,7 @@ dependencies {
     implementation(AndroidX.Lifecycle.runtime)
     implementation(AndroidX.Lifecycle.extension)
     implementation(AndroidX.constraintLayout)
-    implementation(kotlin("stdlib-jdk7"))
+    implementation(Kotlin.stdlib)
     implementation(Kotlin.coroutines)
     androidTestImplementation(AndroidX.testRunner)
     androidTestImplementation(AndroidX.espressoCore)

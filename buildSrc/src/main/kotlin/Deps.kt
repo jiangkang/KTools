@@ -34,7 +34,9 @@ fun DependencyHandlerScope.hilt() {
 }
 
 object Kotlin {
+    const val kotlinVersion = "1.4.21"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
+    const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 }
 
 object AndroidX {

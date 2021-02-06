@@ -15,6 +15,6 @@ dependencies {
     androidTestImplementation(AndroidX.espressoCore)
     implementation(project(":tools"))
     implementation(project(":widget"))
-    implementation(kotlin("stdlib-jdk7"))
+    implementation(Kotlin.stdlib)
     lintChecks(project(":klint"))
 }

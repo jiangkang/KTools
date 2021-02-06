@@ -14,5 +14,5 @@ dependencies {
     implementation(AndroidX.Lifecycle.runtime)
     implementation(AndroidX.Lifecycle.extension)
     implementation(Kotlin.coroutines)
-    implementation(kotlin("stdlib-jdk7"))
+    implementation(Kotlin.stdlib)
 }

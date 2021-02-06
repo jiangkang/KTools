@@ -5,6 +5,6 @@ dependencies {
     testImplementation(junit)
     implementation(AndroidX.recyclerView)
     okHttp()
-    implementation(kotlin("stdlib-jdk7"))
+    implementation(Kotlin.stdlib)
     implementation(project(":tools"))
 }

@@ -3,12 +3,15 @@ buildscript {
         jcenter()
         google()
         mavenCentral()
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
     }
 
     dependencies {
         classpath("com.android.tools.build:gradle:4.1.1")
         classpath("org.greenrobot:greendao-gradle-plugin:3.2.2")
-        classpath(kotlin("gradle-plugin", version = "1.3.72"))
+        classpath(kotlin("gradle-plugin", version = "1.4.21"))
         classpath(Google.hiltPlugin)
     }
 }
