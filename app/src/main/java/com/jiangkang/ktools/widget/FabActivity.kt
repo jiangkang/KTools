@@ -6,17 +6,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jiangkang.ktools.R
-import kotlinx.android.synthetic.main.activity_fab.*
+import com.jiangkang.ktools.databinding.ActivityFabBinding
 
 class FabActivity : AppCompatActivity() {
 
+    private val binding by lazy { ActivityFabBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fab)
-        fab.setOnClickListener{
+        binding.fab.setOnClickListener{
             Snackbar.make(it, "我一出现，FloatingActionButton也要向上移动", Snackbar.LENGTH_SHORT).show()
         }
-        iv_fake_fab.setOnClickListener {
+        binding.ivFakeFab.setOnClickListener {
             Snackbar.make(it, "这是一个假的FloatingActionButton", Snackbar.LENGTH_SHORT).show()
         }
     }

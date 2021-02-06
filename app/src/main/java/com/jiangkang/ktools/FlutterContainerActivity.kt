@@ -5,7 +5,6 @@
 //import android.view.ViewGroup
 //import android.widget.FrameLayout
 //import io.flutter.facade.Flutter
-//import kotlinx.android.synthetic.main.activity_flutter_container.*
 //
 ////class FlutterContainerActivity : AppCompatActivity() {
 ////

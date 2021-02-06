@@ -40,7 +40,7 @@ subprojects {
         }
         plugin("kotlin-android")
         plugin("kotlin-kapt")
-        plugin("org.jetbrains.kotlin.android.extensions")
+//        plugin("org.jetbrains.kotlin.plugin.parcelize")
     }
     if (isAppModule) {
         project.extensions.configure<com.android.build.gradle.internal.dsl.BaseAppModuleExtension>("android") {

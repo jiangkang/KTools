@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.jiangkang.ktools.R
-import kotlinx.android.synthetic.main.fragment_constraint_layout.*
+import com.jiangkang.ktools.databinding.FragmentConstraintLayoutBinding
 
 
 /**
@@ -18,10 +18,12 @@ import kotlinx.android.synthetic.main.fragment_constraint_layout.*
  */
 class ConstraintLayoutFragment : Fragment() {
 
-
+    private var _binding:FragmentConstraintLayoutBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_constraint_layout, container, false)
+        _binding = FragmentConstraintLayoutBinding.inflate(layoutInflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,14 +38,19 @@ class ConstraintLayoutFragment : Fragment() {
         val constraint2 = ConstraintSet()
         constraint2.clone(context, R.layout.activity_constraint_layout_img_alt)
 
-        iv_constraint.setOnClickListener {
-            TransitionManager.beginDelayedTransition(constraint_root)
+        binding.ivConstraint.setOnClickListener {
+            TransitionManager.beginDelayedTransition(binding.constraintRoot)
             val constraint = if (set) constraint1 else constraint2
-            constraint.applyTo(constraint_root)
+            constraint.applyTo(binding.constraintRoot)
             set = !set
         }
 
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

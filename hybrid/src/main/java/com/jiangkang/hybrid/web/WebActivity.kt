@@ -1,7 +1,6 @@
 package com.jiangkang.hybrid.web
 
 import android.annotation.TargetApi
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -23,22 +22,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.jiangkang.hybrid.R
+import com.jiangkang.hybrid.databinding.ActivityWebBinding
 import com.jiangkang.tools.utils.DownloadUtils
 import com.jiangkang.tools.utils.LogUtils
 import com.jiangkang.tools.utils.ToastUtils
-import com.jiangkang.tools.utils.isDebug
 import com.jiangkang.tools.widget.KDialog
-import kotlinx.android.synthetic.main.activity_web.*
 
 class WebActivity : AppCompatActivity(), WebContract.IView {
 
     override val tvTitle: TextView
         get() {
-            return tv_title_middle
+            return binding.tvTitleMiddle
         }
     override val ivBack: ImageView
         get() {
-            return iv_title_left
+            return binding.ivTitleLeft
         }
 
     //网址
@@ -46,10 +44,11 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
 
     private var mContext = this
 
+    private val binding by lazy { ActivityWebBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
-        registerForContextMenu(webContainer)
+        registerForContextMenu(binding.webContainer)
         initVar()
         handleClick()
     }
@@ -58,7 +57,7 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
     private val CONTEXT_MENU_ID_DOWNLOAD_IMAGE = 0
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
-        webContainer.hitTestResult?.let {
+        binding.webContainer.hitTestResult?.let {
             when (it.type) {
                 WebView.HitTestResult.IMAGE_TYPE,
                 WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE -> {
@@ -74,7 +73,7 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
 
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        webContainer.hitTestResult?.let {
+        binding.webContainer.hitTestResult?.let {
             val url = it.extra
             if (CONTEXT_MENU_ID_DOWNLOAD_IMAGE == item.itemId) {
                 if (url != null && (isHttpUrl(url) or isHttpsUrl(url))) {
@@ -101,15 +100,15 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
 
     private fun handleClick() {
 
-        iv_title_left.setOnClickListener {
-            if (webContainer!!.canGoBack()) {
-                webContainer!!.goBack()
+        binding.ivTitleLeft.setOnClickListener {
+            if (binding.webContainer.canGoBack()) {
+                binding.webContainer.goBack()
             } else {
                 finish()
             }
         }
 
-        iv_title_right.setOnClickListener {
+        binding.ivTitleRight.setOnClickListener {
             printPage()
         }
 
@@ -118,9 +117,9 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
     private fun printPage() {
         val printManager = getSystemService(Context.PRINT_SERVICE) as PrintManager
         val printAdapter = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            webContainer.createPrintDocumentAdapter("KTools_Doc_" + System.currentTimeMillis().toString())
+            binding.webContainer.createPrintDocumentAdapter("KTools_Doc_" + System.currentTimeMillis().toString())
         } else {
-            webContainer.createPrintDocumentAdapter()
+            binding.webContainer.createPrintDocumentAdapter()
         }
 
         val printJob = printManager.print("Print_" + System.currentTimeMillis().toString(),
@@ -140,13 +139,13 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
 
         Log.d(TAG, "initVar: launchUrl = " + launchUrl!!)
 
-        webContainer?.apply {
+        binding.webContainer.apply {
             webChromeClient = KWebChromeClient(mContext)
             webViewClient = KWebViewClient(mContext, webArgs)
             addJavascriptInterface(KJavaInterface(mContext), "jk")
         }
 
-        webContainer?.settings?.apply {
+        binding.webContainer.settings.apply {
             mixedContentMode = MIXED_CONTENT_ALWAYS_ALLOW
             javaScriptEnabled = false
             allowFileAccessFromFileURLs = true
@@ -157,9 +156,7 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
 
 
         WebView.setWebContentsDebuggingEnabled(true)
-
-        webContainer?.loadUrl(launchUrl, mapOf("x-requested-with" to "good luck to you"))
-
+        binding.webContainer.loadUrl(launchUrl, mapOf("x-requested-with" to "good luck to you"))
     }
 
     private fun initWebArgs(): WebArgs {
@@ -172,9 +169,9 @@ class WebActivity : AppCompatActivity(), WebContract.IView {
 
 
     override fun onBackPressed() {
-        if (webContainer!!.canGoBack()) {
-            webContainer!!.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
-            webContainer!!.goBack()
+        if (binding.webContainer.canGoBack()) {
+            binding.webContainer.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+            binding.webContainer.goBack()
         } else {
             super.onBackPressed()
         }

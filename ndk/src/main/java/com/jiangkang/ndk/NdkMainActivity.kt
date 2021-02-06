@@ -1,27 +1,27 @@
 package com.jiangkang.ndk
 
 import android.os.Bundle
-import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import com.jiangkang.ndk.databinding.ActivityNdkMainBinding
 import com.jiangkang.ndk.skia.SkiaActivity
 import com.jiangkang.tools.extend.startActivity
 import com.jiangkang.tools.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_ndk_main.*
 
 class NdkMainActivity : AppCompatActivity() {
+    private val binding by lazy { ActivityNdkMainBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ndk_main)
+        setContentView(binding.root)
         System.loadLibrary("ktools")
         handleLogic()
     }
 
     private fun handleLogic() {
-        btn_hello_world.setOnClickListener {
+        binding.btnHelloWorld.setOnClickListener {
             ToastUtils.showShortToast(sayHello())
         }
 
-        btn_skia.setOnClickListener {
+        binding.btnSkia.setOnClickListener {
             startActivity<SkiaActivity>()
         }
     }

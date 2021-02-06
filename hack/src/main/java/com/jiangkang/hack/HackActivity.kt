@@ -6,9 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import androidx.activity.ComponentActivity
 import com.jiangkang.hack.activity.ReplacementActivity
+import com.jiangkang.hack.databinding.ActivityHackBinding
 import com.jiangkang.hack.hook.ActivityStartingCallback
 import com.jiangkang.tools.extend.startActivity
 import com.jiangkang.tools.utils.DownloadUtils
@@ -17,29 +17,29 @@ import com.jiangkang.tools.utils.ReflectionUtil
 import com.jiangkang.tools.utils.ToastUtils
 import dalvik.system.BaseDexClassLoader
 import dalvik.system.DexClassLoader
-import kotlinx.android.synthetic.main.activity_hack.*
 import java.io.File
 import java.nio.file.Files
 
 class HackActivity : ComponentActivity() {
 
+    private val binding by lazy { ActivityHackBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hack)
-        findViewById<Button>(R.id.btn_hook_OnClick).setOnClickListener {
+        setContentView(binding.root)
+        binding.btnHookOnClick.setOnClickListener {
             ToastUtils.showShortToast("Hook 点击事件")
         }
-        hookOnClickListener(findViewById<Button>(R.id.btn_hook_OnClick))
+        hookOnClickListener(binding.btnHookOnClick)
         handleClick()
     }
 
     private fun handleClick() {
-        btn_dex_path_list.setOnClickListener {
+        binding.btnDexPathList.setOnClickListener {
             val field = ReflectionUtil.findField(classLoader, "pathList")
             val dexPathList = field?.get(classLoader)
         }
 
-        btn_load_dex.setOnClickListener {
+        binding.btnLoadDex.setOnClickListener {
             val jarFile = File(
                     filesDir,
                     "hello_world_dex.jar"
@@ -62,7 +62,7 @@ class HackActivity : ComponentActivity() {
             ToastUtils.showLongToast("执行dex中方法：$msg")
         }
 
-        btn_hook_instrumentation.setOnClickListener {
+        binding.btnHookInstrumentation.setOnClickListener {
             HookUtils.hookInstrumentationWithActivity(this@HackActivity, object : ActivityStartingCallback {
                 override fun activityStarting(source: Context, target: Activity, intent: Intent) {
                     intent.setClass(source, ReplacementActivity::class.java)
@@ -71,7 +71,7 @@ class HackActivity : ComponentActivity() {
             startActivity<HackActivity>()
         }
 
-        btn_load_apk.setOnClickListener {
+        binding.btnLoadApk.setOnClickListener {
             val url = "https://github.com/jiangkang/flutter-system/releases/download/v0.1.0/app-debug.apk"
             val apkFile = File(filesDir, "flutter_system.apk")
             if (apkFile.exists()) {

@@ -5,15 +5,13 @@ import android.os.Bundle
 import com.jiangkang.hybrid.Khybrid
 import com.jiangkang.ktools.R
 import com.jiangkang.ktools.databinding.ActivityHybridBinding
-import kotlinx.android.synthetic.main.activity_hybrid.*
 
 class HybridActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityHybridBinding
+    private val binding by lazy { ActivityHybridBinding.inflate(layoutInflater) }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHybridBinding.inflate(layoutInflater)
         setContentView(binding.root)
         handleClick()
     }

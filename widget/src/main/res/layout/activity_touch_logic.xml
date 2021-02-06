@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.jiangkang.widget.ui.TouchLinearLayout android:layout_width="match_parent"
+<RelativeLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <com.jiangkang.widget.ui.TouchButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="1"
-        android:layout_marginTop="20dp"
+    <ImageView
+        android:id="@+id/iv_center"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/landscape"
+        android:scaleType="centerCrop"
         />
 
-    <com.jiangkang.widget.ui.TouchButton
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btn_right"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2"
-        android:layout_marginTop="20dp"
-        />
-
-    <com.jiangkang.widget.ui.TouchButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="3"
-        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/iv_center"
+        android:layout_alignTop="@id/iv_center"
+        android:layout_alignBottom="@id/iv_center"
+        android:layout_marginLeft="10dp"
+        android:text="Click Me"
         />
 
 
-</com.jiangkang.widget.ui.TouchLinearLayout>
+</RelativeLayout>

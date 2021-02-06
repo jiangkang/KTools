@@ -1,41 +1,39 @@
 package com.jiangkang.widget.ui
 
+import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
-import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.TouchDelegate
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.jiangkang.tools.utils.ToastUtils
-import com.jiangkang.widget.R
+import com.jiangkang.widget.databinding.ActivityTouchLogicBinding
 
 class TouchLogicActivity : AppCompatActivity() {
 
-    private val tag = "TouchLogicActivity"
-    private lateinit var gestureDetector: GestureDetector
-
+    private val binding by lazy { ActivityTouchLogicBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
+        setContentView(binding.root)
 
-            override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
-                if (e2.y - e1.y > 0){
-                    ToastUtils.showShortToast("下滑")
-                } else {
-                    ToastUtils.showShortToast("上滑")
-                }
-                return super.onFling(e1, e2, velocityX, velocityY)
+        binding.ivCenter.apply {
+            post {
+                val gap = 500
+                val bounds = Rect()
+                getHitRect(bounds)
+                bounds.left -= gap
+                bounds.top -= gap
+                bounds.right += gap
+                bounds.bottom += gap
+                setOnClickListener { ToastUtils.showShortToast("Click") }
+                (binding.ivCenter.parent as View).touchDelegate = TouchDelegate(bounds, binding.ivCenter)
             }
-
-        })
-        setContentView(R.layout.activity_touch_logic)
-    }
-
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        gestureDetector.onTouchEvent(event)
-        when (event.action) {
-
         }
-        return super.onTouchEvent(event)
+
+        binding.btnRight.setOnClickListener {
+            ToastUtils.showShortToast("Btn Click")
+        }
+
     }
 
 }

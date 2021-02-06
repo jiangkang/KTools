@@ -3,24 +3,23 @@ package com.jiangkang.design.lottie
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.jiangkang.design.R
-import kotlinx.android.synthetic.main.activity_lottie_demo.*
+import com.jiangkang.design.databinding.ActivityLottieDemoBinding
 
 class LottieDemoActivity : AppCompatActivity() {
 
+    private val binding by lazy { ActivityLottieDemoBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lottie_demo)
-
+        setContentView(binding.root)
         handleClick()
     }
 
     private fun handleClick() {
-
-        btn_load_from_xml.setOnClickListener {
-            lottie_view.setAnimation(R.raw.bullseye)
+        binding.btnLoadFromXml.setOnClickListener {
+            binding.lottieView.setAnimation(R.raw.bullseye)
         }
 
-        btn_load_from_assets.setOnClickListener {
+        binding.btnLoadFromAssets.setOnClickListener {
 
         }
 

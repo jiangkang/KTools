@@ -5,32 +5,27 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import com.jiangkang.ktools.R
-import kotlinx.android.synthetic.main.activity_coordinator.*
+import com.jiangkang.ktools.databinding.ActivityCoordinatorBinding
 
 class CoordinatorActivity : AppCompatActivity() {
 
-    private val mToolbar: Toolbar by lazy {findViewById<Toolbar>(R.id.toolbar)}
-    private val mWebView: WebView by lazy { findViewById<WebView>(R.id.web_view) }
-
+    private val binding by lazy { ActivityCoordinatorBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coordinator)
+        setContentView(binding.root)
         initViews()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initViews() {
-        mToolbar.title = "Demo"
-        mToolbar.setTitleTextColor(Color.WHITE)
-        setSupportActionBar(mToolbar)
-        mWebView.settings.javaScriptEnabled = true
-        mWebView.loadUrl("https://jiangkang.tech")
-        fab.setOnClickListener {
-            mWebView.reload()
+        binding.toolbar.title = "Demo"
+        binding.toolbar.setTitleTextColor(Color.WHITE)
+        setSupportActionBar(binding.toolbar)
+        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.loadUrl("https://jiangkang.tech")
+        binding.fab.setOnClickListener {
+            binding.webView.reload()
         }
     }
 

@@ -4,22 +4,21 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.jiangkang.ktools.R
-import kotlinx.android.synthetic.main.activity_gallery.*
+import com.jiangkang.ktools.databinding.ActivityGalleryBinding
 
 class GalleryActivity : AppCompatActivity() {
 
-
+    private val binding by lazy { ActivityGalleryBinding.inflate(layoutInflater)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_gallery)
+        setContentView(binding.root)
         initViews()
 
     }
 
     private fun initViews() {
-        rcGallery.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
-        rcGallery.adapter = GalleryAdapter(this)
+        binding.rcGallery.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        binding.rcGallery.adapter = GalleryAdapter(this)
     }
 
     companion object {

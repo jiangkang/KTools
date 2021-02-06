@@ -39,7 +39,7 @@ object Kotlin {
 
 object AndroidX {
     const val core = "androidx.core:core:1.3.0"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
     const val recyclerView = "androidx.recyclerview:recyclerview:1.1.0"
     const val testRunner = "androidx.test:runner:1.2.0"
     const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
@@ -53,6 +53,9 @@ object AndroidX {
     const val print = "androidx.print:print:1.0.0"
     const val startup = "androidx.startup:startup-runtime:1.0.0-beta01"
     const val futures = "androidx.concurrent:concurrent-futures-ktx:1.1.0"
+    const val tracing = "androidx.tracing:tracing-ktx:1.0.0"
+    const val exifinterface = "androidx.exifinterface:exifinterface:1.3.2"
+    const val customview = "androidx.customview:customview:1.1.0"
 
     object Navigation {
         const val fragment = "androidx.navigation:navigation-fragment:2.3.0"

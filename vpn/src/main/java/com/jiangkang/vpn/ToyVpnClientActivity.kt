@@ -4,15 +4,16 @@ import android.app.Activity
 import android.content.Intent
 import android.net.VpnService
 import android.os.Bundle
-import kotlinx.android.synthetic.main.layout_toy_vpn_client_activity.*
+import com.jiangkang.vpn.databinding.LayoutToyVpnClientActivityBinding
 
 class ToyVpnClientActivity : Activity(){
 
+    private val binding by lazy { LayoutToyVpnClientActivityBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_toy_vpn_client_activity)
+        setContentView(binding.root)
 
-        btn_connect.setOnClickListener {
+        binding.btnConnect.setOnClickListener {
             val intent = VpnService.prepare(this@ToyVpnClientActivity)
             if (intent != null) {
                 startActivityForResult(intent, 0)
@@ -21,7 +22,7 @@ class ToyVpnClientActivity : Activity(){
             }
         }
 
-        btn_disconnect.setOnClickListener {
+        binding.btnDisconnect.setOnClickListener {
             startService(getServiceIntent().setAction(ToyVpnService.ACTION_DISCONNECT))
         }
     }

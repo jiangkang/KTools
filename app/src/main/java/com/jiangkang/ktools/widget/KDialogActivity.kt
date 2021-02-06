@@ -21,62 +21,62 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.jiangkang.ktools.R
+import com.jiangkang.ktools.databinding.ActivityKdialogBinding
 import com.jiangkang.tools.utils.FileUtils
 import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KDialog
-import kotlinx.android.synthetic.main.activity_kdialog.*
 import java.text.DateFormat
 import java.util.*
 
 class KDialogActivity : AppCompatActivity() {
 
+    private val binding by lazy { ActivityKdialogBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //转场动画
-            window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
-            window.enterTransition = Fade()
-            window.exitTransition = Fade()
-        }
-        setContentView(R.layout.activity_kdialog)
+        //转场动画
+        window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+        window.enterTransition = Fade()
+        window.exitTransition = Fade()
+        setContentView(binding.root)
 
-        btn_create_simple_text_dialog.setOnClickListener {
+        binding.btnCreateSimpleTextDialog.setOnClickListener {
             onBtnCreateSimpleTextDialogClicked()
         }
 
-        btn_single_choice_dialog.setOnClickListener {
+        binding.btnSingleChoiceDialog.setOnClickListener {
             onBtnSingleChoiceDialogClicked()
         }
 
-        btn_multi_choices_dialog.setOnClickListener {
+        binding.btnMultiChoicesDialog.setOnClickListener {
             onBtnMultiChoicesDialogClicked()
         }
 
-        btn_progress_dialog_simple.setOnClickListener {
+        binding.btnProgressDialogSimple.setOnClickListener {
             onBtnProgressDialogSimpleClicked()
         }
 
-        btn_progress_dialog_indeterminate.setOnClickListener {
+        binding.btnProgressDialogIndeterminate.setOnClickListener {
             onBtnProgressDialogIndeterminateClicked()
         }
 
-        btn_input_dialog.setOnClickListener {
+
+        binding.btnInputDialog.setOnClickListener {
             onBtnInputDialogClicked()
         }
 
-        btn_choose_date_dialog.setOnClickListener {
+        binding.btnChooseDateDialog.setOnClickListener {
             onBtnChooseDateDialogClicked()
         }
 
-        btn_choose_time_dialog.setOnClickListener {
+        binding.btnChooseTimeDialog.setOnClickListener {
             onBtnChooseTimeDialogClicked()
         }
 
-        btn_web_view_dialog.setOnClickListener {
+        binding.btnWebViewDialog.setOnClickListener {
             onBtnWebViewDialogClicked()
         }
 
-        btn_bottom_dialog.setOnClickListener {
+        binding.btnBottomDialog.setOnClickListener {
             onBtnBottomDialogClicked()
         }
     }
