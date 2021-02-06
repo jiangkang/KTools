@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:4.1.1")
+        classpath("com.android.tools.build:gradle:4.1.2")
         classpath("org.greenrobot:greendao-gradle-plugin:3.2.2")
         classpath(kotlin("gradle-plugin", version = "1.4.21"))
         classpath(Google.hiltPlugin)
@@ -43,6 +43,7 @@ subprojects {
         }
         plugin("kotlin-android")
         plugin("kotlin-kapt")
+        plugin("org.jetbrains.kotlin.plugin.parcelize")
 //        plugin("org.jetbrains.kotlin.plugin.parcelize")
     }
     if (isAppModule) {

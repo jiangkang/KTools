@@ -1,15 +1,14 @@
 package com.jiangkang.image.fresco
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.jiangkang.image.R
 
-class FrescoDemoFragment : androidx.fragment.app.Fragment() {
+class FrescoDemoFragment : Fragment() {
 
     companion object {
         fun newInstance() = FrescoDemoFragment()
@@ -24,7 +23,7 @@ class FrescoDemoFragment : androidx.fragment.app.Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(FrescoDemoViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(FrescoDemoViewModel::class.java)
     }
 
 
