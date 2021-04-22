@@ -48,12 +48,8 @@ class ContactsLoaderCallback(private val context: Context) : LoaderManager.Loade
         val jsonArray = JSONArray()
         if (data != null && data.moveToFirst()) {
             do {
-                val name = data.getString(
-                        data.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)
-                )
-                val id = data.getInt(
-                        data.getColumnIndex(ContactsContract.Contacts._ID)
-                )
+                val name = data.getString(data.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                val id = data.getInt(data.getColumnIndex(ContactsContract.Contacts._ID))
 
                 //指定获取NUMBER这一列数据
                 val phoneProjection = arrayOf(

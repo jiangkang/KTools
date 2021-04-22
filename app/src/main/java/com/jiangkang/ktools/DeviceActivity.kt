@@ -32,15 +32,15 @@ class DeviceActivity : AppCompatActivity() {
 
         binding.btnCheckNetworkInfo.setOnClickListener {
             val builder = StringBuilder()
-            builder.appendln("网络类型: ${NetworkUtils.netWorkType}")
-                    .appendln("Mac地址:${NetworkUtils.macAddress}")
-            KDialog.showMsgDialog(this@DeviceActivity, builder.toString())
+//            builder.appendLine("网络类型: ${NetworkUtils.netWorkType}")
+//                    .appendLine("Mac地址:${NetworkUtils.macAddress}")
+//            KDialog.showMsgDialog(this@DeviceActivity, builder.toString())
         }
 
 
         binding.btnGetDeviceInfo.setOnClickListener {
             val builder = StringBuilder().apply {
-                appendln("java.vm.version:${DeviceUtils.vmVersion}")
+                appendLine("java.vm.version:${DeviceUtils.vmVersion}")
             }
             KDialog.showMsgDialog(this@DeviceActivity, builder.toString())
         }

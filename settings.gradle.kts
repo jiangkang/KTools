@@ -11,7 +11,7 @@ include(
         ":hybrid",
         ":design",
         ":image",
-        ":klint",
+//        ":klint",
         ":kanimation",
         ":container",
         ":media",
