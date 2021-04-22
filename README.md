@@ -17,3 +17,8 @@ Android常用功能的封装库
 
 1. 请使用当前稳定渠道下最新版的Android Studio
 2. 项目几乎全部是Kotlin写的
+3. 项目当前包括了Flutter Module,如果遇到找不到flutter_release的情况,请执行下面的命令
+   ```shell script
+   cd flutter_module
+   flutter build aar
+   ```
