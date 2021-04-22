@@ -29,29 +29,6 @@ android {
         javaMaxHeapSize = "4g"
     }
 
-    lintOptions {
-
-        lintConfig = file("$rootDir/quality/lint/lint.xml")
-
-        //关闭检查指定的Issue Id
-        disable("TypographyFractions", "TypographyQuotes")
-
-        //打开指定的Issue的检查
-        enable("RtlHardcoded", "RtlCompat", "RtlEnabled")
-
-        //仅仅只检查这些的子集，其他的不检查，这个选项会覆盖上面的disable，enable配置
-        checkOnly("NewApi", "InlinedApi")
-
-        //如果设置为true，则会关闭lint的分析进度
-        isQuiet = false
-
-        //如果设置为true(默认)，如果发现错误就停止构建
-        isAbortOnError = false
-
-        //如果设置为true，则只报告error
-        isIgnoreWarnings = false
-    }
-
     externalNativeBuild {
         cmake {
             path = file("CMakeLists.txt")
@@ -119,7 +96,7 @@ dependencies {
     implementation(project(":storage"))
     kapt(project(":compiler"))
     implementation(project(":image"))
-    lintChecks(project(":klint"))
+//    lintChecks(project(":klint"))
     implementation(project(":design"))
     implementation(project(":container"))
     implementation(project(":vpn"))

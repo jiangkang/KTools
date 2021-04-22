@@ -16,5 +16,5 @@ dependencies {
     implementation(project(":tools"))
     implementation(project(":widget"))
     implementation(Kotlin.stdlib)
-    lintChecks(project(":klint"))
+//    lintChecks(project(":klint"))
 }
