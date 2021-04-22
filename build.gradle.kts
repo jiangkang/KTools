@@ -1,4 +1,5 @@
 buildscript {
+    val kotlin_version by extra("1.4.32")
     repositories {
         jcenter()
         google()
@@ -9,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:4.1.2")
+        classpath("com.android.tools.build:gradle:4.1.3")
         classpath("org.greenrobot:greendao-gradle-plugin:3.2.2")
         classpath(kotlin("gradle-plugin", version = "1.4.21"))
         classpath(Google.hiltPlugin)

@@ -90,7 +90,6 @@ class HackActivity : ComponentActivity() {
         }
     }
 
-    // TODO: 2020/8/22 还未完成 
     private fun loadApkDynamic(apkFile: File) {
         val dexClassLoader = DexClassLoader(apkFile.absolutePath,
                 codeCacheDir.absolutePath,
@@ -124,7 +123,7 @@ class HackActivity : ComponentActivity() {
                 hostDexElements.javaClass.componentType, hostDexElements.size + apkDexElements.size) as Array<*>
         System.arraycopy(hostDexElements, 0, combined, 0, hostDexElements.size)
         System.arraycopy(apkDexElements, 0, combined, hostDexElements.size, apkDexElements.size)
-        
+
         hostDexElementsField.set(hostPathList, combined)
         ToastUtils.showShortToast("加载APK成功")
     }

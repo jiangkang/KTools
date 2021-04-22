@@ -53,11 +53,13 @@ object AndroidX {
     const val multiDex = "androidx.multidex:multidex:2.0.1"
     const val viewpager2 = "androidx.viewpager2:viewpager2:1.0.0"
     const val print = "androidx.print:print:1.0.0"
-    const val startup = "androidx.startup:startup-runtime:1.0.0-beta01"
+    const val startup = "androidx.startup:startup-runtime:1.0.0"
     const val futures = "androidx.concurrent:concurrent-futures-ktx:1.1.0"
     const val tracing = "androidx.tracing:tracing-ktx:1.0.0"
     const val exifinterface = "androidx.exifinterface:exifinterface:1.3.2"
     const val customview = "androidx.customview:customview:1.1.0"
+    const val paging = "androidx.paging:paging-runtime:2.1.2"
+    const val biometric = "androidx.biometric:biometric:1.0.1"
 
     object Navigation {
         const val fragment = "androidx.navigation:navigation-fragment:2.3.0"
@@ -72,6 +74,8 @@ object AndroidX {
     object Lifecycle {
         const val runtime = "androidx.lifecycle:lifecycle-runtime:2.2.0"
         const val extension = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+        const val compiler = "androidx.lifecycle:lifecycle-compiler:2.2.0"
     }
 
     object WorkManager {

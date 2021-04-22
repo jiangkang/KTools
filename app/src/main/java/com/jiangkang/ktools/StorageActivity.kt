@@ -78,7 +78,7 @@ class StorageActivity : AppCompatActivity() {
             ToastUtils.showShortToast("存储成功")
 
             dialog.dismiss()
-        }, DialogInterface.OnClickListener { dialog, _ -> dialog.dismiss() })
+        }, { dialog, _ -> dialog.dismiss() })
 
         SpUtils.getInstance(this, "storage")
                 .putString("author", "姜康")
@@ -107,8 +107,12 @@ class StorageActivity : AppCompatActivity() {
 
             ToastUtils.showToast(value, 9000)
             dialog.dismiss()
-        }, DialogInterface.OnClickListener { dialog, _ -> dialog.dismiss() })
+        }, { dialog, _ -> dialog.dismiss() })
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }

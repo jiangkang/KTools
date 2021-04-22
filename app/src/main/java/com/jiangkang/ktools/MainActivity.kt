@@ -1,16 +1,27 @@
 package com.jiangkang.ktools
 
+import android.bluetooth.BluetoothHeadset
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.res.Configuration
+import android.hardware.usb.UsbManager
+import android.media.AudioManager
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jiangkang.hybrid.Khybrid
 import com.jiangkang.ktools.databinding.ActivityMainBinding
+import com.jiangkang.ktools.lifecycle.LogLifecycleObserver
+import com.jiangkang.ktools.receiver.HeadSetBroadcastReceiver
+import com.jiangkang.ktools.receiver.USBReceiver
+import com.jiangkang.tools.utils.ToastUtils
 
 /**
  * Adapter : [FunctionAdapter]
@@ -19,9 +30,34 @@ open class MainActivity : BaseActivity() {
 
     private lateinit var binding:ActivityMainBinding
     private val tag = "${javaClass.simpleName}_Lifecycle"
+    private val mHeadsetReceiver = HeadSetBroadcastReceiver()
+    private val mUsbReceiver = USBReceiver()
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+        lifecycle.addObserver(LogLifecycleObserver())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val filter = IntentFilter().apply {
+            // 有线耳机
+            addAction(Intent.ACTION_HEADSET_PLUG)
+            addAction(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
+
+            // 蓝牙耳机
+            addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED)
+        }
+
+        val usbFilter = IntentFilter().apply {
+            addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED)
+            addAction(UsbManager.ACTION_USB_DEVICE_DETACHED)
+        }
+        
+        registerReceiver(mHeadsetReceiver,filter)
+        registerReceiver(mUsbReceiver,usbFilter)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         Log.d(tag,"onCreate(${savedInstanceState.toString()})")
         setContentView(binding.root)
@@ -97,6 +133,8 @@ open class MainActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(tag,"onDestroy()")
+        unregisterReceiver(mHeadsetReceiver)
+        unregisterReceiver(mUsbReceiver)
     }
 
     override fun finish() {

@@ -1,6 +1,5 @@
 package com.jiangkang.ktools
 
-import android.app.Activity
 import android.app.Application
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -9,20 +8,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Debug
 import android.os.StrictMode
-import android.provider.Settings
 import android.util.Log
 import android.view.Choreographer
-import android.view.ViewDebug
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.multidex.MultiDex
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.jiangkang.hack.HookUtils
-import com.jiangkang.hack.hook.ActivityStartingCallback
 import com.jiangkang.ktools.receiver.KToolsAppWidgetProvider
 import com.jiangkang.ktools.works.AppOptWorker
 import com.jiangkang.ndk.NdkMainActivity
 import com.jiangkang.tools.King
-import com.jiangkang.tools.utils.ToastUtils
 import com.jiangkang.tools.widget.KNotification
 import com.jiangkang.tools.widget.KShortcut
 
@@ -41,9 +35,9 @@ open class KApplication : Application() {
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             val stackTrace = e.stackTrace
             val reason = StringBuilder()
-            reason.appendln(e.message)
+            reason.appendLine(e.message)
             stackTrace.forEach {
-                reason.appendln(it.toString())
+                reason.appendLine(it.toString())
             }
             val intent = Intent(applicationContext, CrashInfoActivity::class.java)
                     .apply {
@@ -52,11 +46,6 @@ open class KApplication : Application() {
                     }
             startActivity(intent)
         }
-        HookUtils.hookInstrumentation(object : ActivityStartingCallback {
-            override fun activityStarting(source: Context, target: Activity, intent: Intent) {
-                ToastUtils.showShortToast("启动了${intent.component?.shortClassName}")
-            }
-        })
     }
 
     override fun onCreate() {
@@ -77,12 +66,10 @@ open class KApplication : Application() {
 
         initWidgets()
 
-        val callback = Choreographer.FrameCallback {
-            frameTimeNanos -> Log.d(tag, frameTimeNanos.toString())
+        val callback = Choreographer.FrameCallback { frameTimeNanos ->
+            Log.d(tag, frameTimeNanos.toString())
         }
         Choreographer.getInstance().postFrameCallback(callback)
-
-
     }
 
     /**

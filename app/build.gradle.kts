@@ -16,11 +16,6 @@ android {
 
     ndkVersion = vNdkVersion
 
-//    buildTypes {
-//        release(enableMinify = true, shrinkRes = true, proguardFiles = getDefaultProguardFile("proguard-android.txt"))
-//        debug(enableMinify = false, shrinkRes = false, proguardFiles = getDefaultProguardFile("proguard-android.txt"))
-//    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -45,7 +40,7 @@ android {
         enable("RtlHardcoded", "RtlCompat", "RtlEnabled")
 
         //仅仅只检查这些的子集，其他的不检查，这个选项会覆盖上面的disable，enable配置
-        check("NewApi", "InlinedApi")
+        checkOnly("NewApi", "InlinedApi")
 
         //如果设置为true，则会关闭lint的分析进度
         isQuiet = false
@@ -70,6 +65,7 @@ dependencies {
     implementation(AndroidX.viewpager2)
     implementation(AndroidX.appcompat)
     implementation(AndroidX.constraintLayout)
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
     androidTestImplementation(AndroidX.espressoCore) {
         exclude("com.android.support", "support-annotations")
     }
@@ -99,6 +95,7 @@ dependencies {
     implementation(AndroidX.Lifecycle.extension)
     implementation(AndroidX.Room.runtime)
     kapt(AndroidX.Room.compiler)
+    kapt(AndroidX.Lifecycle.compiler)
     implementation(Kotlin.stdlib)
     implementation(Kotlin.coroutines)
     implementation(AndroidX.multiDex)
@@ -111,6 +108,8 @@ dependencies {
     implementation(AndroidX.WorkManager.runtimeKtx)
     implementation(AndroidX.DataStore.core)
     implementation(AndroidX.DataStore.preferences)
+    implementation(AndroidX.futures)
+    implementation(AndroidX.paging)
 //    implementation(Square.LeakCanary.android)
     implementation(project(":widget"))
     implementation(project(":annotations"))
