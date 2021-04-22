@@ -18,7 +18,10 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-
+      - name: flutter env
+        uses: subosito/flutter-action@v1.4.0
+      - name: build flutter module
+        run: cd flutter_module && flutter build aar &&  cd ..
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
